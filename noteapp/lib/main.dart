@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Screens/Logins/login_SignUp.dart';
 

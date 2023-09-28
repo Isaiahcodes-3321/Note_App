@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../Constant/themes.dart';
 import '../../Utils/reUsedTextField.dart';
-import 'signUpPage.dart';
 
 class LoginPage extends StatefulWidget {
   final Function(int) switchTab; 

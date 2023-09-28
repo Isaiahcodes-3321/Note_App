@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../Constant/themes.dart';
 
 class ReUsedTextField extends StatelessWidget {
