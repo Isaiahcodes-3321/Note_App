@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../Constant/themes.dart';
 import '../../Utils/reUsedTextField.dart';
+import '../HomePage/homePgae.dart';
 
 class LoginPage extends StatefulWidget {
-  final Function(int) switchTab; 
-  const LoginPage({super.key, required this.switchTab});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -13,7 +13,38 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var loginPasswordController = TextEditingController();
+  var loginEmailController = TextEditingController();
   bool loginHidePassword = true;
+
+  void ShowSnackbar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: themeColor,
+        content: Padding(
+          padding: EdgeInsets.all(5.sp),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(93, 93, 149, 1),
+                borderRadius: BorderRadius.circular(10.sp)),
+            child: Padding(
+              padding: EdgeInsets.all(10.sp),
+              child: Text("All inputs are required",
+                  textAlign: TextAlign.center,
+                  style: textFonts.copyWith(fontSize: 15.sp)),
+            ),
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    loginPasswordController.dispose();
+    loginEmailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +61,8 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 5.h),
                   Text(
                     "Welcome Back!",
-                    style: textFonts.copyWith(fontSize: 25.sp, color: themeColor),
+                    style:
+                        textFonts.copyWith(fontSize: 23.sp, color: themeColor),
                   ),
                   SizedBox(height: 3.h),
                   Container(
@@ -38,10 +70,10 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         SizedBox(height: 3.h),
                         ReUsedTextField(
-                          obscureText: true,
-                          controller: TextEditingController(),
-                          keyboardType: TextInputType.emailAddress,
-                          hintText: "Email",
+                          obscureText: false,
+                          controller: loginEmailController,
+                          keyboardType: TextInputType.text,
+                          hintText: "User Name",
                           prefixIcon: Icon(Icons.mail_outline_rounded,
                               color: Colors.black),
                           onChanged: (value) {},
@@ -83,7 +115,21 @@ class _LoginPageState extends State<LoginPage> {
                             color: themeColor,
                             borderRadius: BorderRadius.circular(25.sp)),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (loginPasswordController.text.isEmpty ||
+                                loginEmailController.text.isEmpty) {
+                              ShowSnackbar(context);
+                            } else {
+                              Navigator.push<void>(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) => HomePage(),
+                                ),
+                              );
+                              loginPasswordController.clear();
+                              loginEmailController.clear();
+                            }
+                          },
                           child: Padding(
                             padding: EdgeInsets.all(10.sp),
                             child: Text("Login",

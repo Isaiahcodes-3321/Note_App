@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../Constant/themes.dart';
 import '../../Utils/reUsedTextField.dart';
 
@@ -13,7 +12,41 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   var signUpPasswordController = TextEditingController();
+  var signUpUsernameController = TextEditingController();
+  var signUpEmailController = TextEditingController();
   bool signUpHidePassword = true;
+
+  void ShowSnackbar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: themeColor,
+        content: Padding(
+          padding: EdgeInsets.all(5.sp),
+          child: Container(
+            decoration: BoxDecoration( color: Color.fromRGBO(93, 93, 149, 1),
+            borderRadius: BorderRadius.circular(10.sp)),
+           
+            child: Padding(
+              padding: EdgeInsets.all(10.sp),
+              child: Text("All inputs are required",
+               textAlign: TextAlign.center,
+              style: textFonts.copyWith(fontSize: 15.sp)),
+            ),
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      ),
+    );
+  }
+
+
+  @override
+  void dispose() {
+    signUpPasswordController.dispose();
+    signUpUsernameController.dispose();
+    signUpEmailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +64,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text(
                     "Creat An Account",
                     style:
-                        textFonts.copyWith(fontSize: 25.sp, color: themeColor),
+                        textFonts.copyWith(fontSize: 23.sp, color: themeColor),
                   ),
                   SizedBox(height: 5.h),
                   Container(
                     child: Column(
                       children: [
                         ReUsedTextField(
-                          obscureText: true,
-                          controller: TextEditingController(),
-                          keyboardType: TextInputType.phone,
-                          hintText: "Useer Name",
+                          obscureText: false,
+                          controller: signUpUsernameController,
+                          keyboardType: TextInputType.text,
+                          hintText: "User Name",
                           prefixIcon: Icon(Icons.person_3_outlined,
                               color: Colors.black),
                           onChanged: (value) {},
                         ),
                         SizedBox(height: 3.h),
                         ReUsedTextField(
-                          obscureText: true,
-                          controller: TextEditingController(),
+                          obscureText: false,
+                          controller: signUpEmailController,
                           keyboardType: TextInputType.emailAddress,
                           hintText: "Email",
                           prefixIcon: Icon(Icons.mail_outline_rounded,
@@ -82,21 +115,36 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                  Padding(padding: EdgeInsets.all(20.sp),
-                  child: GestureDetector(
-                    onTap: (){},
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(color: themeColor,
-                        borderRadius: BorderRadius.circular(25.sp)),
-                      child: TextButton(onPressed: (){},
-                      child: Padding(
-                        padding: EdgeInsets.all(10.sp),
-                        child: Text("Sign Up",style: textFonts.copyWith(color: Colors.white)),
-                      ),
+                  Padding(
+                    padding: EdgeInsets.all(20.sp),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: themeColor,
+                            borderRadius: BorderRadius.circular(25.sp)),
+                        child: TextButton(
+                          onPressed: () {
+                            if (signUpPasswordController.text.isEmpty ||
+                                signUpUsernameController.text.isEmpty ||
+                                signUpEmailController.text.isEmpty) {
+                                ShowSnackbar(context);
+                            } else {
+                              signUpPasswordController.clear();
+                              signUpUsernameController.clear();
+                              signUpEmailController.clear();
+                            }
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(10.sp),
+                            child: Text("Sign Up",
+                                style: textFonts.copyWith(color: Colors.white)),
+                          ),
+                        ),
                       ),
                     ),
-                  ),)
+                  )
                 ],
               ),
             )),

@@ -37,6 +37,7 @@ class _Login_SignUp_PageState extends State<Login_SignUp_Page> with TickerProvid
     return DefaultTabController(
       length: 2, // Change this to 2
       child: Scaffold(
+        key: GlobalKey<ScaffoldState>(),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(15.h),
           child: Container(
@@ -72,7 +73,7 @@ class _Login_SignUp_PageState extends State<Login_SignUp_Page> with TickerProvid
               child: TabBarView(
                 children: [
                   SignUpPage(),
-                  LoginPage(switchTab: switchToTab,),
+                  LoginPage(),
                 ],
               ),
             ),
