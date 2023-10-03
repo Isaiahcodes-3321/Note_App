@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "**/.gitignore": true,
+        "**/.metadata": true,
+        "**/linux": true,
+        "**/macos": true,
+        "**/noteapp.iml": true,
+        "**/web": true,
+        "**/windows": true
+    }
+}

@@ -19,7 +19,8 @@ class Note_App extends StatelessWidget {
   Widget build(BuildContext context) {
     return  ResponsiveSizer( 
   builder: (context, orientation, screenType) {
-    return  const MaterialApp(
+    return  const
+     MaterialApp(
         title: 'Material App',
         debugShowCheckedModeBanner: false,
         home: SafeArea(child: Login_SignUp_Page())
