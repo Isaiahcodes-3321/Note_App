@@ -17,8 +17,9 @@ var outlineInputBorder = OutlineInputBorder(
 
 
 class Backgroundcolor {
+  
   static Color ligthmode = Colors.white;
-  static Color darkhmode = Colors.black;
+  static Color darkhmode = Color.fromARGB(255, 20, 20, 20);
 
   static Color themeColorLigthmode = Color.fromRGBO(42, 42, 92, 1.0);
   static Color themeColorDarkmode = Color.fromRGBO(7, 7, 17, 1);
