@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../Constant/themes.dart';
-import 'login.dart';
-import 'signUpPage.dart';
+import 'package:noteapp/Screens/Logins/export_login_register.dart';
+
 
 class Login_SignUp_Page extends StatefulWidget {
   const Login_SignUp_Page({super.key});

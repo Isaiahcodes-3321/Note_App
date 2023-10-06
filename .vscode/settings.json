@@ -1,6 +1,8 @@
 {
     "files.exclude": {
+        "**/.dart_tool": true,
         "**/.gitignore": true,
+        "**/.idea": true,
         "**/.metadata": true,
         "**/linux": true,
         "**/macos": true,

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../Constant/themes.dart';
-import '../../state_Management/riverPod.dart';
+import 'export._home.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -16,6 +14,9 @@ class _MyDrawerState extends State<MyDrawer> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       final theme = ref.watch(themeProvider);
+      var text_Mode_Color =
+          theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode;
+
       return ListView(
         children: <Widget>[
           DrawerHeader(
@@ -29,14 +30,17 @@ class _MyDrawerState extends State<MyDrawer> {
                     text: 'isaiahshell2019@gmail.com \n',
                   ),
                   TextSpan(
-                    text: 'Isaiah Shell',
-                  ),
+                      text: 'Isaiah Shell',
+                      style: AppTextStyle.textStyle()
+                          .copyWith(color: text_Mode_Color, fontSize: 17.sp)),
                 ],
               ),
             ),
           )),
           ListTile(
-            title: Text('Trash'),
+            title: Text('Trash',
+                style: AppTextStyle.textStyle()
+                    .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
           ),
           Divider(
             color:
@@ -47,7 +51,9 @@ class _MyDrawerState extends State<MyDrawer> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Theme'),
+                Text('Theme',
+                    style: AppTextStyle.textStyle()
+                        .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
                 Consumer(
                   builder: (context, ref, child) {
                     final theme = ref.watch(themeProvider);
@@ -70,14 +76,18 @@ class _MyDrawerState extends State<MyDrawer> {
                 theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
-            title: Text('Developers'),
+            title: Text('Developers',
+                style: AppTextStyle.textStyle()
+                    .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
           ),
           Divider(
             color:
                 theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
-            title: Text('rate us'),
+            title: Text('Rate Us',
+                style: AppTextStyle.textStyle()
+                    .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
           ),
           Divider(
             color:
@@ -87,9 +97,16 @@ class _MyDrawerState extends State<MyDrawer> {
             height: MediaQuery.sizeOf(context).height * 0.25,
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: TextButton(
-                onPressed: () {},
-                child: Text('LOG OUT'),
+              child: Container(
+                child: TextButton(
+                  onPressed: () {
+              
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(20.sp),
+                    child: Text('LOG OUT'),
+                  ),
+                ),
               ),
             ),
           )

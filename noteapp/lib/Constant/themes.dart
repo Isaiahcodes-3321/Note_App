@@ -26,7 +26,7 @@ class Backgroundcolor {
 }
 
 class AppTextStyle {
-  // Appbar text and add button white color 
+  // Appbar text and add floatingButton white color 
  static Color appbarTextcolor = Colors.white;
 
   static TextStyle textStyle() {

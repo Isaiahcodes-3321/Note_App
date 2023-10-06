@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../Constant/themes.dart';
-import '../../state_Management/riverPod.dart';
-import '../Add_Note/noteScreen.dart';
-import 'drawer.dart';
+import 'export._home.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
