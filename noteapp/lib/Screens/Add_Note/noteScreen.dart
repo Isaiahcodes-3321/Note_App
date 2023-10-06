@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../Constant/themes.dart';
 import '../../state_Management/riverPod.dart';
 import '../HomePage/home_page.dart';
+// import 'package:rich_field_controller/rich_field_controller.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
@@ -82,11 +84,11 @@ class _AddNoteState extends State<AddNote> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 20.sp, vertical: 10.sp),
-                        child: SingleChildScrollView(
-                          child: Column(children: [
-                           
-                          ]),
-                        ),
+                    child: SingleChildScrollView(
+                      child: Column(children: [
+                      
+                      ]),
+                    ),
                   ),
                 )
               ],
@@ -105,6 +107,7 @@ class _AddNoteState extends State<AddNote> {
       );
     });
   }
+  
 }
 
 
@@ -129,9 +132,7 @@ class _AddNoteState extends State<AddNote> {
 //                                 color: const Color.fromARGB(255, 28, 28, 28),
 //                                 fontSize: 20.sp),
 //                             // maxLength: 10,
-//                             maxLines:
-//                                 (MediaQuery.sizeOf(context).height * 0.5).toInt(),
-                        
+//                             maxLines: null,
 //                             textInputAction: TextInputAction.newline,
 //                             controller: note_Text,
 //                             decoration: InputDecoration(
