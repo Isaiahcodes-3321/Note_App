@@ -12,3 +12,4 @@ class ThemeState extends StateNotifier<bool> {
 final themeProvider = StateNotifierProvider<ThemeState, bool>((ref) {
   return ThemeState();
 });
+

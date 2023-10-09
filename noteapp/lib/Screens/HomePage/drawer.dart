@@ -38,9 +38,19 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           )),
           ListTile(
-            title: Text('Trash',
-                style: AppTextStyle.textStyle()
-                    .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
+            title: GestureDetector(
+              onTap: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const Trash_Page(),
+                  ),
+                );
+              },
+              child: Text('Trash',
+                  style: AppTextStyle.textStyle()
+                      .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
+            ),
           ),
           Divider(
             color:
@@ -99,9 +109,7 @@ class _MyDrawerState extends State<MyDrawer> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 child: TextButton(
-                  onPressed: () {
-              
-                  },
+                  onPressed: () {},
                   child: Padding(
                     padding: EdgeInsets.all(20.sp),
                     child: Text('LOG OUT'),

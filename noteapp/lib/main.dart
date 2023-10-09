@@ -12,6 +12,7 @@ Future<void> main() async {
   runApp(ProviderScope(child: const Note_App()));
 }
 
+// flutter pub cache repair
 
 class Note_App extends StatelessWidget {
   const Note_App({super.key});

@@ -1,21 +1,13 @@
-import 'package:clipboard/clipboard.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../Constant/themes.dart';
-import '../../state_Management/riverPod.dart';
-import '../HomePage/home_page.dart';
-// import 'package:rich_field_controller/rich_field_controller.dart';
+import 'export_nolte_input.dart';
 
-class AddNote extends StatefulWidget {
-  const AddNote({super.key});
 
-  @override
-  State<AddNote> createState() => _AddNoteState();
-}
 
-class _AddNoteState extends State<AddNote> {
+
+class AddNote extends StatelessWidget {
+    AddNote({super.key});
+
   final TextEditingController note_Text = TextEditingController();
 
   @override
@@ -78,19 +70,8 @@ class _AddNoteState extends State<AddNote> {
                     ),
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height * 0.70,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 20.sp, vertical: 10.sp),
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                      
-                      ]),
-                    ),
-                  ),
-                )
+
+               Note_Input(),
               ],
             ),
           ),
@@ -107,14 +88,7 @@ class _AddNoteState extends State<AddNote> {
       );
     });
   }
-  
 }
-
-
-
-
-
-
 
 //  GestureDetector(
 //                            onLongPress: () {

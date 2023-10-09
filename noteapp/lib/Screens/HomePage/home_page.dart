@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const AddNote(),
+                      builder: (BuildContext context) => AddNote(),
                     ),
                   );
                 },
