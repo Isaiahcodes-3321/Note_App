@@ -1,14 +1,17 @@
-
 import 'package:flutter/material.dart';
-import 'export_nolte_input.dart';
+import 'controller.dart';
+import 'export_note_input.dart';
 
+class AddNote extends StatefulWidget {
+  AddNote({super.key});
 
+  @override
+  State<AddNote> createState() => _AddNoteState();
+}
 
-
-class AddNote extends StatelessWidget {
-    AddNote({super.key});
-
+class _AddNoteState extends State<AddNote> {
   final TextEditingController note_Text = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class AddNote extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           backgroundColor:
-              theme ? Backgroundcolor.darkhmode : Backgroundcolor.ligthmode,
+              theme ? Backgroundcolor.darkhmode : Backgroundcolor.lightmode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -36,7 +39,9 @@ class AddNote extends StatelessWidget {
                 style: AppTextStyle.textStyle().copyWith(fontSize: 18.sp)),
             actions: [
               GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    connectionCheck. showBanner(context);
+                  },
                   child: Padding(
                       padding: EdgeInsets.all(15.sp),
                       child: Text("Save",
@@ -71,7 +76,7 @@ class AddNote extends StatelessWidget {
                   ),
                 ),
 
-               Note_Input(),
+                //  Note_Input(),
               ],
             ),
           ),

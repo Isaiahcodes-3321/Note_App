@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../ThemeStore/theme.dart';
 import 'export._home.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -15,8 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
     return Consumer(builder: (context, ref, child) {
       final theme = ref.watch(themeProvider);
       var text_Mode_Color =
-          theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode;
-
+          theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
       return ListView(
         children: <Widget>[
           DrawerHeader(
@@ -54,7 +54,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode,
+                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Row(
@@ -83,7 +83,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode,
+                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Text('Developers',
@@ -92,7 +92,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode,
+                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Text('Rate Us',
@@ -101,7 +101,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode,
+                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           Container(
             height: MediaQuery.sizeOf(context).height * 0.25,

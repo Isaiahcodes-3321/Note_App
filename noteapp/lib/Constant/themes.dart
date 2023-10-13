@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../ThemeStore/theme.dart';
+
+//my storage Make Hive accessible anywhere,
+late Box<Theme_check> themestorage;
 
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 var themeColor = Color.fromRGBO(42, 42, 92, 1.0);
@@ -18,10 +23,10 @@ var outlineInputBorder = OutlineInputBorder(
 
 class Backgroundcolor {
   
-  static Color ligthmode = Colors.white;
+  static Color lightmode = Colors.white;
   static Color darkhmode = Color.fromARGB(255, 20, 20, 20);
 
-  static Color themeColorLigthmode = Color.fromRGBO(42, 42, 92, 1.0);
+  static Color themeColorLightmode = Color.fromRGBO(42, 42, 92, 1.0);
   static Color themeColorDarkmode = Color.fromRGBO(7, 7, 17, 1);
 }
 

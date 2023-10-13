@@ -1,3 +1,6 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noteapp/Constant/themes.dart';
+import '../ThemeStore/theme.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,4 +15,3 @@ class ThemeState extends StateNotifier<bool> {
 final themeProvider = StateNotifierProvider<ThemeState, bool>((ref) {
   return ThemeState();
 });
-

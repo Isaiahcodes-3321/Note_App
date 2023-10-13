@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7aa0e7e6-c91e-4ec7-8994-e24f8df2f08e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/noteapp/lib/Screens/Add_Note/noteScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/lib/Screens/Add_Note/noteScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/lib/Screens/Add_Note/note_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/lib/Screens/Add_Note/note_input.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/lib/Screens/HomePage/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/lib/Screens/HomePage/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/lib/Screens/Logins/export_login_register.dart" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/lib/Screens/Logins/export_login_register.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/lib/Screens/Logins/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/lib/Screens/Logins/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/noteapp/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noteapp/windows/runner/runner.exe.manifest" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Wb3zVuN3Nv2VUruhOHAthUTQBY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "C:/Users/DELL-PC/Downloads/flutter_windows_3.7.12-stable/flutter/bin",
+    "settings.editor.selected.configurable": "flutter.settings",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7aa0e7e6-c91e-4ec7-8994-e24f8df2f08e" name="Changes" comment="" />
+      <created>1696987718832</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696987718832</updated>
+    </task>
+    <servers />
+  </component>
+</project>

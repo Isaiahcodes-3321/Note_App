@@ -27,12 +27,12 @@ class _Trash_PageState extends State<Trash_Page> {
       l_date_Deleted.add(date_Deleted);
 
       var text_Mode_Color =
-          theme ? Backgroundcolor.ligthmode : Backgroundcolor.darkhmode;
+          theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
 
       return SafeArea(
         child: Scaffold(
           backgroundColor:
-              theme ? Backgroundcolor.darkhmode : Backgroundcolor.ligthmode,
+              theme ? Backgroundcolor.darkhmode : Backgroundcolor.lightmode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(

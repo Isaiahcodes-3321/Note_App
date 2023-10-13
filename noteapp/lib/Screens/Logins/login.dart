@@ -118,10 +118,16 @@ class _LoginPageState extends State<LoginPage> {
                                 loginEmailController.text.isEmpty) {
                               ShowSnackbar(context);
                             } else {
+                              // showPlatformDialog(
+                              //     context: context,
+                              //     builder: (context) {
+                              //       return (Login_unsuccesful());
+                              //     },
+                              //   );
                               Navigator.push<void>(
                                 context,
                                 MaterialPageRoute<void>(
-                                  builder: (BuildContext context) => HomePage(),
+                                  builder: (BuildContext context) => LoadHomePage(),
                                 ),
                               );
                               loginPasswordController.clear();
