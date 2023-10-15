@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../ThemeStore/theme.dart';
 import 'export._home.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -14,9 +13,11 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      final theme = ref.watch(themeProvider);
+      var get_theme = themestorage.get('myKey');
+      
+      var current_theme = ref.watch(theme_init);
       var text_Mode_Color =
-          theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+          current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
       return ListView(
         children: <Widget>[
           DrawerHeader(
@@ -54,7 +55,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Row(
@@ -64,26 +65,35 @@ class _MyDrawerState extends State<MyDrawer> {
                 Text('Theme',
                     style: AppTextStyle.textStyle()
                         .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
-                Consumer(
-                  builder: (context, ref, child) {
-                    final theme = ref.watch(themeProvider);
-                    return CupertinoSwitch(
-                      activeColor: Colors.white,
-                      thumbColor: Colors.green,
-                      trackColor: Color.fromARGB(255, 35, 35, 36),
-                      value: theme,
-                      onChanged: (value) {
-                        ref.read(themeProvider.notifier).toggleTheme();
+                GestureDetector(
+                    onTap: () {},
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        // Get the current theme state from your Riverpod provider
+                        final theme = ref.watch(theme_init);
+
+                        return CupertinoSwitch(
+                          activeColor: Colors.white,
+                          thumbColor: Colors.green,
+                          trackColor: Color.fromARGB(255, 35, 35, 36),
+                          value: theme,
+                          onChanged: (value) async {
+                            // Toggle the theme state in your Riverpod provider
+                            ref.read(theme_init.notifier).state = value;
+
+                            // Update the theme value in Hive
+                            await themestorage.put('myKey', value);
+                            theme_init = get_theme as StateProvider<bool>;
+                          },
+                        );
                       },
-                    );
-                  },
-                )
+                    )),
               ],
             ),
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Text('Developers',
@@ -92,7 +102,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Text('Rate Us',
@@ -101,7 +111,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           Divider(
             color:
-                theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
           ),
           Container(
             height: MediaQuery.sizeOf(context).height * 0.25,
@@ -112,7 +122,8 @@ class _MyDrawerState extends State<MyDrawer> {
                   onPressed: () {},
                   child: Padding(
                     padding: EdgeInsets.all(20.sp),
-                    child: Text('LOG OUT'),
+                    child:
+                        Text('LOG OUT ', style: TextStyle(color: Colors.red)),
                   ),
                 ),
               ),
@@ -123,3 +134,4 @@ class _MyDrawerState extends State<MyDrawer> {
     });
   }
 }
+

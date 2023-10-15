@@ -4,7 +4,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../ThemeStore/theme.dart';
 
 //my storage Make Hive accessible anywhere,
-late Box<Theme_check> themestorage;
+late Box themestorage;
+
 
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 var themeColor = Color.fromRGBO(42, 42, 92, 1.0);

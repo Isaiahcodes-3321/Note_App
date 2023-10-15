@@ -16,11 +16,14 @@ class _AddNoteState extends State<AddNote> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      final theme = ref.watch(themeProvider);
+      var current_theme = ref.watch(theme_init);
+      var text_Mode_Color =
+          current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+    
       return SafeArea(
         child: Scaffold(
           backgroundColor:
-              theme ? Backgroundcolor.darkhmode : Backgroundcolor.lightmode,
+              current_theme ? Backgroundcolor.darkhmode : Backgroundcolor.lightmode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -30,7 +33,7 @@ class _AddNoteState extends State<AddNote> {
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => HomePage(),
+                      builder: (BuildContext context) => Note_Input(),
                     ),
                   );
                 },
@@ -75,8 +78,7 @@ class _AddNoteState extends State<AddNote> {
                     ),
                   ),
                 ),
-
-                //  Note_Input(),
+                 Note_Input(),
               ],
             ),
           ),
@@ -94,36 +96,3 @@ class _AddNoteState extends State<AddNote> {
     });
   }
 }
-
-//  GestureDetector(
-//                            onLongPress: () {
-//             Clipboard.setData(ClipboardData(text: note_Text.text));
-//             FlutterClipboard.copy(note_Text.text).then((value) {
-//                   ScaffoldMessenger.of(context).showSnackBar(
-//                     SnackBar(
-//                       content: Text('Text copied to clipboard'),
-//                     ),
-//                   );
-//             });
-//           },
-//                           child: TextFormField(
-//                             style: AppTextStyle.textStyle().copyWith(
-//                                 color: const Color.fromARGB(255, 28, 28, 28),
-//                                 fontSize: 20.sp),
-//                             // maxLength: 10,
-//                             maxLines: null,
-//                             textInputAction: TextInputAction.newline,
-//                             controller: note_Text,
-//                             decoration: InputDecoration(
-//                               focusColor: Colors.white,
-//                               hintText: "Note ",
-//                               hintStyle: AppTextStyle.textStyle().copyWith(
-//                                 color: const Color.fromARGB(255, 28, 28, 28),
-//                               ),
-//                               focusedBorder: outlineInputBorder,
-//                               enabledBorder: outlineInputBorder,
-//                               fillColor: const Color.fromARGB(255, 229, 228, 228),
-//                               filled: true,
-//                             ),
-//                           ),
-//                         ),

@@ -6,13 +6,11 @@ part 'theme.g.dart';
 @HiveType(typeId: 0)
 class Theme_check{
   Theme_check({
-    required this.theme,
-    // required this.name,
+    required this.theme_data,
   });
 
   @HiveField(0)
-  bool theme;
-  // String name;
+  bool theme_data;
 }
 
 //  flutter packages pub run build_runner build

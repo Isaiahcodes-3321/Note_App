@@ -19,16 +19,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final theme = ref.watch(themeProvider);
         final title_added = ref.watch(title_Note);
         final note_added = ref.watch(note_Note);
-        text_Mode_Color =
-            theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+        var current_theme = ref.watch(theme_init);
+        var text_Mode_Color = current_theme
+            ? Backgroundcolor.lightmode
+            : Backgroundcolor.darkhmode;
 
         return SafeArea(
           child: Scaffold(
-              backgroundColor:
-                  theme ? Backgroundcolor.darkhmode : Backgroundcolor.lightmode,
+              backgroundColor: current_theme
+                  ? Backgroundcolor.darkhmode
+                  : Backgroundcolor.lightmode,
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar(
@@ -99,7 +101,8 @@ class _HomePageState extends State<HomePage> {
                           onLongPress: () {
                             setState(() {
                               onlong_press = !onlong_press;
-                               itemLongPressedStates[index] = !itemLongPressedStates[index];
+                              itemLongPressedStates[index] =
+                                  !itemLongPressedStates[index];
                             });
                           },
                           child: Padding(
@@ -107,7 +110,9 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                 color: itemLongPressedStates[index] ? Colors.red : Colors.green,
+                                color: itemLongPressedStates[index]
+                                    ? Colors.red
+                                    : Colors.green,
                               ),
                               width: MediaQuery.of(context).size.width * 0.40,
                               height: MediaQuery.of(context).size.width * 0.30,
@@ -149,7 +154,7 @@ class _HomePageState extends State<HomePage> {
               ),
               drawer: Drawer(
                   // Take 70% of the user screen
-                  backgroundColor: theme
+                  backgroundColor: current_theme
                       ? Color.fromARGB(255, 36, 36, 38)
                       : Backgroundcolor.lightmode,
                   width: MediaQuery.sizeOf(context).width * 0.70,

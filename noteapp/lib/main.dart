@@ -17,10 +17,11 @@ Future<void> main() async {
 }
 
 Future<void> setupHive() async {
-  await Hive.initFlutter();
+ await Hive.initFlutter();
   Hive.registerAdapter(ThemecheckAdapter());
   // Opening the hive storage for theme storage
-  themestorage = await Hive.openBox<Theme_check>('themeBox');
+  themestorage = await Hive.openBox('themeBox');
+  
 }
 
 

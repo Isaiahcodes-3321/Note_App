@@ -17,7 +17,7 @@ class ThemecheckAdapter extends TypeAdapter<Theme_check> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Theme_check(
-      theme: fields[0] as bool,
+      theme_data: fields[0] as bool,
     );
   }
 
@@ -26,7 +26,7 @@ class ThemecheckAdapter extends TypeAdapter<Theme_check> {
     writer
       ..writeByte(1)
       ..writeByte(0)
-      ..write(obj.theme);
+      ..write(obj.theme_data);
   }
 
   @override
