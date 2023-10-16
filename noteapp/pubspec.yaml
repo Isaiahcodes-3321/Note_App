@@ -37,7 +37,7 @@ dependencies:
   hive:
   hive_flutter:
   image_picker: ^1.0.4
-  audioplayers: ^5.2.0
+  # audioplayers: ^5.2.0
   # record: ^5.0.1
   # flutter_quill: ^7.0.0
 

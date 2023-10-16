@@ -13,9 +13,9 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
-
-
   final TextEditingController note_context = TextEditingController();
+    final TextEditingController note_title_context = TextEditingController();
+
   bool isButtonVisible = false;
 
   @override
@@ -49,7 +49,7 @@ class _AddNoteState extends State<AddNote> {
               actions: [
                 GestureDetector(
                     onTap: () async {
-                      connectionCheck.showBanner(context);
+                      logics.showBanner(context);
                     },
                     child: Padding(
                         padding: EdgeInsets.all(15.sp),
@@ -63,39 +63,82 @@ class _AddNoteState extends State<AddNote> {
               width: double.infinity,
               child: Column(
                 children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                        width: double.infinity,
-                        color: Colors.green,
-                        // height: 15.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              // image displayed
-                              child: Row(
-                                children: [
-                                  if (connectionCheck.image != null)
-                                    Image.file(
-                                      File(connectionCheck.image!.path),
-                                      width: 100,
-                                      height: 100,
+                  logics.image != null
+                      ? Expanded(
+                          flex: 2,
+                          child: Container(
+                              width: double.infinity,
+                              // color: Colors.green,
+                              // height: 15.h,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      // image displayed
+                                      child: Row(
+                                        children: [
+                                          if (logics.image != null)
+                                            InkWell(
+                                                onTap: () {
+                                                  Navigator.push<void>(
+                                                    context,
+                                                    MaterialPageRoute<void>(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          Image_full_screen(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Hero(
+                                                  tag: 'imageTag',
+                                                  child: Dismissible(
+                                                    key: Key('your_unique_key'),
+                                                    onDismissed: (direction) {
+                                                      if (direction ==
+                                                              DismissDirection
+                                                                  .endToStart ||
+                                                          direction ==
+                                                              DismissDirection
+                                                                  .startToEnd) {
+                                                        logics.image = null;
+                                                      }
+                                                    },
+                                                    background: Container(
+                                                      color: Colors.red,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Icon(Icons.delete,
+                                                          color: Colors.white),
+                                                    ),
+                                                    child: logics.image != null
+                                                        ? Image.file(
+                                                            File(logics
+                                                                .image!.path),
+                                                            width: 100,
+                                                            height: 100,
+                                                          )
+                                                        : Container(),
+                                                  ),
+                                                )),
+                                        ],
+                                      ),
                                     ),
-                                ],
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              //  Audio
-                              child: Row(
-                                children: [],
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      //  Audio
+                                      child: Row(
+                                        children: [],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        )
+                      : Text(""),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 20.sp, vertical: 20.sp),
@@ -103,7 +146,7 @@ class _AddNoteState extends State<AddNote> {
                       style: AppTextStyle.textStyle().copyWith(
                           color: const Color.fromARGB(255, 28, 28, 28),
                           fontSize: 20.sp),
-                      controller: TextEditingController(),
+                      controller: note_title_context,
                       decoration: InputDecoration(
                         focusColor: Colors.white,
                         hintText: "Note title",
@@ -185,7 +228,7 @@ class _AddNoteState extends State<AddNote> {
                           // image button
                           FloatingActionButton(
                             onPressed: () {
-                              connectionCheck.showImagePickerOptions(context);
+                              logics.showImagePickerOptions(context);
                             },
                             backgroundColor: themeColor,
                             child: Icon(
@@ -198,7 +241,7 @@ class _AddNoteState extends State<AddNote> {
                           // audio button
                           FloatingActionButton(
                             onPressed: () {
-                              connectionCheck.showAudioOptions(context);
+                              logics.showAudioOptions(context);
                             },
                             backgroundColor: themeColor,
                             child: Icon(

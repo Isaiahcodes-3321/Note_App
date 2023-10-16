@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'export_note_input.dart';
 
-var connectionCheck = ConnectionCheck();
+var logics = ConnectionCheck();
 
 class ConnectionCheck {
   Future<void> showBanner(BuildContext context) async {
@@ -56,16 +56,12 @@ class ConnectionCheck {
     );
   }
 
-
-
 // Function to capture a photo
   Future<void> takePhoto() async {
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
-      // setState(() {
       image = pickedFile;
-      // });
     }
   }
 
@@ -73,9 +69,8 @@ class ConnectionCheck {
   Future<void> getImage() async {
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);
-    // setState(() {
+
     image = pickedFile;
-    // });
   }
 
 //  Audio recording
@@ -103,6 +98,4 @@ class ConnectionCheck {
       },
     );
   }
-
-
 }
