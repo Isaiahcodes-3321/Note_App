@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'controller.dart';
 import 'export_note_input.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddNote extends StatefulWidget {
   AddNote({super.key});
@@ -12,6 +13,8 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+
+
   final TextEditingController note_context = TextEditingController();
   bool isButtonVisible = false;
 
@@ -36,7 +39,7 @@ class _AddNoteState extends State<AddNote> {
                     Navigator.push<void>(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => Note_Input(),
+                        builder: (BuildContext context) => HomePage(),
                       ),
                     );
                   },
@@ -71,18 +74,23 @@ class _AddNoteState extends State<AddNote> {
                           children: [
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
+                              // image displayed
                               child: Row(
                                 children: [
-                                  // Image
+                                  if (connectionCheck.image != null)
+                                    Image.file(
+                                      File(connectionCheck.image!.path),
+                                      width: 100,
+                                      height: 100,
+                                    ),
                                 ],
                               ),
                             ),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
+                              //  Audio
                               child: Row(
-                                children: [
-                                  //  Audio
-                                ],
+                                children: [],
                               ),
                             ),
                           ],
@@ -174,8 +182,11 @@ class _AddNoteState extends State<AddNote> {
                       top: 1,
                       child: Column(
                         children: [
+                          // image button
                           FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              connectionCheck.showImagePickerOptions(context);
+                            },
                             backgroundColor: themeColor,
                             child: Icon(
                               Icons.camera_alt_outlined,
@@ -184,8 +195,11 @@ class _AddNoteState extends State<AddNote> {
                             ),
                           ),
                           SizedBox(height: 3.h),
+                          // audio button
                           FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              connectionCheck.showAudioOptions(context);
+                            },
                             backgroundColor: themeColor,
                             child: Icon(
                               Icons.audiotrack_outlined,

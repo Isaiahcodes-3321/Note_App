@@ -3,6 +3,7 @@ export  'package:responsive_sizer/responsive_sizer.dart';
 export  '../../Constant/themes.dart';
 export  '../HomePage/home_page.dart';
 export  'note_input.dart';
-// export  'package:clipboard/clipboard.dart';
+export  'package:clipboard/clipboard.dart';
+export 'package:image_picker/image_picker.dart';
 export '../../state_Management/theme_state.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
