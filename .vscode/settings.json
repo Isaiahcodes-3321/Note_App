@@ -1,9 +1,13 @@
 {
     "files.exclude": {
         "**/.dart_tool": true,
+        "**/.flutter-plugins": true,
+        "**/.flutter-plugins-dependencies": true,
         "**/.gitignore": true,
         "**/.idea": true,
         "**/.metadata": true,
+        "**/analysis_options.yaml": true,
+        "**/ios": true,
         "**/linux": true,
         "**/macos": true,
         "**/noteapp.iml": true,

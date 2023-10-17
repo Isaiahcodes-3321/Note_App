@@ -17,29 +17,24 @@ Future<void> main() async {
 }
 
 Future<void> setupHive() async {
- await Hive.initFlutter();
+  await Hive.initFlutter();
   Hive.registerAdapter(ThemecheckAdapter());
   // Opening the hive storage for theme storage
   themestorage = await Hive.openBox('themeBox');
-  
 }
-
-
 
 class Note_App extends StatelessWidget {
   const Note_App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  ResponsiveSizer( 
-  builder: (context, orientation, screenType) {
-    return  const
-     MaterialApp(
-        title: 'Material App',
-        debugShowCheckedModeBanner: false,
-        home: SafeArea(child: Login_SignUp_Page())
-      );
-  },
-);
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return const MaterialApp(
+            title: 'Material App',
+            debugShowCheckedModeBanner: false,
+            home: SafeArea(child: Login_SignUp_Page()));
+      },
+    );
   }
 }

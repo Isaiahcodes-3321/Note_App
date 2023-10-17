@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'controller.dart';
 import 'export_note_input.dart';
+
 
 class AddNote extends StatefulWidget {
   AddNote({super.key});
@@ -14,7 +11,7 @@ class AddNote extends StatefulWidget {
 
 class _AddNoteState extends State<AddNote> {
   final TextEditingController note_context = TextEditingController();
-    final TextEditingController note_title_context = TextEditingController();
+  final TextEditingController note_title_context = TextEditingController();
 
   bool isButtonVisible = false;
 
@@ -131,7 +128,22 @@ class _AddNoteState extends State<AddNote> {
                                       scrollDirection: Axis.horizontal,
                                       //  Audio
                                       child: Row(
-                                        children: [],
+                                        children: [
+//                                           logics.image != null
+//                                               ? AudioFileWaveforms(
+//  size: Size(MediaQuery.of(context).size.width, 100.0),
+//  playerController: logics.controller,
+//  enableSeekGesture: true,
+//  waveformType: WaveformType.long,
+//  waveformData: [],
+//  playerWaveStyle: const PlayerWaveStyle(
+//       fixedWaveColor: Colors.white54,
+//       liveWaveColor: Colors.blueAccent,
+//       spacing: 6,
+//       ),
+// )
+//                                               : Text("")
+                                        ],
                                       ),
                                     ),
                                   ],
