@@ -91,11 +91,8 @@ class ConnectionCheck {
                   style: AppTextStyle.textStyle()
                       .copyWith(fontSize: 18.sp, color: Colors.black)),
               onTap: () {
-                // setState() {
-                isRecording = !isRecording;
                 recordingAudio(context);
-                print(" clik is working");
-                // }
+                print(" click is working");
               },
             ),
           ],
@@ -104,51 +101,121 @@ class ConnectionCheck {
     );
   }
 
-  var audio;
-  RecorderController controller = RecorderController();
+// Recording Audio
+  String recordedAudioFile = '';
   Future<void> recordingAudio(BuildContext context) async {
-    final hasPermission = await controller.checkPermission();
-    await controller.record();
+    controller.reset();
+    try {
+      if (await controller.checkPermission()) {
+        await controller.record();
+      }
+    } catch (e) {
+      print("error recording $e");
+    }
 
     showDialog(
       context: context,
       builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: Text("Recording in Progress",
-                  style: AppTextStyle.textStyle()
-                      .copyWith(fontSize: 20.sp, color: Colors.black)),
-              content: AudioWaveforms(
-                size: Size(MediaQuery.of(context).size.width, 100.0),
-                recorderController: controller,
-                enableGesture: true,
-                waveStyle: WaveStyle(
-                  waveColor: Colors.blue,
-                  showDurationLabel: true,
-                  spacing: 8.0,
-                  showBottom: false,
-                  extendWaveform: true,
-                  showMiddleLine: false,
+        return WillPopScope(
+          onWillPop: () async {
+            // Prevent dialog from closing if the user clicks outside the dialog
+            return false;
+          },
+          child: AlertDialog(
+            title: Text("Recording in Progress",
+                style: AppTextStyle.textStyle()
+                    .copyWith(fontSize: 20.sp, color: Colors.black)),
+            content: AudioWaveforms(
+              size: Size(MediaQuery.of(context).size.width, 100.0),
+              recorderController: controller,
+              enableGesture: true,
+              waveStyle: WaveStyle(
+                waveColor: Colors.blue,
+                showDurationLabel: true,
+                spacing: 8.0,
+                showBottom: false,
+                extendWaveform: true,
+                showMiddleLine: false,
+              ),
+            ),
+            actions: [
+              SizedBox(
+                height: 3.h,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    String? path = await controller.stop();
+                    recordedAudioFile = path!;
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Stop Recording"),
                 ),
               ),
-              actions: [
-                SizedBox(
-                  height: 3.h,
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+// Playing Audio
+  Future<void> playAudio(BuildContext context) async {
+    // Ensure that a recorded audio file path is available
+    if (recordedAudioFile == null) {
+      return;
+    }
+
+    try {
+      print('Audio is playing now');
+      await player_controller.preparePlayer(
+        path: recordedAudioFile,
+        shouldExtractWaveform: true,
+        noOfSamples: 100,
+        volume: 1.0,
+      );
+
+      // Listen to audio completion and dispose when finished
+      player_controller.onCompletion.listen((_) {
+        print('Audio playback completed');
+        // player_controller.dispose();
+      });
+
+      await player_controller.startPlayer(finishMode: FinishMode.stop);
+    } catch (e) {
+      print("Error playing audio: $e");
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AudioFileWaveforms(
+                size: Size(150.sp, 50.sp),
+                playerController: player_controller,
+                enableSeekGesture: true,
+                waveformType: WaveformType.long,
+                waveformData: [],
+                playerWaveStyle: const PlayerWaveStyle(
+                  fixedWaveColor: Color.fromARGB(255, 220, 153, 148),
+                  liveWaveColor: Colors.blueAccent,
+                  spacing: 6,
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await controller.stop();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Stop Recording"),
-                  ),
-                ),
-              ],
-            );
-          },
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: () async {
+                  await player_controller.stopPlayer();
+                  Navigator.pop(context);
+                },
+                child: Text('Stop Audio'),
+              ),
+            ],
+          ),
         );
       },
     );

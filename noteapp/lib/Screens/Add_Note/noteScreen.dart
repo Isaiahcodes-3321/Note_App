@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'export_note_input.dart';
 
-
 class AddNote extends StatefulWidget {
   AddNote({super.key});
 
@@ -10,10 +9,23 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+  @override
+  void initState() {
+    controller = RecorderController();
+    player_controller = PlayerController();
+    super.initState();
+  }
+
   final TextEditingController note_context = TextEditingController();
   final TextEditingController note_title_context = TextEditingController();
 
   bool isButtonVisible = false;
+
+  void dispose() {
+    controller = RecorderController();
+    player_controller = PlayerController();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,26 +72,23 @@ class _AddNoteState extends State<AddNote> {
               width: double.infinity,
               child: Column(
                 children: [
-                  logics.image != null
-                      ? Expanded(
-                          flex: 2,
-                          child: Container(
-                              width: double.infinity,
-                              // color: Colors.green,
-                              // height: 15.h,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      // image displayed
-                                      child: Row(
-                                        children: [
-                                          if (logics.image != null)
-                                            InkWell(
+                  logics.image != null || logics.recordedAudioFile.isNotEmpty
+                      ? Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              logics.image != null
+                                  ? Expanded(
+                                      flex: 4,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.30,
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: InkWell(
                                                 onTap: () {
                                                   Navigator.push<void>(
                                                     context,
@@ -109,6 +118,7 @@ class _AddNoteState extends State<AddNote> {
                                                       alignment:
                                                           Alignment.center,
                                                       child: Icon(Icons.delete,
+                                                          size: 30.sp,
                                                           color: Colors.white),
                                                     ),
                                                     child: logics.image != null
@@ -120,35 +130,67 @@ class _AddNoteState extends State<AddNote> {
                                                           )
                                                         : Container(),
                                                   ),
-                                                )),
-                                        ],
+                                                ))),
+                                      ))
+                                  : Text(''),
+                              logics.recordedAudioFile.isNotEmpty
+                                  ? Expanded(
+                                      flex: 6,
+                                      child: Dismissible(
+                                        key: Key('your_unique_key'),
+                                        onDismissed: (direction) {
+                                          if (direction ==
+                                                  DismissDirection.endToStart ||
+                                              direction ==
+                                                  DismissDirection.startToEnd) {
+                                            logics.recordedAudioFile = '';
+                                          }
+                                        },
+                                        background: Container(
+                                          color: Colors.red,
+                                          alignment: Alignment.center,
+                                          child: Icon(Icons.delete,
+                                              size: 30.sp, color: Colors.white),
+                                        ),
+                                        child: Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                color: Color.fromRGBO(
+                                                    42, 42, 92, 1.0),
+                                                width: 3.0,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(6),
+                                              child: TextButton(
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                    Color.fromRGBO(
+                                                        42, 42, 92, 1.0),
+                                                  ),
+                                                ),
+                                                onPressed: () async {
+                                                  logics.playAudio(context);
+                                                },
+                                                child: Text("Play Audio",
+                                                    style:
+                                                        AppTextStyle.textStyle()
+                                                            .copyWith(
+                                                                fontSize:
+                                                                    18.sp)),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      //  Audio
-                                      child: Row(
-                                        children: [
-//                                           logics.image != null
-//                                               ? AudioFileWaveforms(
-//  size: Size(MediaQuery.of(context).size.width, 100.0),
-//  playerController: logics.controller,
-//  enableSeekGesture: true,
-//  waveformType: WaveformType.long,
-//  waveformData: [],
-//  playerWaveStyle: const PlayerWaveStyle(
-//       fixedWaveColor: Colors.white54,
-//       liveWaveColor: Colors.blueAccent,
-//       spacing: 6,
-//       ),
-// )
-//                                               : Text("")
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
+                                    )
+                                  : Text('')
+                            ],
+                          ),
                         )
                       : Text(""),
                   Padding(
@@ -272,3 +314,21 @@ class _AddNoteState extends State<AddNote> {
     });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
