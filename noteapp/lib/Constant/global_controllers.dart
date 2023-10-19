@@ -9,6 +9,5 @@ static late RecorderController controller;
 static late PlayerController playerController;
 static  TextEditingController? noteContext;
 static  TextEditingController? noteTittleContext;
-// static late String? noteBodyValue;
-// static late String? noteTittleValue;
+static var providerRef;
 }

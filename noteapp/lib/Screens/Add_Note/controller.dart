@@ -25,12 +25,13 @@ class ConnectionCheck {
     } else {
       final completer = Completer<void>();
       print('Updating note');
-      providerRef.read(noteTittle.notifier).state =
+      GlobalControllers.providerRef.read(noteTittle.notifier).state =
           GlobalControllers.noteTittleContext!.text;
-      providerRef.read(noteBody.notifier).state =
+      GlobalControllers.providerRef.read(noteBody.notifier).state =
           GlobalControllers.noteContext!.text;
 
-      String notebodyValue = providerRef.read(noteBody.notifier).state;
+      String notebodyValue =
+          GlobalControllers.providerRef.read(noteBody.notifier).state;
       print("Current notebody value: $notebodyValue");
 
       ScaffoldMessenger.of(context).showSnackBar(

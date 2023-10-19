@@ -25,11 +25,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-         providerRef = ref;
-        // String noteBodyValue = ref.read(noteBody.notifier).state;
-        // String noteTittleValue = ref.read(noteTittle.notifier).state;
+         GlobalControllers.providerRef = ref;
 
-        var currentTheme = ref.watch(themeInit);
+        String noteBodyValue = GlobalControllers.providerRef.read(noteBody.notifier).state;
+        String noteTittleValue = GlobalControllers.providerRef.read(noteTittle.notifier).state;
+
+        var currentTheme = GlobalControllers.providerRef.watch(themeInit);
         var textModeColor = currentTheme
             ? Backgroundcolor.lightmode
             : Backgroundcolor.darkhmode;
@@ -93,9 +94,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SliverToBoxAdapter(
                     child: 
-                    // noteTittleValue.isNotEmpty ?
-                     Text("GlobalControllers.noteBodyValue")
-                        // : Text("no note"),
+                    noteTittleValue.isNotEmpty ?
+                     Text(noteBodyValue)
+                        : Text("no note"),
                   ),
                 ],
               ),

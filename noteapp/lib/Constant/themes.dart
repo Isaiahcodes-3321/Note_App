@@ -6,7 +6,7 @@ import '../ThemeStore/theme.dart';
 
 
 
-var providerRef;
+
 
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 var themeColor = Color.fromRGBO(42, 42, 92, 1.0);
