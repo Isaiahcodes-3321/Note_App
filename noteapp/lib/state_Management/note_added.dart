@@ -1,9 +1,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final title_Note = StateProvider((ref) => "Hello New Note");
+final notetittle = StateProvider<String>((ref) => 'Note Title');
+final notebody = StateProvider<String>((ref) => 'Note Body');
 
-final note_Note = StateProvider((ref) =>
-    "Hello i will be going to the market to get some things today okey ");
+ 
+var dateadded = StateProvider((ref) => " 9 Sep");
 
-final date_added = StateProvider((ref) => "5 Sep");

@@ -3,8 +3,8 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:noteapp/Constant/themes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class Login_unsuccesful extends StatelessWidget {
-  const Login_unsuccesful({super.key});
+class LoginUnsuccesful extends StatelessWidget {
+  const LoginUnsuccesful({super.key});
 
   @override
   Widget build(BuildContext context) {

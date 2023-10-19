@@ -11,4 +11,5 @@ export  'package:clipboard/clipboard.dart';
 export 'package:image_picker/image_picker.dart';
 export '../../state_Management/theme_state.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
+export 'package:noteapp/state_Management/note_added.dart';
 

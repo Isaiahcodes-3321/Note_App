@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
+
 import 'export_note_input.dart';
 import 'dart:ui' as ui;
 
@@ -18,6 +20,18 @@ class ConnectionCheck {
           duration: Duration(seconds: 4),
         ),
       );
+    } else {
+      print(' Updating note ');
+      Consumer(
+        builder: (context, ref, child) {
+          ref.read(notetittle.notifier).state =
+              GlobalControllers.noteTittleContext.text;
+          ref.read(notebody.notifier).state =
+              GlobalControllers.noteContext.text;
+          return SizedBox();
+        },
+      );
+      print(' Note its  ${GlobalControllers.noteTittleContext.text}');
     }
   }
 
@@ -104,10 +118,10 @@ class ConnectionCheck {
 // Recording Audio
   String recordedAudioFile = '';
   Future<void> recordingAudio(BuildContext context) async {
-    controller.reset();
+    GlobalControllers.controller?.reset();
     try {
-      if (await controller.checkPermission()) {
-        await controller.record();
+      if (await GlobalControllers.controller!.checkPermission()) {
+        await GlobalControllers.controller!.record();
       }
     } catch (e) {
       print("error recording $e");
@@ -127,7 +141,7 @@ class ConnectionCheck {
                     .copyWith(fontSize: 20.sp, color: Colors.black)),
             content: AudioWaveforms(
               size: Size(MediaQuery.of(context).size.width, 100.0),
-              recorderController: controller,
+              recorderController: GlobalControllers.controller,
               enableGesture: true,
               waveStyle: WaveStyle(
                 waveColor: Colors.blue,
@@ -146,7 +160,7 @@ class ConnectionCheck {
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(
                   onPressed: () async {
-                    String? path = await controller.stop();
+                    String? path = await GlobalControllers.controller.stop();
                     recordedAudioFile = path!;
                     Navigator.of(context).pop();
                   },
@@ -169,7 +183,7 @@ class ConnectionCheck {
 
     try {
       print('Audio is playing now');
-      await player_controller.preparePlayer(
+      await GlobalControllers.playerController.preparePlayer(
         path: recordedAudioFile,
         shouldExtractWaveform: true,
         noOfSamples: 100,
@@ -177,12 +191,13 @@ class ConnectionCheck {
       );
 
       // Listen to audio completion and dispose when finished
-      player_controller.onCompletion.listen((_) {
+      GlobalControllers.playerController.onCompletion.listen((_) {
         print('Audio playback completed');
         // player_controller.dispose();
       });
 
-      await player_controller.startPlayer(finishMode: FinishMode.stop);
+      await GlobalControllers.playerController
+          .startPlayer(finishMode: FinishMode.stop);
     } catch (e) {
       print("Error playing audio: $e");
     }
@@ -196,7 +211,7 @@ class ConnectionCheck {
             children: [
               AudioFileWaveforms(
                 size: Size(150.sp, 50.sp),
-                playerController: player_controller,
+                playerController: GlobalControllers.playerController,
                 enableSeekGesture: true,
                 waveformType: WaveformType.long,
                 waveformData: [],
@@ -209,7 +224,7 @@ class ConnectionCheck {
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
-                  await player_controller.stopPlayer();
+                  await GlobalControllers.playerController.stopPlayer();
                   Navigator.pop(context);
                 },
                 child: Text('Stop Audio'),

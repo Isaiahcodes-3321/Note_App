@@ -4,8 +4,8 @@ part 'theme.g.dart';
 
 // Storage for user
 @HiveType(typeId: 0)
-class Theme_check{
-  Theme_check({
+class ThemeCheck{
+  ThemeCheck({
     required this.theme_data,
   });
 

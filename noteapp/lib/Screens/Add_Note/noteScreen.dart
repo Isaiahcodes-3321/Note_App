@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
 import 'export_note_input.dart';
 
 class AddNote extends StatefulWidget {
@@ -11,26 +12,26 @@ class AddNote extends StatefulWidget {
 class _AddNoteState extends State<AddNote> {
   @override
   void initState() {
-    controller = RecorderController();
-    player_controller = PlayerController();
+    GlobalControllers.controller = RecorderController();
+    GlobalControllers.playerController = PlayerController();
+    GlobalControllers.noteContext = TextEditingController();
+    GlobalControllers.noteTittleContext = TextEditingController();
+
     super.initState();
   }
-
-  final TextEditingController note_context = TextEditingController();
-  final TextEditingController note_title_context = TextEditingController();
 
   bool isButtonVisible = false;
 
   void dispose() {
-    controller = RecorderController();
-    player_controller = PlayerController();
+    GlobalControllers.controller = RecorderController();
+    GlobalControllers.playerController = PlayerController();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      var current_theme = ref.watch(theme_init);
+      var current_theme = ref.watch(themeInit);
       var text_Mode_Color =
           current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
 
@@ -95,7 +96,7 @@ class _AddNoteState extends State<AddNote> {
                                                     MaterialPageRoute<void>(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          Image_full_screen(),
+                                                          ImageFullScreen(),
                                                     ),
                                                   );
                                                 },
@@ -156,7 +157,7 @@ class _AddNoteState extends State<AddNote> {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(30),
+                                                  BorderRadius.circular(35),
                                               border: Border.all(
                                                 color: Color.fromRGBO(
                                                     42, 42, 92, 1.0),
@@ -164,7 +165,7 @@ class _AddNoteState extends State<AddNote> {
                                               ),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(6),
+                                              padding: const EdgeInsets.all(5),
                                               child: TextButton(
                                                 style: ButtonStyle(
                                                   backgroundColor:
@@ -200,7 +201,7 @@ class _AddNoteState extends State<AddNote> {
                       style: AppTextStyle.textStyle().copyWith(
                           color: const Color.fromARGB(255, 28, 28, 28),
                           fontSize: 20.sp),
-                      controller: note_title_context,
+                      controller: GlobalControllers.noteTittleContext,
                       decoration: InputDecoration(
                         focusColor: Colors.white,
                         hintText: "Note title",
@@ -225,10 +226,10 @@ class _AddNoteState extends State<AddNote> {
                             GestureDetector(
                               onTap: () {
                                 Clipboard.setData(
-                                    ClipboardData(text: note_context.text));
+                                    ClipboardData(text: GlobalControllers.noteContext.text));
                               },
                               child: TextFormField(
-                                controller: note_context,
+                                controller: GlobalControllers.noteContext,
                                 maxLines: null,
                                 decoration: InputDecoration(
                                   focusColor: Colors.white,
@@ -314,21 +315,3 @@ class _AddNoteState extends State<AddNote> {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

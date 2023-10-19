@@ -1,9 +1,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final title_trash = StateProvider((ref) => "Hello New Note");
+final titleTrash = StateProvider((ref) => "Hello New Note");
 
-final note_trash = StateProvider((ref) =>
+final noteTrash = StateProvider((ref) =>
     "Hello i will be going to the market to get some things today okey ");
 
-final date_deleted = StateProvider((ref) => "5 Sep");
+final dateDeleted = StateProvider((ref) => "5 Sep");

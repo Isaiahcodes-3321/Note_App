@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
 
-class Login_SignUp_Page extends StatefulWidget {
-  const Login_SignUp_Page({super.key});
+class LoginSignUpPage extends StatefulWidget {
+  const LoginSignUpPage({super.key});
 
   @override
-  State<Login_SignUp_Page> createState() => _Login_SignUp_PageState();
+  State<LoginSignUpPage> createState() => _LoginSignUpPageState();
 }
 
-class _Login_SignUp_PageState extends State<Login_SignUp_Page> with TickerProviderStateMixin {
+class _LoginSignUpPageState extends State<LoginSignUpPage> with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override

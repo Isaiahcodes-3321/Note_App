@@ -1,6 +1,7 @@
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/services.dart';
 import 'Constant/themes.dart';
@@ -21,7 +22,7 @@ Future<void> setupHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ThemecheckAdapter());
   // Opening the hive storage for theme storage
-  themestorage = await Hive.openBox('themeBox');
+  GlobalControllers.themeStorage = await Hive.openBox('themeBox');
 }
 
 class Note_App extends StatelessWidget {
@@ -34,7 +35,7 @@ class Note_App extends StatelessWidget {
         return const MaterialApp(
             title: 'Material App',
             debugShowCheckedModeBanner: false,
-            home: SafeArea(child: Login_SignUp_Page()));
+            home: SafeArea(child: LoginSignUpPage()));
       },
     );
   }

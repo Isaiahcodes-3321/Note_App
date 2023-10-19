@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'export._home.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
+import 'export_home.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -13,11 +14,11 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      var get_theme = themestorage.get('myKey');
-      
-      var current_theme = ref.watch(theme_init);
-      var text_Mode_Color =
-          current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+      var getTheme = GlobalControllers.themeStorage.get('myKey');
+
+      var currenttTheme = ref.watch(themeInit);
+      var textModeColor =
+          currenttTheme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
       return ListView(
         children: <Widget>[
           DrawerHeader(
@@ -33,7 +34,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   TextSpan(
                       text: 'Isaiah Shell',
                       style: AppTextStyle.textStyle()
-                          .copyWith(color: text_Mode_Color, fontSize: 17.sp)),
+                          .copyWith(color: textModeColor, fontSize: 17.sp)),
                 ],
               ),
             ),
@@ -50,12 +51,13 @@ class _MyDrawerState extends State<MyDrawer> {
               },
               child: Text('Trash',
                   style: AppTextStyle.textStyle()
-                      .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
+                      .copyWith(color: textModeColor, fontSize: 18.sp)),
             ),
           ),
           Divider(
-            color:
-                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+            color: currenttTheme
+                ? Backgroundcolor.lightmode
+                : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Row(
@@ -64,13 +66,13 @@ class _MyDrawerState extends State<MyDrawer> {
               children: [
                 Text('Theme',
                     style: AppTextStyle.textStyle()
-                        .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
+                        .copyWith(color: textModeColor, fontSize: 18.sp)),
                 GestureDetector(
                     onTap: () {},
                     child: Consumer(
                       builder: (context, ref, child) {
                         // Get the current theme state from your Riverpod provider
-                        final theme = ref.watch(theme_init);
+                        final theme = ref.watch(themeInit);
 
                         return CupertinoSwitch(
                           activeColor: Colors.white,
@@ -79,11 +81,11 @@ class _MyDrawerState extends State<MyDrawer> {
                           value: theme,
                           onChanged: (value) async {
                             // Toggle the theme state in your Riverpod provider
-                            ref.read(theme_init.notifier).state = value;
+                            ref.read(themeInit.notifier).state = value;
 
                             // Update the theme value in Hive
-                            await themestorage.put('myKey', value);
-                            theme_init = get_theme as StateProvider<bool>;
+                            await GlobalControllers.themeStorage.put('myKey', value);
+                            themeInit = getTheme as StateProvider<bool>;
                           },
                         );
                       },
@@ -92,26 +94,29 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           Divider(
-            color:
-                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+            color: currenttTheme
+                ? Backgroundcolor.lightmode
+                : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Text('Developers',
                 style: AppTextStyle.textStyle()
-                    .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
+                    .copyWith(color: textModeColor, fontSize: 18.sp)),
           ),
           Divider(
-            color:
-                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+            color: currenttTheme
+                ? Backgroundcolor.lightmode
+                : Backgroundcolor.darkhmode,
           ),
           ListTile(
             title: Text('Rate Us',
                 style: AppTextStyle.textStyle()
-                    .copyWith(color: text_Mode_Color, fontSize: 18.sp)),
+                    .copyWith(color: textModeColor, fontSize: 18.sp)),
           ),
           Divider(
-            color:
-                current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode,
+            color: currenttTheme
+                ? Backgroundcolor.lightmode
+                : Backgroundcolor.darkhmode,
           ),
           Container(
             height: MediaQuery.sizeOf(context).height * 0.25,
@@ -134,4 +139,3 @@ class _MyDrawerState extends State<MyDrawer> {
     });
   }
 }
-

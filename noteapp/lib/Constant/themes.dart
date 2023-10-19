@@ -4,10 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../ThemeStore/theme.dart';
 
-//my storage Make Hive accessible anywhere,
-late Box themestorage;
-late RecorderController controller;
- late PlayerController player_controller;
+
 
 
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';

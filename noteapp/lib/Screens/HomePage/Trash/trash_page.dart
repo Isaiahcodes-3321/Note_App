@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../export._home.dart';
+import '../export_home.dart';
 
 class Trash_Page extends StatefulWidget {
   const Trash_Page({super.key});
@@ -13,10 +13,10 @@ class _Trash_PageState extends State<Trash_Page> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      final theme = ref.watch(theme_init);
-      final title_Trash = ref.watch(title_trash);
-      final note_Trash = ref.watch(note_trash);
-      final date_Deleted = ref.watch(date_deleted);
+      final theme = ref.watch(themeInit);
+      final title_Trash = ref.watch(titleTrash);
+      final note_Trash = ref.watch(noteTrash);
+      final date_Deleted = ref.watch(dateDeleted);
 
       List<String> l_title_Trash = [];
       List<String> l_note_Trash = [];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'export._home.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
+import 'export_home.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -15,20 +16,22 @@ class _HomePageState extends State<HomePage> {
   bool onlong_press = true;
   List<bool> itemLongPressedStates = [false, false, false];
 
+
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final title_added = ref.watch(title_Note);
-        final note_added = ref.watch(note_Note);
-        var current_theme = ref.watch(theme_init);
-        var text_Mode_Color = current_theme
+        var tittleAdded = "${GlobalControllers.noteTittleContext.text}";
+        var noteAdded = "${GlobalControllers.noteTittleContext.text}";
+
+        var currentTheme = ref.watch(themeInit);
+        var textModeColor = currentTheme
             ? Backgroundcolor.lightmode
             : Backgroundcolor.darkhmode;
 
         return SafeArea(
           child: Scaffold(
-              backgroundColor: current_theme
+              backgroundColor: currentTheme
                   ? Backgroundcolor.darkhmode
                   : Backgroundcolor.lightmode,
               body: CustomScrollView(
@@ -122,21 +125,21 @@ class _HomePageState extends State<HomePage> {
                                 child: Column(
                                   children: [
                                     // Title
-                                    Text(title_added,
+                                    Text(tittleAdded,
                                         style:
                                             AppTextStyle.textStyle().copyWith(
-                                          color: text_Mode_Color,
+                                          color: textModeColor,
                                           fontSize: 20.sp,
                                           overflow: TextOverflow.ellipsis,
                                         )),
                                     SizedBox(
                                       height: 3.h,
                                     ),
-                                    Text(note_added,
+                                    Text(noteAdded,
                                         maxLines: 3,
                                         style:
                                             AppTextStyle.textStyle().copyWith(
-                                          color: text_Mode_Color,
+                                          color: textModeColor,
                                           fontSize: 18.sp,
                                           overflow: TextOverflow.ellipsis,
                                         )),
@@ -154,7 +157,7 @@ class _HomePageState extends State<HomePage> {
               ),
               drawer: Drawer(
                   // Take 70% of the user screen
-                  backgroundColor: current_theme
+                  backgroundColor: currentTheme
                       ? Color.fromARGB(255, 36, 36, 38)
                       : Backgroundcolor.lightmode,
                   width: MediaQuery.sizeOf(context).width * 0.70,
