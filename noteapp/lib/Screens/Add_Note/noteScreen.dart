@@ -25,8 +25,25 @@ class _AddNoteState extends State<AddNote> {
   void dispose() {
     GlobalControllers.controller = RecorderController();
     GlobalControllers.playerController = PlayerController();
+     GlobalControllers.noteContext = TextEditingController();
+    GlobalControllers.noteTittleContext = TextEditingController();
     super.dispose();
   }
+
+
+   Future<void> updateNoteContents() async {
+  await Future.delayed(Duration.zero); 
+  await Consumer(
+    builder: (context, ref, child) {
+      ref.read(noteTittle.notifier).state = GlobalControllers.noteTittleContext!.text;
+      ref.read(noteBody.notifier).state = GlobalControllers.noteContext!.text;
+
+      String notebodyValue = ref.read(noteBody.notifier).state;
+      print("Current notebody value: $notebodyValue");
+    return SizedBox();
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +51,7 @@ class _AddNoteState extends State<AddNote> {
       var current_theme = ref.watch(themeInit);
       var text_Mode_Color =
           current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+
 
       return SafeArea(
         child: Scaffold(
@@ -226,7 +244,7 @@ class _AddNoteState extends State<AddNote> {
                             GestureDetector(
                               onTap: () {
                                 Clipboard.setData(
-                                    ClipboardData(text: GlobalControllers.noteContext.text));
+                                    ClipboardData(text: GlobalControllers.noteContext!.text));
                               },
                               child: TextFormField(
                                 controller: GlobalControllers.noteContext,

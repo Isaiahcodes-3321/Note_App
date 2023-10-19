@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
-
 
 class LoginSignUpPage extends StatefulWidget {
   const LoginSignUpPage({super.key});
@@ -9,7 +9,8 @@ class LoginSignUpPage extends StatefulWidget {
   State<LoginSignUpPage> createState() => _LoginSignUpPageState();
 }
 
-class _LoginSignUpPageState extends State<LoginSignUpPage> with TickerProviderStateMixin {
+class _LoginSignUpPageState extends State<LoginSignUpPage>
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -19,7 +20,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> with TickerProviderSt
       length: 2,
       vsync: this,
     );
-  }
+    }
 
   @override
   void dispose() {
@@ -67,7 +68,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> with TickerProviderSt
         ),
         body: Column(
           children: [
-             Expanded(
+            Expanded(
               child: TabBarView(
                 children: [
                   SignUpPage(),
@@ -91,4 +92,3 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> with TickerProviderSt
     );
   }
 }
-

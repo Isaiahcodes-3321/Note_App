@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 
@@ -21,17 +23,26 @@ class ConnectionCheck {
         ),
       );
     } else {
-      print(' Updating note ');
-      Consumer(
-        builder: (context, ref, child) {
-          ref.read(notetittle.notifier).state =
-              GlobalControllers.noteTittleContext.text;
-          ref.read(notebody.notifier).state =
-              GlobalControllers.noteContext.text;
-          return SizedBox();
-        },
+      final completer = Completer<void>();
+      print('Updating note');
+      providerRef.read(noteTittle.notifier).state =
+          GlobalControllers.noteTittleContext!.text;
+      providerRef.read(noteBody.notifier).state =
+          GlobalControllers.noteContext!.text;
+
+      String notebodyValue = providerRef.read(noteBody.notifier).state;
+      print("Current notebody value: $notebodyValue");
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: themeColor,
+          content: Text(
+            "Note Saved",
+            style: AppTextStyle.textStyle().copyWith(fontSize: 15.sp),
+          ),
+          duration: Duration(seconds: 5),
+        ),
       );
-      print(' Note its  ${GlobalControllers.noteTittleContext.text}');
     }
   }
 

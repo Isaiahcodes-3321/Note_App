@@ -1,10 +1,8 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/services.dart';
-import 'Constant/themes.dart';
 import 'Screens/Logins/login_SignUp.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ThemeStore/theme.dart';

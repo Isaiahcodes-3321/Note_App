@@ -7,7 +7,8 @@ class GlobalControllers {
 static late Box themeStorage;
 static late RecorderController controller;
 static late PlayerController playerController;
-static late TextEditingController noteContext;
-static late TextEditingController noteTittleContext;
-
+static  TextEditingController? noteContext;
+static  TextEditingController? noteTittleContext;
+// static late String? noteBodyValue;
+// static late String? noteTittleValue;
 }

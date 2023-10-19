@@ -10,19 +10,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+ 
+
+  bool isButtonVisible = false;
+
   final globalKey = GlobalKey();
   bool isSearching = false;
-  var text_Mode_Color;
-  bool onlong_press = true;
+  var textModeColor;
+  bool onlongPress = true;
   List<bool> itemLongPressedStates = [false, false, false];
-
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        var tittleAdded = "${GlobalControllers.noteTittleContext.text}";
-        var noteAdded = "${GlobalControllers.noteTittleContext.text}";
+         providerRef = ref;
+        // String noteBodyValue = ref.read(noteBody.notifier).state;
+        // String noteTittleValue = ref.read(noteTittle.notifier).state;
 
         var currentTheme = ref.watch(themeInit);
         var textModeColor = currentTheme
@@ -86,73 +91,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SliverGrid(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push<void>(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => AddNote(),
-                              ),
-                            );
-                          },
-                          onLongPress: () {
-                            setState(() {
-                              onlong_press = !onlong_press;
-                              itemLongPressedStates[index] =
-                                  !itemLongPressedStates[index];
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: itemLongPressedStates[index]
-                                    ? Colors.red
-                                    : Colors.green,
-                              ),
-                              width: MediaQuery.of(context).size.width * 0.40,
-                              height: MediaQuery.of(context).size.width * 0.30,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 1.w, vertical: 2.h),
-                                child: Column(
-                                  children: [
-                                    // Title
-                                    Text(tittleAdded,
-                                        style:
-                                            AppTextStyle.textStyle().copyWith(
-                                          color: textModeColor,
-                                          fontSize: 20.sp,
-                                          overflow: TextOverflow.ellipsis,
-                                        )),
-                                    SizedBox(
-                                      height: 3.h,
-                                    ),
-                                    Text(noteAdded,
-                                        maxLines: 3,
-                                        style:
-                                            AppTextStyle.textStyle().copyWith(
-                                          color: textModeColor,
-                                          fontSize: 18.sp,
-                                          overflow: TextOverflow.ellipsis,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      childCount: 3,
-                    ),
-                  )
+                  SliverToBoxAdapter(
+                    child: 
+                    // noteTittleValue.isNotEmpty ?
+                     Text("GlobalControllers.noteBodyValue")
+                        // : Text("no note"),
+                  ),
                 ],
               ),
               drawer: Drawer(
@@ -162,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       : Backgroundcolor.lightmode,
                   width: MediaQuery.sizeOf(context).width * 0.70,
                   child: MyDrawer()),
-              floatingActionButton: onlong_press
+              floatingActionButton: onlongPress
                   ? FloatingActionButton(
                       focusElevation: 30,
                       onPressed: () {
@@ -193,3 +137,87 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  SliverGrid(
+//                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                       crossAxisCount: 2,
+                      
+//                     ),
+//                     delegate: SliverChildBuilderDelegate(
+//                       (BuildContext context, int index) {
+//                         return GestureDetector(
+//                           onTap: () {
+//                             Navigator.push<void>(
+//                               context,
+//                               MaterialPageRoute<void>(
+//                                 builder: (BuildContext context) => AddNote(),
+//                               ),
+//                             );
+//                           },
+//                           onLongPress: () {
+//                             setState(() {
+//                               onlongPress = !onlongPress;
+//                               itemLongPressedStates[index] =
+//                                   !itemLongPressedStates[index];
+//                             });
+//                           },
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(8.0),
+//                             child: Container(
+//                               decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(10),
+//                                 color: itemLongPressedStates[index]
+//                                     ? Colors.red
+//                                     : Colors.green,
+//                               ),
+//                               width: MediaQuery.of(context).size.width * 0.40,
+//                               height: MediaQuery.of(context).size.width * 0.30,
+//                               child: Padding(
+//                                 padding: EdgeInsets.symmetric(
+//                                     horizontal: 3.w, vertical: 2.h),
+//                                 child: Column(
+//                                   children: [
+//                                     // Title
+//                                     Text(tittleAdded,
+//                                         style:
+//                                             AppTextStyle.textStyle().copyWith(
+//                                           color: textModeColor,
+//                                           fontSize: 20.sp,
+//                                           overflow: TextOverflow.ellipsis,
+//                                         )),
+//                                     SizedBox(
+//                                       height: 3.h,
+//                                     ),
+//                                     // Note body
+//                                     Text(noteAdded,
+//                                         maxLines: 3,
+//                                         style:
+//                                             AppTextStyle.textStyle().copyWith(
+//                                           color: textModeColor,
+//                                           fontSize: 18.sp,
+//                                           overflow: TextOverflow.ellipsis,
+//                                         )),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                       childCount: 3,
+//                     ),
+//                   )
