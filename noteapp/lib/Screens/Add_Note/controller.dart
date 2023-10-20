@@ -1,15 +1,12 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:noteapp/Constant/global_controllers.dart';
-
 import 'export_note_input.dart';
-import 'dart:ui' as ui;
 
 var logics = ConnectionCheck();
 
 class ConnectionCheck {
-  Future<void> showBanner(BuildContext context) async {
+
+  Future<void> savedState(BuildContext context) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -23,7 +20,7 @@ class ConnectionCheck {
         ),
       );
     } else {
-      final completer = Completer<void>();
+      
       print('Updating note');
       GlobalControllers.providerRef.read(noteTittle.notifier).state =
           GlobalControllers.noteTittleContext!.text;
@@ -83,7 +80,7 @@ class ConnectionCheck {
     );
   }
 
-// Function to capture a photo
+// Function to capture photo
   Future<void> takePhoto() async {
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.camera);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Constant/global_controllers.dart';
 import 'export_home.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,34 +10,33 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
- 
-
-  bool isButtonVisible = false;
-
-  final globalKey = GlobalKey();
   bool isSearching = false;
   var textModeColor;
-  bool onlongPress = true;
-  List<bool> itemLongPressedStates = [false, false, false];
+  // bool onlongPress = true;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-         GlobalControllers.providerRef = ref;
+        GlobalControllers.providerRef = ref;
 
-        String noteBodyValue = GlobalControllers.providerRef.read(noteBody.notifier).state;
-        String noteTittleValue = GlobalControllers.providerRef.read(noteTittle.notifier).state;
+        String noteBodyValue =
+            GlobalControllers.providerRef.read(noteBody.notifier).state;
+        String noteTittleValue =
+            GlobalControllers.providerRef.read(noteTittle.notifier).state;
 
         var currentTheme = GlobalControllers.providerRef.watch(themeInit);
-        var textModeColor = currentTheme
-            ? Backgroundcolor.lightmode
-            : Backgroundcolor.darkhmode;
+        var textModeColor =
+            currentTheme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
+
+        var listTilebackground = currentTheme
+            ? Color.fromARGB(255, 54, 54, 56)
+            : Color.fromARGB(255, 143, 143, 179);
 
         return SafeArea(
           child: Scaffold(
               backgroundColor: currentTheme
-                  ? Backgroundcolor.darkhmode
+                  ? Backgroundcolor.darkmode
                   : Backgroundcolor.lightmode,
               body: CustomScrollView(
                 slivers: [
@@ -93,9 +91,54 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   SliverToBoxAdapter(
-                    child: 
-                    noteTittleValue.isNotEmpty ?
-                     Text(noteBodyValue)
+                    child: noteTittleValue.isNotEmpty
+                        ? Container(
+                            width: MediaQuery.sizeOf(context).width * 100.0,
+                            height: MediaQuery.sizeOf(context).width * 100.0,
+                            child: Padding(
+                                padding: EdgeInsets.all(20),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(22),
+                                          color: listTilebackground,
+                                        ),
+                                        child: ListTile(
+                                          title: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // Title
+                                              Text(
+                                                noteTittleValue,
+                                                style: AppTextStyle.textStyle()
+                                                    .copyWith(
+                                                  color: textModeColor,
+                                                  fontSize: 20.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          // Note
+                                          subtitle: Text(
+                                            noteBodyValue,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: AppTextStyle.textStyle()
+                                                .copyWith(
+                                              color: textModeColor,
+                                              fontSize: 15.sp,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          )
                         : Text("no note"),
                   ),
                 ],
@@ -107,118 +150,24 @@ class _HomePageState extends State<HomePage> {
                       : Backgroundcolor.lightmode,
                   width: MediaQuery.sizeOf(context).width * 0.70,
                   child: MyDrawer()),
-              floatingActionButton: onlongPress
-                  ? FloatingActionButton(
-                      focusElevation: 30,
-                      onPressed: () {
-                        Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => AddNote(),
-                          ),
-                        );
-                      },
-                      backgroundColor: themeColor,
-                      child: Icon(
-                        Icons.add,
-                        color: AppTextStyle.appbarTextcolor,
-                        size: 25.sp,
-                      ))
-                  : FloatingActionButton(
-                      focusElevation: 30,
-                      onPressed: () {},
-                      backgroundColor: themeColor,
-                      child: Icon(
-                        Icons.delete_forever,
-                        color: AppTextStyle.appbarTextcolor,
-                        size: 25.sp,
-                      ))),
+              floatingActionButton: FloatingActionButton(
+                  focusElevation: 30,
+                  onPressed: () {
+                    Navigator.push<void>(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => AddNote(),
+                      ),
+                    );
+                  },
+                  backgroundColor: themeColor,
+                  child: Icon(
+                    Icons.add,
+                    color: AppTextStyle.appbarTextcolor,
+                    size: 25.sp,
+                  ))),
         );
       },
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  SliverGrid(
-//                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                       crossAxisCount: 2,
-                      
-//                     ),
-//                     delegate: SliverChildBuilderDelegate(
-//                       (BuildContext context, int index) {
-//                         return GestureDetector(
-//                           onTap: () {
-//                             Navigator.push<void>(
-//                               context,
-//                               MaterialPageRoute<void>(
-//                                 builder: (BuildContext context) => AddNote(),
-//                               ),
-//                             );
-//                           },
-//                           onLongPress: () {
-//                             setState(() {
-//                               onlongPress = !onlongPress;
-//                               itemLongPressedStates[index] =
-//                                   !itemLongPressedStates[index];
-//                             });
-//                           },
-//                           child: Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: Container(
-//                               decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 color: itemLongPressedStates[index]
-//                                     ? Colors.red
-//                                     : Colors.green,
-//                               ),
-//                               width: MediaQuery.of(context).size.width * 0.40,
-//                               height: MediaQuery.of(context).size.width * 0.30,
-//                               child: Padding(
-//                                 padding: EdgeInsets.symmetric(
-//                                     horizontal: 3.w, vertical: 2.h),
-//                                 child: Column(
-//                                   children: [
-//                                     // Title
-//                                     Text(tittleAdded,
-//                                         style:
-//                                             AppTextStyle.textStyle().copyWith(
-//                                           color: textModeColor,
-//                                           fontSize: 20.sp,
-//                                           overflow: TextOverflow.ellipsis,
-//                                         )),
-//                                     SizedBox(
-//                                       height: 3.h,
-//                                     ),
-//                                     // Note body
-//                                     Text(noteAdded,
-//                                         maxLines: 3,
-//                                         style:
-//                                             AppTextStyle.textStyle().copyWith(
-//                                           color: textModeColor,
-//                                           fontSize: 18.sp,
-//                                           overflow: TextOverflow.ellipsis,
-//                                         )),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         );
-//                       },
-//                       childCount: 3,
-//                     ),
-//                   )

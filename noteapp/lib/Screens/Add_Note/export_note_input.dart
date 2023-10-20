@@ -6,6 +6,7 @@ export  'full_image.dart';
 export 'package:flutter/services.dart';
 export 'controller.dart';
 export 'dart:io';
+export 'package:noteapp/Constant/global_controllers.dart';
 export 'package:audio_waveforms/audio_waveforms.dart';
 export  'package:clipboard/clipboard.dart';
 export 'package:image_picker/image_picker.dart';

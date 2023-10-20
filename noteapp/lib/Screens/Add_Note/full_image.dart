@@ -1,6 +1,6 @@
 import 'export_note_input.dart';
 import 'package:flutter/material.dart';
-import 'controller.dart';
+
 
 class ImageFullScreen extends StatelessWidget {
   @override

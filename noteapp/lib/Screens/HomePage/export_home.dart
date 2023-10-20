@@ -8,6 +8,7 @@ export 'package:responsive_sizer/responsive_sizer.dart';
 export '../../../state_Management/trash_bin.dart';
 export '../../state_Management/theme_state.dart';
 export '../../state_Management/note_added.dart';
+export 'package:noteapp/Constant/global_controllers.dart';
 
 
 

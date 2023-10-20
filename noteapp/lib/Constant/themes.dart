@@ -1,8 +1,6 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
+
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../ThemeStore/theme.dart';
 
 
 
@@ -26,7 +24,7 @@ var outlineInputBorder = OutlineInputBorder(
 class Backgroundcolor {
   
   static Color lightmode = Colors.white;
-  static Color darkhmode = Color.fromARGB(255, 20, 20, 20);
+  static Color darkmode = Color.fromARGB(255, 20, 20, 20);
 
   static Color themeColorLightmode = Color.fromRGBO(42, 42, 92, 1.0);
   static Color themeColorDarkmode = Color.fromRGBO(7, 7, 17, 1);

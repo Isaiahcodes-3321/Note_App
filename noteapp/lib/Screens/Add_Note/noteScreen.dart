@@ -21,8 +21,9 @@ class _AddNoteState extends State<AddNote> {
   }
 
   bool isButtonVisible = false;
+  
 
-  void dispose() {
+void dispose() {
     GlobalControllers.controller = RecorderController();
     GlobalControllers.playerController = PlayerController();
      GlobalControllers.noteContext = TextEditingController();
@@ -30,33 +31,18 @@ class _AddNoteState extends State<AddNote> {
     super.dispose();
   }
 
-
-   Future<void> updateNoteContents() async {
-  await Future.delayed(Duration.zero); 
-  await Consumer(
-    builder: (context, ref, child) {
-      ref.read(noteTittle.notifier).state = GlobalControllers.noteTittleContext!.text;
-      ref.read(noteBody.notifier).state = GlobalControllers.noteContext!.text;
-
-      String notebodyValue = ref.read(noteBody.notifier).state;
-      print("Current notebody value: $notebodyValue");
-    return SizedBox();
-    },
-  );
-}
-
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      var current_theme = ref.watch(themeInit);
+      var current_theme = GlobalControllers.providerRef.watch(themeInit);
       var text_Mode_Color =
-          current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+          current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
 
 
       return SafeArea(
         child: Scaffold(
             backgroundColor: current_theme
-                ? Backgroundcolor.darkhmode
+                ? Backgroundcolor.darkmode
                 : Backgroundcolor.lightmode,
             appBar: AppBar(
               backgroundColor: themeColor,
@@ -77,7 +63,7 @@ class _AddNoteState extends State<AddNote> {
               actions: [
                 GestureDetector(
                     onTap: () async {
-                      logics.showBanner(context);
+                      logics.savedState(context);
                     },
                     child: Padding(
                         padding: EdgeInsets.all(15.sp),

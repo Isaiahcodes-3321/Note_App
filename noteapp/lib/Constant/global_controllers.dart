@@ -10,4 +10,6 @@ static late PlayerController playerController;
 static  TextEditingController? noteContext;
 static  TextEditingController? noteTittleContext;
 static var providerRef;
+static var getTheme;
+
 }

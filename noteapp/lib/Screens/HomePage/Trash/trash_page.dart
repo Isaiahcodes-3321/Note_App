@@ -26,13 +26,13 @@ class _Trash_PageState extends State<Trash_Page> {
       l_note_Trash.add(note_Trash);
       l_date_Deleted.add(date_Deleted);
 
-      var text_Mode_Color =
-          theme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+      var textModeColor =
+          theme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
 
       return SafeArea(
         child: Scaffold(
           backgroundColor:
-              theme ? Backgroundcolor.darkhmode : Backgroundcolor.lightmode,
+              theme ? Backgroundcolor.darkmode : Backgroundcolor.lightmode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -100,7 +100,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                             Text(l_title_Trash[index],
                                                 style: AppTextStyle.textStyle()
                                                     .copyWith(
-                                                  color: text_Mode_Color,
+                                                  color: textModeColor,
                                                   fontSize: 18.sp,
                                                 )),
                                             // Date
@@ -112,7 +112,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                                     style:
                                                         AppTextStyle.textStyle()
                                                             .copyWith(
-                                                      color: text_Mode_Color,
+                                                      color: textModeColor,
                                                       fontSize: 16.sp,
                                                     )),
                                               ),
@@ -130,7 +130,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                       ),
                                     ),
                                     Divider(
-                                      color: text_Mode_Color,
+                                      color: textModeColor,
                                     )
                                   ],
                                 ),

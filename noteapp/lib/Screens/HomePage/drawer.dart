@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noteapp/Constant/global_controllers.dart';
+import 'package:hive/hive.dart';
+
 import 'export_home.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -14,11 +15,11 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      var getTheme = GlobalControllers.themeStorage.get('myKey');
+      GlobalControllers.getTheme = GlobalControllers.themeStorage.get('myKey');
 
-      var currenttTheme = ref.watch(themeInit);
-      var textModeColor =
-          currenttTheme ? Backgroundcolor.lightmode : Backgroundcolor.darkhmode;
+      var textModeColor = GlobalControllers.getTheme
+          ? Backgroundcolor.lightmode
+          : Backgroundcolor.darkmode;
       return ListView(
         children: <Widget>[
           DrawerHeader(
@@ -55,9 +56,9 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           Divider(
-            color: currenttTheme
+            color: GlobalControllers.getTheme
                 ? Backgroundcolor.lightmode
-                : Backgroundcolor.darkhmode,
+                : Backgroundcolor.darkmode,
           ),
           ListTile(
             title: Row(
@@ -84,8 +85,9 @@ class _MyDrawerState extends State<MyDrawer> {
                             ref.read(themeInit.notifier).state = value;
 
                             // Update the theme value in Hive
-                            await GlobalControllers.themeStorage.put('myKey', value);
-                            themeInit = getTheme as StateProvider<bool>;
+                            await GlobalControllers.themeStorage
+                                .put('myKey', value);
+                            // themeInit = GlobalControllers.getTheme  as StateProvider<bool>;
                           },
                         );
                       },
@@ -94,9 +96,9 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
           ),
           Divider(
-            color: currenttTheme
+            color: GlobalControllers.getTheme
                 ? Backgroundcolor.lightmode
-                : Backgroundcolor.darkhmode,
+                : Backgroundcolor.darkmode,
           ),
           ListTile(
             title: Text('Developers',
@@ -104,9 +106,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     .copyWith(color: textModeColor, fontSize: 18.sp)),
           ),
           Divider(
-            color: currenttTheme
+            color: GlobalControllers.getTheme
                 ? Backgroundcolor.lightmode
-                : Backgroundcolor.darkhmode,
+                : Backgroundcolor.darkmode,
           ),
           ListTile(
             title: Text('Rate Us',
@@ -114,9 +116,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     .copyWith(color: textModeColor, fontSize: 18.sp)),
           ),
           Divider(
-            color: currenttTheme
+            color: GlobalControllers.getTheme
                 ? Backgroundcolor.lightmode
-                : Backgroundcolor.darkhmode,
+                : Backgroundcolor.darkmode,
           ),
           Container(
             height: MediaQuery.sizeOf(context).height * 0.25,
