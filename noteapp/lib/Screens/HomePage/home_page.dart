@@ -100,37 +100,56 @@ class _HomePageState extends State<HomePage> {
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(22),
-                                          color: listTilebackground,
-                                        ),
-                                        child: ListTile(
-                                          title: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              // Title
-                                              Text(
-                                                noteTittleValue,
-                                                style: AppTextStyle.textStyle()
-                                                    .copyWith(
-                                                  color: textModeColor,
-                                                  fontSize: 20.sp,
-                                                ),
-                                              ),
-                                            ],
+                                      Dismissible(
+                                        key: Key('your_unique_key'),
+                                        onDismissed: (direction) {
+                                          if (direction ==
+                                                  DismissDirection.endToStart ||
+                                              direction ==
+                                                  DismissDirection.startToEnd) {
+                                            GlobalControllers.providerRef
+                                                .read(noteBody.notifier)
+                                                .state = '';
+                                            GlobalControllers.providerRef
+                                                .read(noteTittle.notifier)
+                                                .state = '';
+                                          }
+                                        },
+                                        background: GlobalDismissibleContainer.container(context),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(22),
+                                            color: listTilebackground,
                                           ),
-                                          // Note
-                                          subtitle: Text(
-                                            noteBodyValue,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: AppTextStyle.textStyle()
-                                                .copyWith(
-                                              color: textModeColor,
-                                              fontSize: 15.sp,
+                                          child: ListTile(
+                                            title: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                // Title
+                                                Text(
+                                                  noteTittleValue,
+                                                  style:
+                                                      AppTextStyle.textStyle()
+                                                          .copyWith(
+                                                    color: textModeColor,
+                                                    fontSize: 20.sp,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // Note
+                                            subtitle: Text(
+                                              noteBodyValue,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: AppTextStyle.textStyle()
+                                                  .copyWith(
+                                                color: textModeColor,
+                                                fontSize: 15.sp,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -139,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 )),
                           )
-                        : Text("no note"),
+                        : Text(""),
                   ),
                 ],
               ),

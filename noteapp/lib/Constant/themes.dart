@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 
-
-
-
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
 var themeColor = Color.fromRGBO(42, 42, 92, 1.0);
 var textFonts = TextStyle(

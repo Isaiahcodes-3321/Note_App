@@ -21,12 +21,11 @@ class _AddNoteState extends State<AddNote> {
   }
 
   bool isButtonVisible = false;
-  
 
-void dispose() {
+  void dispose() {
     GlobalControllers.controller = RecorderController();
     GlobalControllers.playerController = PlayerController();
-     GlobalControllers.noteContext = TextEditingController();
+    GlobalControllers.noteContext = TextEditingController();
     GlobalControllers.noteTittleContext = TextEditingController();
     super.dispose();
   }
@@ -37,7 +36,6 @@ void dispose() {
       var current_theme = GlobalControllers.providerRef.watch(themeInit);
       var text_Mode_Color =
           current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
-
 
       return SafeArea(
         child: Scaffold(
@@ -77,7 +75,7 @@ void dispose() {
               width: double.infinity,
               child: Column(
                 children: [
-                  logics.image != null || logics.recordedAudioFile.isNotEmpty
+                  logics.image != null || logics.recordedAudio.isNotEmpty
                       ? Padding(
                           padding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -118,14 +116,9 @@ void dispose() {
                                                         logics.image = null;
                                                       }
                                                     },
-                                                    background: Container(
-                                                      color: Colors.red,
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Icon(Icons.delete,
-                                                          size: 30.sp,
-                                                          color: Colors.white),
-                                                    ),
+                                                    background:
+                                                        GlobalDismissibleContainer
+                                                            .container(context),
                                                     child: logics.image != null
                                                         ? Image.file(
                                                             File(logics
@@ -138,25 +131,19 @@ void dispose() {
                                                 ))),
                                       ))
                                   : Text(''),
-                              logics.recordedAudioFile.isNotEmpty
+                              logics.recordedAudio.isNotEmpty
                                   ? Expanded(
                                       flex: 6,
                                       child: Dismissible(
                                         key: Key('your_unique_key'),
                                         onDismissed: (direction) {
                                           if (direction ==
-                                                  DismissDirection.endToStart ||
-                                              direction ==
-                                                  DismissDirection.startToEnd) {
-                                            logics.recordedAudioFile = '';
+                                              DismissDirection.horizontal) {
+                                            logics.recordedAudio = '';
                                           }
                                         },
-                                        background: Container(
-                                          color: Colors.red,
-                                          alignment: Alignment.center,
-                                          child: Icon(Icons.delete,
-                                              size: 30.sp, color: Colors.white),
-                                        ),
+                                        background: GlobalDismissibleContainer
+                                            .container(context),
                                         child: Center(
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -229,8 +216,8 @@ void dispose() {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Clipboard.setData(
-                                    ClipboardData(text: GlobalControllers.noteContext!.text));
+                                Clipboard.setData(ClipboardData(
+                                    text: GlobalControllers.noteContext!.text));
                               },
                               child: TextFormField(
                                 controller: GlobalControllers.noteContext,

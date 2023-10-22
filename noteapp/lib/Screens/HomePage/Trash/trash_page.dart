@@ -9,7 +9,7 @@ class Trash_Page extends StatefulWidget {
 }
 
 class _Trash_PageState extends State<Trash_Page> {
-  bool onlong_press = true;
+  bool onTap = true;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
@@ -18,13 +18,13 @@ class _Trash_PageState extends State<Trash_Page> {
       final note_Trash = ref.watch(noteTrash);
       final date_Deleted = ref.watch(dateDeleted);
 
-      List<String> l_title_Trash = [];
-      List<String> l_note_Trash = [];
-      List<String> l_date_Deleted = [];
+      List<String> ltitleTrash = [];
+      List<String> lnoteTrash = [];
+      List<String> ldateDeleted = [];
 
-      l_title_Trash.add(title_Trash);
-      l_note_Trash.add(note_Trash);
-      l_date_Deleted.add(date_Deleted);
+      ltitleTrash.add(title_Trash);
+      lnoteTrash.add(note_Trash);
+      ldateDeleted.add(date_Deleted);
 
       var textModeColor =
           theme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
@@ -69,15 +69,15 @@ class _Trash_PageState extends State<Trash_Page> {
                       ListView.builder(
                         shrinkWrap: true,
                         reverse: true,
-                        itemCount: l_title_Trash.length,
+                        itemCount: ltitleTrash.length,
                         itemBuilder: (context, index) {
-                          if (index < l_title_Trash.length &&
-                              index < l_note_Trash.length &&
-                              index < l_date_Deleted.length) {
+                          if (index < ltitleTrash.length &&
+                              index < lnoteTrash.length &&
+                              index < ldateDeleted.length) {
                             return GestureDetector(
-                              onLongPress: () {
+                              onTap: () {
                                 setState(() {
-                                  onlong_press = !onlong_press;
+                                  onTap = !onTap;
                                 });
                               },
                               child: Padding(
@@ -87,7 +87,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                   children: [
                                     Container(
                                       child: ListTile(
-                                        leading: onlong_press
+                                        leading: onTap
                                             ? Icon(Icons.person, size: 25.sp)
                                             : Icon(Icons.gpp_good_outlined,
                                                 size: 25.sp),
@@ -97,7 +97,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             // tittle
-                                            Text(l_title_Trash[index],
+                                            Text(ltitleTrash[index],
                                                 style: AppTextStyle.textStyle()
                                                     .copyWith(
                                                   color: textModeColor,
@@ -108,7 +108,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                               child: Align(
                                                 alignment: Alignment.bottomLeft,
                                                 child: Text(
-                                                    l_date_Deleted[index],
+                                                    ldateDeleted[index],
                                                     style:
                                                         AppTextStyle.textStyle()
                                                             .copyWith(
@@ -121,7 +121,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                         ),
                                         // Note
                                         subtitle: Text(
-                                          l_note_Trash[index],
+                                          lnoteTrash[index],
                                           maxLines: 2,
                                           style: TextStyle(
                                             overflow: TextOverflow.ellipsis,
@@ -145,7 +145,7 @@ class _Trash_PageState extends State<Trash_Page> {
                   ),
                 ),
               ),
-              onlong_press
+              onTap
                   ? Text("")
                   : Container(
                       color: themeColor,

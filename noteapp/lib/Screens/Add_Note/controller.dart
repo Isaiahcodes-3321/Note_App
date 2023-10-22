@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'export_note_input.dart';
 
 var logics = ConnectionCheck();
 
 class ConnectionCheck {
-
   Future<void> savedState(BuildContext context) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
@@ -20,7 +18,6 @@ class ConnectionCheck {
         ),
       );
     } else {
-      
       print('Updating note');
       GlobalControllers.providerRef.read(noteTittle.notifier).state =
           GlobalControllers.noteTittleContext!.text;
@@ -125,7 +122,8 @@ class ConnectionCheck {
   }
 
 // Recording Audio
-  String recordedAudioFile = '';
+  // String recordedAudioFile = 'lib/Audio_file/recorded_audio';
+  String recordedAudio = '';
   Future<void> recordingAudio(BuildContext context) async {
     GlobalControllers.controller?.reset();
     try {
@@ -170,7 +168,9 @@ class ConnectionCheck {
                 child: ElevatedButton(
                   onPressed: () async {
                     String? path = await GlobalControllers.controller.stop();
-                    recordedAudioFile = path!;
+                    recordedAudio = path!;
+                    // New line
+                    // recordedAudioFile = recordedAudio;
                     Navigator.of(context).pop();
                   },
                   child: Text("Stop Recording"),
@@ -186,14 +186,28 @@ class ConnectionCheck {
 // Playing Audio
   Future<void> playAudio(BuildContext context) async {
     // Ensure that a recorded audio file path is available
-    if (recordedAudioFile == null) {
+    if (recordedAudio == null) {
       return;
     }
 
     try {
       print('Audio is playing now');
+      //     try {
+      //   final ByteData data = await rootBundle.load(recordedAudioFile);
+      //   final Uint8List uint8List = data.buffer.asUint8List();
+
+      //   if (uint8List.isNotEmpty) {
+      //     print('There is audio in the file.');
+      //   } else {
+      //     print('No audio in the file.');
+      //   }
+      // } catch (e) {
+      //   print('Error loading audio file: $e');
+      // }
+
+      print('audio is about to play');
       await GlobalControllers.playerController.preparePlayer(
-        path: recordedAudioFile,
+        path: recordedAudio,
         shouldExtractWaveform: true,
         noOfSamples: 100,
         volume: 1.0,
