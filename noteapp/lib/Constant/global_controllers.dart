@@ -20,7 +20,6 @@ class GlobalDismissibleContainer {
      return Container(
       width: 30.sp,
       color: Colors.red,
-      // alignment: Alignment.center,
       child: Row(crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
