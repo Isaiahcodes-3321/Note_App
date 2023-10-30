@@ -7,6 +7,9 @@ import 'Screens/Logins/login_SignUp.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'ThemeStore/theme.dart';
 
+
+
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupHive();

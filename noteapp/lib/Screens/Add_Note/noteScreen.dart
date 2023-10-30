@@ -61,7 +61,7 @@ class _AddNoteState extends State<AddNote> {
               actions: [
                 GestureDetector(
                     onTap: () async {
-                      logics.savedState(context);
+                      // logics.savedState(context);
                     },
                     child: Padding(
                         padding: EdgeInsets.all(15.sp),
@@ -217,7 +217,7 @@ class _AddNoteState extends State<AddNote> {
                             GestureDetector(
                               onTap: () {
                                 Clipboard.setData(ClipboardData(
-                                    text: GlobalControllers.noteContext!.text));
+                                    text: GlobalControllers.noteContext.text));
                               },
                               child: TextFormField(
                                 controller: GlobalControllers.noteContext,
@@ -247,10 +247,11 @@ class _AddNoteState extends State<AddNote> {
             floatingActionButton: Container(
               // color: Colors.black,
               constraints: BoxConstraints(
-                minHeight: 30.h,
+                minHeight:  MediaQuery.sizeOf(context).height * 0.35,
               ),
               child: Stack(
                 alignment: Alignment.bottomCenter,
+                fit: StackFit.loose,
                 children: [
                   FloatingActionButton(
                     focusElevation: 30,
@@ -268,7 +269,7 @@ class _AddNoteState extends State<AddNote> {
                   ),
                   if (isButtonVisible)
                     Positioned(
-                      top: 1,
+                      top: 0.h,
                       child: Column(
                         children: [
                           // image button

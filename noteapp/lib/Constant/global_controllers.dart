@@ -7,25 +7,38 @@ class GlobalControllers {
   static late Box themeStorage;
   static late RecorderController controller;
   static late PlayerController playerController;
-  static TextEditingController? noteContext;
-  static TextEditingController? noteTittleContext;
+  static late TextEditingController noteContext;
+  static late TextEditingController noteTittleContext;
   static var providerRef;
   static var getTheme;
+}
+
+class GlobalControllersLogins {
+  static late TextEditingController userName;
+  static late TextEditingController password;
+}
+
+class GlobalControllersRegister {
+  static late TextEditingController userName;
+  static late TextEditingController email;
+  static late TextEditingController password;
+  static late bool registerCheck;
 }
 
 class GlobalDismissibleContainer {
   static Container container(BuildContext context) {
     // double containerWidth = MediaQuery.of(context).size.width * 0.10;
 
-     return Container(
+    return Container(
       width: 30.sp,
       color: Colors.red,
-      child: Row(crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Icon(Icons.delete, size: 30, color: Colors.white),
-           Icon(Icons.delete, size: 30, color: Colors.white),
-            Icon(Icons.delete, size: 30, color: Colors.white),
+          Icon(Icons.delete, size: 30, color: Colors.white),
+          Icon(Icons.delete, size: 30, color: Colors.white),
         ],
       ),
     );

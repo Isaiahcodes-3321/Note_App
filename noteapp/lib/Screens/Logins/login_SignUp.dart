@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
+
+
 
 class LoginSignUpPage extends StatefulWidget {
   const LoginSignUpPage({super.key});

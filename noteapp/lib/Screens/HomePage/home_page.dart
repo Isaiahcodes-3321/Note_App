@@ -129,15 +129,21 @@ class _HomePageState extends State<HomePage> {
                                                       .spaceBetween,
                                               children: [
                                                 // Title
-                                                Text(
-                                                  noteTittleValue,
-                                                  style:
-                                                      AppTextStyle.textStyle()
-                                                          .copyWith(
-                                                    color: textModeColor,
-                                                    fontSize: 20.sp,
+                                                Expanded( flex: 8,
+                                                  child: Text(
+                                                    noteTittleValue,
+                                                     overflow: TextOverflow.ellipsis,
+                                                    style:
+                                                        AppTextStyle.textStyle()
+                                                            .copyWith(
+                                                      color: textModeColor,
+                                                      fontSize: 20.sp,
+                                                    ),
                                                   ),
                                                 ),
+                                                // Expanded( flex: 2,
+                                                //   child: Align(alignment: Alignment.centerRight,
+                                                //     child: Text("9 oct 2023",style: TextStyle(fontSize: 20))))
                                               ],
                                             ),
                                             // Note

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
-
+LoginAndRegistrationControllers registrationControllers = LoginAndRegistrationControllers();
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -10,40 +11,24 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  var signUpPasswordController = TextEditingController();
-  var signUpUsernameController = TextEditingController();
-  var signUpEmailController = TextEditingController();
   bool signUpHidePassword = true;
+ 
 
-  void ShowSnackbar(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: themeColor,
-        content: Padding(
-          padding: EdgeInsets.all(5.sp),
-          child: Container(
-            decoration: BoxDecoration( color: Color.fromRGBO(93, 93, 149, 1),
-            borderRadius: BorderRadius.circular(10.sp)),
-           
-            child: Padding(
-              padding: EdgeInsets.all(10.sp),
-              child: Text("All inputs are required",
-               textAlign: TextAlign.center,
-              style: textFonts.copyWith(fontSize: 15.sp)),
-            ),
-          ),
-        ),
-        duration: Duration(seconds: 3),
-      ),
-    );
+  @override
+  void initState() {
+     GlobalControllersRegister.registerCheck = true;
+    GlobalControllersRegister.email = TextEditingController();
+    GlobalControllersRegister.password = TextEditingController();
+    GlobalControllersRegister.userName = TextEditingController();
+    super.initState();
   }
-
 
   @override
   void dispose() {
-    signUpPasswordController.dispose();
-    signUpUsernameController.dispose();
-    signUpEmailController.dispose();
+    GlobalControllersRegister.email = TextEditingController();
+    GlobalControllersRegister.password = TextEditingController();
+    GlobalControllersRegister.userName = TextEditingController();
+
     super.dispose();
   }
 
@@ -71,7 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       children: [
                         ReUsedTextField(
                           obscureText: false,
-                          controller: signUpUsernameController,
+                          controller: GlobalControllersRegister.userName,
                           keyboardType: TextInputType.text,
                           hintText: "User Name",
                           prefixIcon: Icon(Icons.person_3_outlined,
@@ -81,7 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         SizedBox(height: 3.h),
                         ReUsedTextField(
                           obscureText: false,
-                          controller: signUpEmailController,
+                          controller: GlobalControllersRegister.email,
                           keyboardType: TextInputType.emailAddress,
                           hintText: "Email",
                           prefixIcon: Icon(Icons.mail_outline_rounded,
@@ -90,7 +75,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         SizedBox(height: 3.h),
                         ReUsedTextField(
-                          controller: signUpPasswordController,
+                          controller: GlobalControllersRegister.password,
                           obscureText: signUpHidePassword,
                           keyboardType: TextInputType.text,
                           hintText: "Password",
@@ -125,14 +110,16 @@ class _SignUpPageState extends State<SignUpPage> {
                             borderRadius: BorderRadius.circular(25.sp)),
                         child: TextButton(
                           onPressed: () {
-                            if (signUpPasswordController.text.isEmpty ||
-                                signUpUsernameController.text.isEmpty ||
-                                signUpEmailController.text.isEmpty) {
-                                ShowSnackbar(context);
+                            if (GlobalControllersRegister.password.text.isEmpty ||
+                                GlobalControllersRegister.userName.text.isEmpty ||
+                                GlobalControllersRegister.email.text.isEmpty) {
+                              registrationControllers.inputsRequiredSnackbar(context);
                             } else {
-                              signUpPasswordController.clear();
-                              signUpUsernameController.clear();
-                              signUpEmailController.clear();
+                               registrationControllers.registerCheckInternetConnection(context);
+
+                              // GlobalControllersRegister.password.clear();
+                              // GlobalControllersRegister.userName.clear();
+                              // GlobalControllersRegister.email.clear();
                             }
                           },
                           child: Padding(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
+LoginAndRegistrationControllers loginControllers =
+    LoginAndRegistrationControllers();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,37 +13,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var loginPasswordController = TextEditingController();
-  var loginEmailController = TextEditingController();
   bool loginHidePassword = true;
 
-  void ShowSnackbar(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: themeColor,
-        content: Padding(
-          padding: EdgeInsets.all(5.sp),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Color.fromRGBO(93, 93, 149, 1),
-                borderRadius: BorderRadius.circular(10.sp)),
-            child: Padding(
-              padding: EdgeInsets.all(10.sp),
-              child: Text("All inputs are required",
-                  textAlign: TextAlign.center,
-                  style: textFonts.copyWith(fontSize: 15.sp)),
-            ),
-          ),
-        ),
-        duration: Duration(seconds: 3),
-      ),
-    );
+  void initState() {
+    GlobalControllersLogins.userName = TextEditingController();
+    GlobalControllersLogins.password = TextEditingController();
+    super.initState();
   }
 
   @override
   void dispose() {
-    loginPasswordController.dispose();
-    loginEmailController.dispose();
+    GlobalControllersLogins.userName = TextEditingController();
+    GlobalControllersLogins.password = TextEditingController();
     super.dispose();
   }
 
@@ -69,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 3.h),
                         ReUsedTextField(
                           obscureText: false,
-                          controller: loginEmailController,
+                          controller: GlobalControllersLogins.userName,
                           keyboardType: TextInputType.text,
                           hintText: "User Name",
                           prefixIcon: Icon(Icons.mail_outline_rounded,
@@ -78,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 3.h),
                         ReUsedTextField(
-                          controller: loginPasswordController,
+                          controller: GlobalControllersLogins.password,
                           obscureText: loginHidePassword,
                           keyboardType: TextInputType.text,
                           hintText: "Password",
@@ -114,10 +98,14 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(25.sp)),
                         child: TextButton(
                           onPressed: () {
-                            if (loginPasswordController.text.isEmpty ||
-                                loginEmailController.text.isEmpty) {
-                              ShowSnackbar(context);
+                            if (GlobalControllersLogins.password.text.isEmpty ||
+                                GlobalControllersLogins.userName.text.isEmpty) {
+                              loginControllers
+                                  .inputsRequiredSnackbar(context);
                             } else {
+                              loginControllers
+                                  .loginCheckInternetConnection(context);
+
                               // showPlatformDialog(
                               //     context: context,
                               //     builder: (context) {
@@ -127,11 +115,12 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push<void>(
                                 context,
                                 MaterialPageRoute<void>(
-                                  builder: (BuildContext context) => LoadHomePage(),
+                                  builder: (BuildContext context) =>
+                                      LoadHomePage(),
                                 ),
                               );
-                              loginPasswordController.clear();
-                              loginEmailController.clear();
+                              GlobalControllersLogins.password.clear();
+                              GlobalControllersLogins.userName.clear();
                             }
                           },
                           child: Padding(

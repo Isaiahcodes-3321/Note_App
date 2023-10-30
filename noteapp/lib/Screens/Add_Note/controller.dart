@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../Api_Service/api_class.dart';
 import 'export_note_input.dart';
 
 var logics = ConnectionCheck();
+ApiService apiService = ApiService();
 
 class ConnectionCheck {
   Future<void> savedState(BuildContext context) async {
@@ -20,14 +22,16 @@ class ConnectionCheck {
     } else {
       print('Updating note');
       GlobalControllers.providerRef.read(noteTittle.notifier).state =
-          GlobalControllers.noteTittleContext!.text;
+          GlobalControllers.noteTittleContext.text;
       GlobalControllers.providerRef.read(noteBody.notifier).state =
           GlobalControllers.noteContext!.text;
 
       String notebodyValue =
           GlobalControllers.providerRef.read(noteBody.notifier).state;
-      print("Current notebody value: $notebodyValue");
-
+      
+      
+        // await apiService.createNote(context);
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: themeColor,
@@ -169,8 +173,6 @@ class ConnectionCheck {
                   onPressed: () async {
                     String? path = await GlobalControllers.controller.stop();
                     recordedAudio = path!;
-                    // New line
-                    // recordedAudioFile = recordedAudio;
                     Navigator.of(context).pop();
                   },
                   child: Text("Stop Recording"),
@@ -192,18 +194,6 @@ class ConnectionCheck {
 
     try {
       print('Audio is playing now');
-      //     try {
-      //   final ByteData data = await rootBundle.load(recordedAudioFile);
-      //   final Uint8List uint8List = data.buffer.asUint8List();
-
-      //   if (uint8List.isNotEmpty) {
-      //     print('There is audio in the file.');
-      //   } else {
-      //     print('No audio in the file.');
-      //   }
-      // } catch (e) {
-      //   print('Error loading audio file: $e');
-      // }
 
       print('audio is about to play');
       await GlobalControllers.playerController.preparePlayer(
