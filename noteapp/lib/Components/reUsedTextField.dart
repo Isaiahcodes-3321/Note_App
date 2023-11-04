@@ -3,7 +3,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../Constant/themes.dart';
 
 class ReUsedTextField extends StatelessWidget {
-  ReUsedTextField({
+  const ReUsedTextField({super.key, 
     required this.controller,
     required this.keyboardType,
     required this.hintText,
@@ -31,7 +31,7 @@ class ReUsedTextField extends StatelessWidget {
             color: themeColor.withOpacity(0.5), 
             spreadRadius: 1, 
             blurRadius: 2, 
-            offset: Offset(0, 1),
+            offset: const Offset(0, 1),
           ),
         ],
       ),
@@ -44,8 +44,8 @@ class ReUsedTextField extends StatelessWidget {
             decoration: InputDecoration(
               focusColor: Colors.white,
               hintText: hintText,
-              hintStyle: TextStyle(
-                color: const Color.fromARGB(255, 104, 104, 104),
+              hintStyle: const TextStyle(
+                color: Color.fromARGB(255, 104, 104, 104),
               ),
                focusedBorder: outlineInputBorder,
               enabledBorder: outlineInputBorder,

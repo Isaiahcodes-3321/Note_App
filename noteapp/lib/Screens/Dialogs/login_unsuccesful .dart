@@ -24,7 +24,7 @@ class LoginUnsuccesful extends StatelessWidget {
       ),
       content: Text("Incorrect password or username.",
           style: AppTextStyle.textStyle().copyWith(
-            color: Color.fromARGB(255, 171, 72, 65),
+            color: const Color.fromARGB(255, 171, 72, 65),
           ),
           textAlign: TextAlign.center),
       actions: <Widget>[

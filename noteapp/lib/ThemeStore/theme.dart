@@ -2,15 +2,19 @@ import 'package:hive/hive.dart';
 part 'theme.g.dart';
 
 
-// Storage for user
+
 @HiveType(typeId: 0)
-class ThemeCheck{
-  ThemeCheck({
-    required this.theme_data,
+class TokenStorage{
+  TokenStorage({
+    required this.myToken,
+    required this.myRefreshToken,
   });
 
   @HiveField(0)
-  bool theme_data;
+  String myToken;
+
+  @HiveField(1)
+  String myRefreshToken;
 }
 
 //  flutter packages pub run build_runner build

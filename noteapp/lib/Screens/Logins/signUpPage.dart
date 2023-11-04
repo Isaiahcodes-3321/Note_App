@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
-LoginAndRegistrationControllers registrationControllers = LoginAndRegistrationControllers();
+LoginAndRegistrationControllers registrationControllers =
+    LoginAndRegistrationControllers();
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -12,11 +14,10 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   bool signUpHidePassword = true;
- 
 
   @override
   void initState() {
-     GlobalControllersRegister.registerCheck = true;
+    GlobalControllersRegister.registerCheck = true;
     GlobalControllersRegister.email = TextEditingController();
     GlobalControllersRegister.password = TextEditingController();
     GlobalControllersRegister.userName = TextEditingController();
@@ -34,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: SingleChildScrollView(
@@ -51,53 +52,51 @@ class _SignUpPageState extends State<SignUpPage> {
                         textFonts.copyWith(fontSize: 23.sp, color: themeColor),
                   ),
                   SizedBox(height: 5.h),
-                  Container(
-                    child: Column(
-                      children: [
-                        ReUsedTextField(
-                          obscureText: false,
-                          controller: GlobalControllersRegister.userName,
-                          keyboardType: TextInputType.text,
-                          hintText: "User Name",
-                          prefixIcon: Icon(Icons.person_3_outlined,
-                              color: Colors.black),
-                          onChanged: (value) {},
-                        ),
-                        SizedBox(height: 3.h),
-                        ReUsedTextField(
-                          obscureText: false,
-                          controller: GlobalControllersRegister.email,
-                          keyboardType: TextInputType.emailAddress,
-                          hintText: "Email",
-                          prefixIcon: Icon(Icons.mail_outline_rounded,
-                              color: Colors.black),
-                          onChanged: (value) {},
-                        ),
-                        SizedBox(height: 3.h),
-                        ReUsedTextField(
-                          controller: GlobalControllersRegister.password,
-                          obscureText: signUpHidePassword,
-                          keyboardType: TextInputType.text,
-                          hintText: "Password",
-                          prefixIcon:
-                              Icon(Icons.lock_outlined, color: Colors.black),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                signUpHidePassword = !signUpHidePassword;
-                              });
-                            },
-                            child: Icon(
-                              signUpHidePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: const Color.fromARGB(255, 88, 88, 88),
-                            ),
+                  Column(
+                    children: [
+                      ReUsedTextField(
+                        obscureText: false,
+                        controller: GlobalControllersRegister.userName,
+                        keyboardType: TextInputType.text,
+                        hintText: "User Name",
+                        prefixIcon: const Icon(Icons.person_3_outlined,
+                            color: Colors.black),
+                        onChanged: (value) {},
+                      ),
+                      SizedBox(height: 3.h),
+                      ReUsedTextField(
+                        obscureText: false,
+                        controller: GlobalControllersRegister.email,
+                        keyboardType: TextInputType.emailAddress,
+                        hintText: "Email",
+                        prefixIcon: const Icon(Icons.mail_outline_rounded,
+                            color: Colors.black),
+                        onChanged: (value) {},
+                      ),
+                      SizedBox(height: 3.h),
+                      ReUsedTextField(
+                        controller: GlobalControllersRegister.password,
+                        obscureText: signUpHidePassword,
+                        keyboardType: TextInputType.text,
+                        hintText: "Password",
+                        prefixIcon:
+                           const Icon(Icons.lock_outlined, color: Colors.black),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              signUpHidePassword = !signUpHidePassword;
+                            });
+                          },
+                          child: Icon(
+                            signUpHidePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: const Color.fromARGB(255, 88, 88, 88),
                           ),
-                          onChanged: (value) {},
                         ),
-                      ],
-                    ),
+                        onChanged: (value) {},
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsets.all(20.sp),
@@ -111,15 +110,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: TextButton(
                           onPressed: () {
                             if (GlobalControllersRegister.password.text.isEmpty ||
-                                GlobalControllersRegister.userName.text.isEmpty ||
+                                GlobalControllersRegister
+                                    .userName.text.isEmpty ||
                                 GlobalControllersRegister.email.text.isEmpty) {
-                              registrationControllers.inputsRequiredSnackbar(context);
+                              registrationControllers
+                                  .inputsRequiredSnackbar(context);
                             } else {
-                               registrationControllers.registerCheckInternetConnection(context);
-
-                              // GlobalControllersRegister.password.clear();
-                              // GlobalControllersRegister.userName.clear();
-                              // GlobalControllersRegister.email.clear();
+                              registrationControllers
+                                  .registerCheckInternetConnection(context);
                             }
                           },
                           child: Padding(

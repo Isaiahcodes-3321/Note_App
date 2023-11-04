@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'export_home.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
   bool isSearching = false;
-  var textModeColor;
+  // var textModeColor;
   // bool onlongPress = true;
 
   @override
@@ -27,17 +26,17 @@ class _HomePageState extends State<HomePage> {
 
         var currentTheme = GlobalControllers.providerRef.watch(themeInit);
         var textModeColor =
-            currentTheme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
+            currentTheme ? BackgroundColor.lightMode : BackgroundColor.darkMode;
 
-        var listTilebackground = currentTheme
-            ? Color.fromARGB(255, 54, 54, 56)
-            : Color.fromARGB(255, 143, 143, 179);
+        var listTileBackGround = currentTheme
+            ? const Color.fromARGB(255, 54, 54, 56)
+            : const Color.fromARGB(255, 143, 143, 179);
 
         return SafeArea(
           child: Scaffold(
               backgroundColor: currentTheme
-                  ? Backgroundcolor.darkmode
-                  : Backgroundcolor.lightmode,
+                  ? BackgroundColor.darkMode
+                  : BackgroundColor.lightMode,
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar(
@@ -46,17 +45,17 @@ class _HomePageState extends State<HomePage> {
                     backgroundColor: themeColor,
                     flexibleSpace: FlexibleSpaceBar(
                       title: isSearching
-                          ? Container(
+                          ? SizedBox(
                               width: MediaQuery.sizeOf(context).width * 0.55,
                               child: TextField(
                                 decoration: InputDecoration(
                                   hintText: 'Search...',
                                   hintStyle: TextStyle(
-                                      color: AppTextStyle.appbarTextcolor),
+                                      color: AppTextStyle.appBarTextColor),
                                   border: InputBorder.none,
                                 ),
                                 style: TextStyle(
-                                    color: AppTextStyle.appbarTextcolor),
+                                    color: AppTextStyle.appBarTextColor),
                               ),
                             )
                           : Text('Notes', style: AppTextStyle.textStyle()),
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                         return IconButton(
                           icon: Icon(
                             Icons.menu,
-                            color: AppTextStyle.appbarTextcolor,
+                            color: AppTextStyle.appBarTextColor,
                             size: 23.sp,
                           ),
                           onPressed: () {
@@ -79,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                       IconButton(
                         icon: Icon(
                           isSearching ? Icons.cancel_outlined : Icons.search,
-                          color: AppTextStyle.appbarTextcolor,
+                          color: AppTextStyle.appBarTextColor,
                           size: 23.sp,
                         ),
                         onPressed: () {
@@ -92,16 +91,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SliverToBoxAdapter(
                     child: noteTittleValue.isNotEmpty
-                        ? Container(
+                        ? SizedBox(
                             width: MediaQuery.sizeOf(context).width * 100.0,
                             height: MediaQuery.sizeOf(context).width * 100.0,
                             child: Padding(
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     children: [
                                       Dismissible(
-                                        key: Key('your_unique_key'),
+                                        key: const Key('your_unique_key'),
                                         onDismissed: (direction) {
                                           if (direction ==
                                                   DismissDirection.endToStart ||
@@ -120,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(22),
-                                            color: listTilebackground,
+                                            color: listTileBackGround,
                                           ),
                                           child: ListTile(
                                             title: Row(
@@ -164,31 +163,31 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 )),
                           )
-                        : Text(""),
+                        : const Text("hhhh"),
                   ),
                 ],
               ),
               drawer: Drawer(
                   // Take 70% of the user screen
                   backgroundColor: currentTheme
-                      ? Color.fromARGB(255, 36, 36, 38)
-                      : Backgroundcolor.lightmode,
+                      ? const Color.fromARGB(255, 36, 36, 38)
+                      : BackgroundColor.lightMode,
                   width: MediaQuery.sizeOf(context).width * 0.70,
-                  child: MyDrawer()),
+                  child: const MyDrawer()),
               floatingActionButton: FloatingActionButton(
                   focusElevation: 30,
                   onPressed: () {
                     Navigator.push<void>(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => AddNote(),
+                        builder: (BuildContext context) => const AddNote(),
                       ),
                     );
                   },
                   backgroundColor: themeColor,
                   child: Icon(
                     Icons.add,
-                    color: AppTextStyle.appbarTextcolor,
+                    color: AppTextStyle.appBarTextColor,
                     size: 25.sp,
                   ))),
         );

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
 
-
 class LoginSignUpPage extends StatefulWidget {
   const LoginSignUpPage({super.key});
 
@@ -33,6 +32,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
     _tabController.animateTo(tabIndex);
   }
 
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2, // Change this to 2
@@ -51,8 +51,8 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
             ),
             child: TabBar(
               labelColor: Colors.white,
-              unselectedLabelColor: Color.fromARGB(255, 148, 147, 147),
-              indicator: BoxDecoration(),
+              unselectedLabelColor: const Color.fromARGB(255, 148, 147, 147),
+              indicator: const BoxDecoration(),
               tabs: [
                 Tab(
                   child: FittedBox(child: Text("Sign Up", style: textFonts)),
@@ -63,13 +63,13 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
               ],
               isScrollable: false,
               padding: EdgeInsets.only(top: 7.h),
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
             ),
           ),
         ),
         body: Column(
           children: [
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   SignUpPage(),

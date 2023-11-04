@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'export_login_register.dart';
 
 class LoadHomePage extends StatefulWidget {
@@ -9,12 +10,13 @@ class LoadHomePage extends StatefulWidget {
 }
 
 class _LoadHomePageState extends State<LoadHomePage> {
+  @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 4), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     });
   }

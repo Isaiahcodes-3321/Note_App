@@ -1,9 +1,9 @@
+
 import 'package:flutter/material.dart';
-import 'package:noteapp/Constant/global_controllers.dart';
 import 'export_note_input.dart';
 
 class AddNote extends StatefulWidget {
-  AddNote({super.key});
+  const AddNote({super.key});
 
   @override
   State<AddNote> createState() => _AddNoteState();
@@ -22,6 +22,7 @@ class _AddNoteState extends State<AddNote> {
 
   bool isButtonVisible = false;
 
+  @override
   void dispose() {
     GlobalControllers.controller = RecorderController();
     GlobalControllers.playerController = PlayerController();
@@ -33,29 +34,29 @@ class _AddNoteState extends State<AddNote> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      var current_theme = GlobalControllers.providerRef.watch(themeInit);
-      var text_Mode_Color =
-          current_theme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
+      var currentTheme = GlobalControllers.providerRef.watch(themeInit);
+      var textModeColor =
+          currentTheme ? BackgroundColor.lightMode : BackgroundColor.darkMode;
 
       return SafeArea(
         child: Scaffold(
-            backgroundColor: current_theme
-                ? Backgroundcolor.darkmode
-                : Backgroundcolor.lightmode,
+            backgroundColor: currentTheme
+                ? BackgroundColor.darkMode
+                : BackgroundColor.lightMode,
             appBar: AppBar(
               backgroundColor: themeColor,
               leading: IconButton(
-                  color: AppTextStyle.appbarTextcolor,
+                  color: AppTextStyle.appBarTextColor,
                   iconSize: 23.sp,
                   onPressed: () {
                     Navigator.push<void>(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => HomePage(),
+                        builder: (BuildContext context) => const HomePage(),
                       ),
                     );
                   },
-                  icon: Icon(Icons.arrow_back_rounded)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
               title: Text('New Notes',
                   style: AppTextStyle.textStyle().copyWith(fontSize: 18.sp)),
               actions: [
@@ -70,7 +71,7 @@ class _AddNoteState extends State<AddNote> {
                                 .copyWith(fontSize: 18.sp))))
               ],
             ),
-            body: Container(
+            body: SizedBox(
               height: double.infinity,
               width: double.infinity,
               child: Column(
@@ -78,14 +79,14 @@ class _AddNoteState extends State<AddNote> {
                   logics.image != null || logics.recordedAudio.isNotEmpty
                       ? Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               logics.image != null
                                   ? Expanded(
                                       flex: 4,
-                                      child: Container(
+                                      child: SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.30,
@@ -98,14 +99,14 @@ class _AddNoteState extends State<AddNote> {
                                                     MaterialPageRoute<void>(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          ImageFullScreen(),
+                                                          const ImageFullScreen(),
                                                     ),
                                                   );
                                                 },
                                                 child: Hero(
                                                   tag: 'imageTag',
                                                   child: Dismissible(
-                                                    key: Key('your_unique_key'),
+                                                    key: const Key('your_unique_key'),
                                                     onDismissed: (direction) {
                                                       if (direction ==
                                                               DismissDirection
@@ -130,12 +131,12 @@ class _AddNoteState extends State<AddNote> {
                                                   ),
                                                 ))),
                                       ))
-                                  : Text(''),
+                                  : const Text(''),
                               logics.recordedAudio.isNotEmpty
                                   ? Expanded(
                                       flex: 6,
                                       child: Dismissible(
-                                        key: Key('your_unique_key'),
+                                        key: const Key('your_unique_key'),
                                         onDismissed: (direction) {
                                           if (direction ==
                                               DismissDirection.horizontal) {
@@ -150,7 +151,7 @@ class _AddNoteState extends State<AddNote> {
                                               borderRadius:
                                                   BorderRadius.circular(35),
                                               border: Border.all(
-                                                color: Color.fromRGBO(
+                                                color: const Color.fromRGBO(
                                                     42, 42, 92, 1.0),
                                                 width: 3.0,
                                               ),
@@ -161,7 +162,7 @@ class _AddNoteState extends State<AddNote> {
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStateProperty.all(
-                                                    Color.fromRGBO(
+                                                  const Color.fromRGBO(
                                                         42, 42, 92, 1.0),
                                                   ),
                                                 ),
@@ -180,11 +181,11 @@ class _AddNoteState extends State<AddNote> {
                                         ),
                                       ),
                                     )
-                                  : Text('')
+                                  : const Text('')
                             ],
                           ),
                         )
-                      : Text(""),
+                      : const Text(""),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 20.sp, vertical: 20.sp),
@@ -231,7 +232,7 @@ class _AddNoteState extends State<AddNote> {
                                   ),
                                   focusedBorder: outlineInputBorder,
                                   enabledBorder: outlineInputBorder,
-                                  fillColor: Color.fromARGB(255, 238, 238, 238),
+                                  fillColor: const Color.fromARGB(255, 238, 238, 238),
                                   filled: true,
                                 ),
                               ),
@@ -263,7 +264,7 @@ class _AddNoteState extends State<AddNote> {
                     backgroundColor: themeColor,
                     child: Icon(
                       isButtonVisible ? Icons.close : Icons.add,
-                      color: AppTextStyle.appbarTextcolor,
+                      color: AppTextStyle.appBarTextColor,
                       size: 25.sp,
                     ),
                   ),
@@ -280,7 +281,7 @@ class _AddNoteState extends State<AddNote> {
                             backgroundColor: themeColor,
                             child: Icon(
                               Icons.camera_alt_outlined,
-                              color: AppTextStyle.appbarTextcolor,
+                              color: AppTextStyle.appBarTextColor,
                               size: 25.sp,
                             ),
                           ),
@@ -293,7 +294,7 @@ class _AddNoteState extends State<AddNote> {
                             backgroundColor: themeColor,
                             child: Icon(
                               Icons.audiotrack_outlined,
-                              color: AppTextStyle.appbarTextcolor,
+                              color: AppTextStyle.appBarTextColor,
                               size: 25.sp,
                             ),
                           ),

@@ -4,7 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 
 var fontFamily = 'BodoniModa-VariableFont_opsz,wght';
-var themeColor = Color.fromRGBO(42, 42, 92, 1.0);
+var themeColor = const Color.fromRGBO(42, 42, 92, 1.0);
 var textFonts = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: fontFamily,
@@ -13,30 +13,30 @@ var textFonts = TextStyle(
 
 var outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(18.sp),
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
       color: Colors.white,
     ));
 
 
-class Backgroundcolor {
+class BackgroundColor {
   
-  static Color lightmode = Colors.white;
-  static Color darkmode = Color.fromARGB(255, 20, 20, 20);
+  static Color lightMode = Colors.white;
+  static Color darkMode = const Color.fromARGB(255, 20, 20, 20);
 
-  static Color themeColorLightmode = Color.fromRGBO(42, 42, 92, 1.0);
-  static Color themeColorDarkmode = Color.fromRGBO(7, 7, 17, 1);
+  static Color themeColorLightMode = const Color.fromRGBO(42, 42, 92, 1.0);
+  static Color themeColorDarkMode = const Color.fromRGBO(7, 7, 17, 1);
 }
 
 class AppTextStyle {
   // Appbar text and add floatingButton white color 
- static Color appbarTextcolor = Colors.white;
+ static Color appBarTextColor = Colors.white;
 
   static TextStyle textStyle() {
     return TextStyle(
       fontWeight: FontWeight.bold,
       fontFamily: fontFamily,
       fontSize: 20.sp,
-      color: appbarTextcolor,
+      color: appBarTextColor,
     );
   }
 }

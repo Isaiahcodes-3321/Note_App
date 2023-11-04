@@ -3,7 +3,7 @@ import 'package:noteapp/Constant/themes.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ReusedSnackBar {
-  static void showCustomSnackBar(BuildContext context, String text, Color themeColor, Duration duration) {
+  static void showCustomSnackBar(BuildContext context, String text, Color themeColor, Duration duration,) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: themeColor,
@@ -11,7 +11,7 @@ class ReusedSnackBar {
           padding: EdgeInsets.all(5.sp),
           child: Container(
             decoration: BoxDecoration(
-              color: Color.fromRGBO(93, 93, 149, 1),
+              color: const Color.fromRGBO(93, 93, 149, 1),
               borderRadius: BorderRadius.circular(10.sp),
             ),
             child: Padding(
@@ -28,4 +28,5 @@ class ReusedSnackBar {
       ),
     );
   }
+
 }

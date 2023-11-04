@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
+import 'package:noteapp/ThemeStore/theme.dart';
+
 
 //my storage Make Hive accessible anywhere,
 class GlobalControllers {
+  static late Box<TokenStorage> tokenKey;
   static late Box themeStorage;
   static late RecorderController controller;
   static late PlayerController playerController;
@@ -32,7 +35,7 @@ class GlobalDismissibleContainer {
     return Container(
       width: 30.sp,
       color: Colors.red,
-      child: Row(
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

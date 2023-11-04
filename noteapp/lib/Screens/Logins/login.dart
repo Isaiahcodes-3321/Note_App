@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
+
+
 LoginAndRegistrationControllers loginControllers =
     LoginAndRegistrationControllers();
 
@@ -15,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool loginHidePassword = true;
 
+  @override
   void initState() {
     GlobalControllersLogins.userName = TextEditingController();
     GlobalControllersLogins.password = TextEditingController();
@@ -30,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: SingleChildScrollView(
@@ -47,44 +50,42 @@ class _LoginPageState extends State<LoginPage> {
                         textFonts.copyWith(fontSize: 23.sp, color: themeColor),
                   ),
                   SizedBox(height: 3.h),
-                  Container(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 3.h),
-                        ReUsedTextField(
-                          obscureText: false,
-                          controller: GlobalControllersLogins.userName,
-                          keyboardType: TextInputType.text,
-                          hintText: "User Name",
-                          prefixIcon: Icon(Icons.mail_outline_rounded,
-                              color: Colors.black),
-                          onChanged: (value) {},
-                        ),
-                        SizedBox(height: 3.h),
-                        ReUsedTextField(
-                          controller: GlobalControllersLogins.password,
-                          obscureText: loginHidePassword,
-                          keyboardType: TextInputType.text,
-                          hintText: "Password",
-                          prefixIcon:
-                              Icon(Icons.lock_outlined, color: Colors.black),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                loginHidePassword = !loginHidePassword;
-                              });
-                            },
-                            child: Icon(
-                              loginHidePassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: const Color.fromARGB(255, 88, 88, 88),
-                            ),
+                  Column(
+                    children: [
+                      SizedBox(height: 3.h),
+                      ReUsedTextField(
+                        obscureText: false,
+                        controller: GlobalControllersLogins.userName,
+                        keyboardType: TextInputType.text,
+                        hintText: "User Name",
+                        prefixIcon: const Icon(Icons.mail_outline_rounded,
+                            color: Colors.black),
+                        onChanged: (value) {},
+                      ),
+                      SizedBox(height: 3.h),
+                      ReUsedTextField(
+                        controller: GlobalControllersLogins.password,
+                        obscureText: loginHidePassword,
+                        keyboardType: TextInputType.text,
+                        hintText: "Password",
+                        prefixIcon:
+                            const Icon(Icons.lock_outlined, color: Colors.black),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              loginHidePassword = !loginHidePassword;
+                            });
+                          },
+                          child: Icon(
+                            loginHidePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: const Color.fromARGB(255, 88, 88, 88),
                           ),
-                          onChanged: (value) {},
                         ),
-                      ],
-                    ),
+                        onChanged: (value) {},
+                      ),
+                    ],
                   ),
                   SizedBox(height: 2.h),
                   Padding(
@@ -105,22 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                             } else {
                               loginControllers
                                   .loginCheckInternetConnection(context);
-
-                              // showPlatformDialog(
-                              //     context: context,
-                              //     builder: (context) {
-                              //       return (Login_unsuccesful());
-                              //     },
-                              //   );
-                              Navigator.push<void>(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      LoadHomePage(),
-                                ),
-                              );
-                              GlobalControllersLogins.password.clear();
-                              GlobalControllersLogins.userName.clear();
                             }
                           },
                           child: Padding(

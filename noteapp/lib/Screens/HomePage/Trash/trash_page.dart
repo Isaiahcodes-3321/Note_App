@@ -1,47 +1,47 @@
 import 'package:flutter/material.dart';
 import '../export_home.dart';
 
-class Trash_Page extends StatefulWidget {
-  const Trash_Page({super.key});
+class TrashPage extends StatefulWidget {
+  const TrashPage({super.key});
 
   @override
-  State<Trash_Page> createState() => _Trash_PageState();
+  State<TrashPage> createState() => TrashPageState();
 }
 
-class _Trash_PageState extends State<Trash_Page> {
+class TrashPageState extends State<TrashPage> {
   bool onTap = true;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       final theme = ref.watch(themeInit);
-      final title_Trash = ref.watch(titleTrash);
-      final note_Trash = ref.watch(noteTrash);
-      final date_Deleted = ref.watch(dateDeleted);
+      final titleTrashB = ref.watch(titleTrash);
+      final noteTrashB = ref.watch(noteTrash);
+      final dateDeletedB = ref.watch(dateDeleted);
 
       List<String> ltitleTrash = [];
       List<String> lnoteTrash = [];
       List<String> ldateDeleted = [];
 
-      ltitleTrash.add(title_Trash);
-      lnoteTrash.add(note_Trash);
-      ldateDeleted.add(date_Deleted);
+      ltitleTrash.add(titleTrashB);
+      lnoteTrash.add(noteTrashB);
+      ldateDeleted.add(dateDeletedB);
 
       var textModeColor =
-          theme ? Backgroundcolor.lightmode : Backgroundcolor.darkmode;
+          theme ? BackgroundColor.lightMode : BackgroundColor.darkMode;
 
       return SafeArea(
         child: Scaffold(
           backgroundColor:
-              theme ? Backgroundcolor.darkmode : Backgroundcolor.lightmode,
+              theme ? BackgroundColor.darkMode : BackgroundColor.lightMode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
-              color: AppTextStyle.appbarTextcolor,
+              color: AppTextStyle.appBarTextColor,
               iconSize: 23.sp,
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_rounded),
+              icon: const Icon(Icons.arrow_back_rounded),
             ),
             title: Text(
               'Recycle bin',
@@ -123,7 +123,7 @@ class _Trash_PageState extends State<Trash_Page> {
                                         subtitle: Text(
                                           lnoteTrash[index],
                                           maxLines: 2,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
@@ -137,7 +137,7 @@ class _Trash_PageState extends State<Trash_Page> {
                               ),
                             );
                           } else {
-                            return SizedBox();
+                            return const SizedBox();
                           }
                         },
                       ),
@@ -146,7 +146,7 @@ class _Trash_PageState extends State<Trash_Page> {
                 ),
               ),
               onTap
-                  ? Text("")
+                  ? const Text("")
                   : Container(
                       color: themeColor,
                       width: double.infinity,

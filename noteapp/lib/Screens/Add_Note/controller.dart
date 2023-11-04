@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import '../Api_Service/api_class.dart';
 import 'export_note_input.dart';
 
 var logics = ConnectionCheck();
-ApiService apiService = ApiService();
+ApiServiceState apiService = ApiServiceState();
 
 class ConnectionCheck {
   Future<void> savedState(BuildContext context) async {
@@ -16,7 +18,7 @@ class ConnectionCheck {
             "Failed to Save. Please check your internet connection.",
             style: AppTextStyle.textStyle().copyWith(fontSize: 15.sp),
           ),
-          duration: Duration(seconds: 4),
+          duration: const Duration(seconds: 4),
         ),
       );
     } else {
@@ -24,10 +26,10 @@ class ConnectionCheck {
       GlobalControllers.providerRef.read(noteTittle.notifier).state =
           GlobalControllers.noteTittleContext.text;
       GlobalControllers.providerRef.read(noteBody.notifier).state =
-          GlobalControllers.noteContext!.text;
+          GlobalControllers.noteContext.text;
 
-      String notebodyValue =
-          GlobalControllers.providerRef.read(noteBody.notifier).state;
+      // String noteBodyValue =
+      //     GlobalControllers.providerRef.read(noteBody.notifier).state;
       
       
         // await apiService.createNote(context);
@@ -39,7 +41,7 @@ class ConnectionCheck {
             "Note Saved",
             style: AppTextStyle.textStyle().copyWith(fontSize: 15.sp),
           ),
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
         ),
       );
     }
@@ -129,10 +131,10 @@ class ConnectionCheck {
   // String recordedAudioFile = 'lib/Audio_file/recorded_audio';
   String recordedAudio = '';
   Future<void> recordingAudio(BuildContext context) async {
-    GlobalControllers.controller?.reset();
+    GlobalControllers.controller.reset();
     try {
-      if (await GlobalControllers.controller!.checkPermission()) {
-        await GlobalControllers.controller!.record();
+      if (await GlobalControllers.controller.checkPermission()) {
+        await GlobalControllers.controller.record();
       }
     } catch (e) {
       print("error recording $e");
@@ -154,7 +156,7 @@ class ConnectionCheck {
               size: Size(MediaQuery.of(context).size.width, 100.0),
               recorderController: GlobalControllers.controller,
               enableGesture: true,
-              waveStyle: WaveStyle(
+              waveStyle: const WaveStyle(
                 waveColor: Colors.blue,
                 showDurationLabel: true,
                 spacing: 8.0,
@@ -175,7 +177,7 @@ class ConnectionCheck {
                     recordedAudio = path!;
                     Navigator.of(context).pop();
                   },
-                  child: Text("Stop Recording"),
+                  child: const Text("Stop Recording"),
                 ),
               ),
             ],
@@ -188,9 +190,7 @@ class ConnectionCheck {
 // Playing Audio
   Future<void> playAudio(BuildContext context) async {
     // Ensure that a recorded audio file path is available
-    if (recordedAudio == null) {
-      return;
-    }
+   
 
     try {
       print('Audio is playing now');
@@ -227,20 +227,20 @@ class ConnectionCheck {
                 playerController: GlobalControllers.playerController,
                 enableSeekGesture: true,
                 waveformType: WaveformType.long,
-                waveformData: [],
+                waveformData: const [],
                 playerWaveStyle: const PlayerWaveStyle(
                   fixedWaveColor: Color.fromARGB(255, 220, 153, 148),
                   liveWaveColor: Colors.blueAccent,
                   spacing: 6,
                 ),
               ),
-              SizedBox(height: 10),
+             const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
                   await GlobalControllers.playerController.stopPlayer();
                   Navigator.pop(context);
                 },
-                child: Text('Stop Audio'),
+                child: const Text('Stop Audio'),
               ),
             ],
           ),

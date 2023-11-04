@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 
 class ImageFullScreen extends StatelessWidget {
+  const ImageFullScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

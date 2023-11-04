@@ -1,12 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dialogs/flutter_dialogs.dart';
+import 'package:hive/hive.dart';
 import 'package:noteapp/Components/snackBar.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Constant/themes.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:noteapp/Screens/Logins/load_home.dart';
+import 'package:noteapp/Screens/Logins/login_SignUp.dart';
+import 'package:noteapp/ThemeStore/theme.dart';
 
-class ApiService {
+import '../../Components/logOutAnimation.dart';
+
+class ApiServiceState {
   final String registrationEndpoint =
       "https://note-api-amz2.onrender.com/api/v1/auth/signup";
   final String loginEndpoint =
@@ -34,16 +41,19 @@ class ApiService {
   final String emptyTrash =
       "https://note-api-amz2.onrender.com/users/notes/trash/empty-trash";
 
+// Funtion for registration
+  bool checkRegistration = true;
   Future<void> registration(BuildContext context) async {
     print("Registration its going on now");
+
     ReusedSnackBar.showCustomSnackBar(
       context,
       "Registration Its Going On...",
       themeColor,
-      Duration(seconds: 15),
+      const Duration(seconds: 10),
     );
 
-    final Map<String, String> data = {
+    final Map<String, String> registerData = {
       "username": GlobalControllersRegister.userName.text,
       "email": GlobalControllersRegister.email.text,
       "password": GlobalControllersRegister.password.text
@@ -52,27 +62,31 @@ class ApiService {
     try {
       final response = await http.post(
         Uri.parse(registrationEndpoint),
-        body: data,
+        body: registerData,
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Registration completed successfully.");
         print("Response data: ${response.body}");
-        GlobalControllersRegister.userName.clear();
-        GlobalControllersRegister.email.clear();
-        GlobalControllersRegister.password.clear();
+
+        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Registration completed successfully",
           themeColor,
-          Duration(seconds: 4),
+          const Duration(seconds: 4),
         );
+
+        GlobalControllersRegister.userName.clear();
+        GlobalControllersRegister.email.clear();
+        GlobalControllersRegister.password.clear();
       } else {
+        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Opps Failed To Register Please Try Again",
           themeColor,
-          Duration(seconds: 4),
+          const Duration(seconds: 4),
         );
 
         print("Failed to Register. Status code: ${response.statusCode}");
@@ -83,29 +97,132 @@ class ApiService {
     }
   }
 
-  //   Future<void> createNote(BuildContext context) async {
-  //      print("Sending note now to backend");
+  // Funtion for login
+  // obed,
+  // Bigg
 
-  //   final Map<String, String> data = {
-  //     'title': GlobalControllers.noteTittleContext.text,
-  //     'note': GlobalControllers.noteContext.text,
-  //   };
+  Future<void> loginUser(BuildContext context) async {
+    print("Login process initiated.");
 
-  //   try {
-  //     final response = await http.post(
-  //       Uri.parse(createNoteEndpoint),
-  //       body: data,
-  //     );
+    ReusedSnackBar.showCustomSnackBar(
+      context,
+      "Loging in...",
+      themeColor,
+      const Duration(seconds: 10),
+    );
 
-  //     if (response.statusCode == 200) {
-  //       print("Note created successfully.");
-  //       print("Response data: ${response.body}");
-  //     } else {
-  //       print("Failed to create note. Status code: ${response.statusCode}");
-  //       print("Response data: ${response.body}");
-  //     }
-  //   } catch (e) {
-  //     print("Error: $e");
-  //   }
-  // }
+    final loginData = {
+      "username": GlobalControllersLogins.userName.text,
+      "password": GlobalControllersLogins.password.text,
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(loginEndpoint),
+        body: loginData,
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("Login successful.");
+        // print("Response data: ${response.body}");
+
+        // Extract the access token from the response
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        String accessToken = responseData["accessToken"];
+        String reFreshToken = responseData["refreshToken"];
+        // Store the access token using Hive
+        final putToken = TokenStorage(
+          myToken: accessToken,
+          myRefreshToken: reFreshToken,
+        );
+        await GlobalControllers.tokenKey.put('accessToken', putToken);
+
+      
+        // ignore: use_build_context_synchronously
+        Navigator.push<void>(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => const LoadHomePage(),
+          ),
+        );
+          GlobalControllersLogins.userName.clear();
+        GlobalControllersLogins.password.clear();
+      } else if (response.statusCode == 404) {
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed to Login: Incorrect username or password",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+      } else {
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed to Login: Unexpected Error. Please try again.",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+        print("Error: Unexpected error occurred - ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+// User LogOut
+  Future<void> userLogOut(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return (const LogOutAnimation());
+      },
+    );
+   print("User LoginOut");
+   
+      GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
+      final storageAccessToken =
+          GlobalControllers.tokenKey.getAt(0) as TokenStorage;
+      // final storageRefreshToken =
+      //     GlobalControllers.tokenKey.getAt(1) as TokenStorage;
+
+      final Map<String, String> refreshToken = {
+        "refreshToken": storageAccessToken.myRefreshToken
+      };
+
+      try {
+        final response = await http.post(
+          Uri.parse(logOutEndpoint),
+          headers: {
+            'authorization': storageAccessToken.myToken,
+          },
+          body: refreshToken,
+        );
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          print("User logsOut successfully.");
+          // ignore: use_build_context_synchronously
+          Navigator.push<void>(
+            context,
+            MaterialPageRoute<void>(
+              builder: (context) => const LoginSignUpPage(),
+            ),
+          );
+        } else {
+          // ignore: use_build_context_synchronously
+          ReusedSnackBar.showCustomSnackBar(
+            context,
+            "Opps Failed To LogOut Please Try Again",
+            themeColor,
+            const Duration(seconds: 4),
+          );
+
+          print("Failed to LogOut. Status code: ${response.statusCode}");
+          print("Response data: ${response.body}");
+        }
+      } catch (e) {
+        print("Error: $e");
+      }
+    }
 }

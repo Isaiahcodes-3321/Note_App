@@ -1,11 +1,9 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:noteapp/Components/snackBar.dart';
-import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
-import 'package:noteapp/Screens/Api_Service/api_class.dart';
-import 'package:noteapp/Screens/Logins/load_home.dart';
 
-ApiService apiService = ApiService();
+import 'package:flutter/material.dart';
+import 'export_login_register.dart';
+
+
+ApiServiceState apiService = ApiServiceState();
 
 class LoginAndRegistrationControllers {
   void inputsRequiredSnackbar(BuildContext context) {
@@ -13,7 +11,8 @@ class LoginAndRegistrationControllers {
       context,
       "All inputs are required",
       themeColor,
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
+      
     );
   }
 
@@ -21,8 +20,10 @@ class LoginAndRegistrationControllers {
   Future<void> registerCheckInternetConnection(BuildContext context) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
+      // ignore: use_build_context_synchronously
       internetSnackBar(context);
     } else {
+      // ignore: use_build_context_synchronously
       await apiService.registration(context);
     }
   }
@@ -31,10 +32,11 @@ class LoginAndRegistrationControllers {
   Future<void> loginCheckInternetConnection(BuildContext context) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
+      // ignore: use_build_context_synchronously
       internetSnackBar(context);
     } else {
-      LoadHomePage();
-      // await apiService.registration(context);
+      // ignore: use_build_context_synchronously
+      await apiService.loginUser(context);
     }
   }
 
@@ -43,7 +45,8 @@ class LoginAndRegistrationControllers {
       context,
       "Please check your internet connection",
       themeColor,
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
+      
     );
   }
 }
