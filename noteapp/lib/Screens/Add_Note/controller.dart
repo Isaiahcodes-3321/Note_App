@@ -28,11 +28,6 @@ class ConnectionCheck {
       GlobalControllers.providerRef.read(noteBody.notifier).state =
           GlobalControllers.noteContext.text;
 
-      // String noteBodyValue =
-      //     GlobalControllers.providerRef.read(noteBody.notifier).state;
-      
-      
-        // await apiService.createNote(context);
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -143,6 +138,7 @@ class ConnectionCheck {
     showDialog(
       context: context,
       builder: (context) {
+        // ignore: deprecated_member_use
         return WillPopScope(
           onWillPop: () async {
             // Prevent dialog from closing if the user clicks outside the dialog

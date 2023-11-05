@@ -46,11 +46,11 @@ class ApiServiceState {
   Future<void> registration(BuildContext context) async {
     print("Registration its going on now");
 
-    ReusedSnackBar.showCustomSnackBar(
-      context,
-      "Registration Its Going On...",
-      themeColor,
-      const Duration(seconds: 10),
+    showDialog(
+      context: context,
+      builder: (context) {
+        return (const LogOutAnimation());
+      },
     );
 
     final Map<String, String> registerData = {
@@ -68,6 +68,7 @@ class ApiServiceState {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Registration completed successfully.");
         print("Response data: ${response.body}");
+        Navigator.pop(context);
 
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
@@ -98,8 +99,11 @@ class ApiServiceState {
   }
 
   // Funtion for login
-  // obed,
-  // Bigg
+  // isaiah001
+  // big
+
+  //
+  //
 
   Future<void> loginUser(BuildContext context) async {
     print("Login process initiated.");
@@ -110,6 +114,8 @@ class ApiServiceState {
       themeColor,
       const Duration(seconds: 10),
     );
+      // clear the hive storage at all there is still data in it
+      await GlobalControllers.tokenKey.clear();
 
     final loginData = {
       "username": GlobalControllersLogins.userName.text,
@@ -138,7 +144,6 @@ class ApiServiceState {
         );
         await GlobalControllers.tokenKey.put('accessToken', putToken);
 
-      
         // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,
@@ -146,7 +151,7 @@ class ApiServiceState {
             builder: (context) => const LoadHomePage(),
           ),
         );
-          GlobalControllersLogins.userName.clear();
+        GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
       } else if (response.statusCode == 404) {
         // ignore: use_build_context_synchronously
@@ -179,50 +184,49 @@ class ApiServiceState {
         return (const LogOutAnimation());
       },
     );
-   print("User LoginOut");
-   
-      GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
-      final storageAccessToken =
-          GlobalControllers.tokenKey.getAt(0) as TokenStorage;
-      // final storageRefreshToken =
-      //     GlobalControllers.tokenKey.getAt(1) as TokenStorage;
+    print("User LoginOut");
 
-      final Map<String, String> refreshToken = {
-        "refreshToken": storageAccessToken.myRefreshToken
-      };
+    GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
+    final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
 
-      try {
-        final response = await http.post(
-          Uri.parse(logOutEndpoint),
-          headers: {
-            'authorization': storageAccessToken.myToken,
-          },
-          body: refreshToken,
+    final Map<String, String> refreshToken = {
+      "refreshToken": tokenStorage.myRefreshToken
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(logOutEndpoint),
+        headers: {
+          'authorization': tokenStorage.myToken,
+        },
+        body: refreshToken,
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("User logsOut successfully.");
+         await GlobalControllers.tokenKey.clear();
+
+        // ignore: use_build_context_synchronously
+        Navigator.push<void>(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => const LoginSignUpPage(),
+          ),
+        );
+      } else {
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Opps Failed To LogOut Please Try Again",
+          themeColor,
+          const Duration(seconds: 4),
         );
 
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          print("User logsOut successfully.");
-          // ignore: use_build_context_synchronously
-          Navigator.push<void>(
-            context,
-            MaterialPageRoute<void>(
-              builder: (context) => const LoginSignUpPage(),
-            ),
-          );
-        } else {
-          // ignore: use_build_context_synchronously
-          ReusedSnackBar.showCustomSnackBar(
-            context,
-            "Opps Failed To LogOut Please Try Again",
-            themeColor,
-            const Duration(seconds: 4),
-          );
-
-          print("Failed to LogOut. Status code: ${response.statusCode}");
-          print("Response data: ${response.body}");
-        }
-      } catch (e) {
-        print("Error: $e");
+        print("Failed to LogOut. Status code: ${response.statusCode}");
+        print("Response data: ${response.body}");
       }
+    } catch (e) {
+      print("Error: $e");
     }
+  }
 }

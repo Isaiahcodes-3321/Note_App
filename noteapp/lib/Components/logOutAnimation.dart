@@ -10,33 +10,33 @@ class LogOutAnimation extends StatefulWidget {
 }
 
 class _LogOutAnimationState extends State<LogOutAnimation> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Future.delayed(const Duration(seconds: 10), () {
-  //     Navigator.pop(context);
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: Color.fromARGB(255, 133, 135, 181),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      // Prevent dialog from closing if the user clicks outside the dialog
+
+      onWillPop: () async {
+        return false;
+      },
+      child: AlertDialog(
+        backgroundColor: Color.fromARGB(255, 133, 135, 181),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
         ),
-      ),
-      content: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: themeColor,
-        ),
-        height: 40.h,
-        width: double.infinity,
-        child: SpinKitChasingDots(
-          color: Colors.white,
-          size: 40.sp,
+        content: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: themeColor,
+          ),
+          height: 40.h,
+          width: double.infinity,
+          child: SpinKitChasingDots(
+            color: Colors.white,
+            size: 40.sp,
+          ),
         ),
       ),
     );
