@@ -19,10 +19,10 @@ class _HomePageState extends State<HomePage> {
       builder: (context, ref, child) {
         GlobalControllers.providerRef = ref;
 
-        String noteBodyValue =
-            GlobalControllers.providerRef.read(noteBody.notifier).state;
-        String noteTittleValue =
-            GlobalControllers.providerRef.read(noteTittle.notifier).state;
+        // String noteBodyValue =
+        //     GlobalControllers.providerRef.read(UserNewNotes.noteBody.notifier).state;
+        // String noteTittleValue =
+        //     GlobalControllers.providerRef.read(UserNewNotes.noteTittle.notifier).state;
 
         var currentTheme = GlobalControllers.providerRef.watch(themeInit);
         var textModeColor =
@@ -89,82 +89,82 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  SliverToBoxAdapter(
-                    child: noteTittleValue.isNotEmpty
-                        ? SizedBox(
-                            width: MediaQuery.sizeOf(context).width * 100.0,
-                            height: MediaQuery.sizeOf(context).width * 100.0,
-                            child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Dismissible(
-                                        key: const Key('your_unique_key'),
-                                        onDismissed: (direction) {
-                                          if (direction ==
-                                                  DismissDirection.endToStart ||
-                                              direction ==
-                                                  DismissDirection.startToEnd) {
-                                            GlobalControllers.providerRef
-                                                .read(noteBody.notifier)
-                                                .state = '';
-                                            GlobalControllers.providerRef
-                                                .read(noteTittle.notifier)
-                                                .state = '';
-                                          }
-                                        },
-                                        background: GlobalDismissibleContainer.container(context),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(22),
-                                            color: listTileBackGround,
-                                          ),
-                                          child: ListTile(
-                                            title: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                // Title
-                                                Expanded( flex: 8,
-                                                  child: Text(
-                                                    noteTittleValue,
-                                                     overflow: TextOverflow.ellipsis,
-                                                    style:
-                                                        AppTextStyle.textStyle()
-                                                            .copyWith(
-                                                      color: textModeColor,
-                                                      fontSize: 20.sp,
-                                                    ),
-                                                  ),
-                                                ),
-                                                // Expanded( flex: 2,
-                                                //   child: Align(alignment: Alignment.centerRight,
-                                                //     child: Text("9 oct 2023",style: TextStyle(fontSize: 20))))
-                                              ],
-                                            ),
-                                            // Note
-                                            subtitle: Text(
-                                              noteBodyValue,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: AppTextStyle.textStyle()
-                                                  .copyWith(
-                                                color: textModeColor,
-                                                fontSize: 15.sp,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )),
-                          )
-                        : const Text(""),
-                  ),
+                  // SliverToBoxAdapter(
+                  //   child: noteTittleValue.isNotEmpty
+                  //       ? SizedBox(
+                  //           width: MediaQuery.sizeOf(context).width * 100.0,
+                  //           height: MediaQuery.sizeOf(context).width * 100.0,
+                  //           child: Padding(
+                  //               padding: const EdgeInsets.all(20),
+                  //               child: SingleChildScrollView(
+                  //                 child: Column(
+                  //                   children: [
+                  //                     Dismissible(
+                  //                       key: const Key('your_unique_key'),
+                  //                       onDismissed: (direction) {
+                  //                         if (direction ==
+                  //                                 DismissDirection.endToStart ||
+                  //                             direction ==
+                  //                                 DismissDirection.startToEnd) {
+                  //                           GlobalControllers.providerRef
+                  //                               .read(UserNewNotes.noteBody.notifier)
+                  //                               .state = '';
+                  //                           GlobalControllers.providerRef
+                  //                               .read(UserNewNotes.noteTittle.notifier)
+                  //                               .state = '';
+                  //                         }
+                  //                       },
+                  //                       background: GlobalDismissibleContainer.container(context),
+                  //                       child: Container(
+                  //                         decoration: BoxDecoration(
+                  //                           borderRadius:
+                  //                               BorderRadius.circular(22),
+                  //                           color: listTileBackGround,
+                  //                         ),
+                  //                         child: ListTile(
+                  //                           title: Row(
+                  //                             mainAxisAlignment:
+                  //                                 MainAxisAlignment
+                  //                                     .spaceBetween,
+                  //                             children: [
+                  //                               // Title
+                  //                               Expanded( flex: 8,
+                  //                                 child: Text(
+                  //                                   noteTittleValue,
+                  //                                    overflow: TextOverflow.ellipsis,
+                  //                                   style:
+                  //                                       AppTextStyle.textStyle()
+                  //                                           .copyWith(
+                  //                                     color: textModeColor,
+                  //                                     fontSize: 20.sp,
+                  //                                   ),
+                  //                                 ),
+                  //                               ),
+                  //                               // Expanded( flex: 2,
+                  //                               //   child: Align(alignment: Alignment.centerRight,
+                  //                               //     child: Text("9 oct 2023",style: TextStyle(fontSize: 20))))
+                  //                             ],
+                  //                           ),
+                  //                           // Note
+                  //                           subtitle: Text(
+                  //                             noteBodyValue,
+                  //                             maxLines: 2,
+                  //                             overflow: TextOverflow.ellipsis,
+                  //                             style: AppTextStyle.textStyle()
+                  //                                 .copyWith(
+                  //                               color: textModeColor,
+                  //                               fontSize: 15.sp,
+                  //                             ),
+                  //                           ),
+                  //                         ),
+                  //                       ),
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               )),
+                  //         )
+                  //       : const Text(""),
+                  // ),
                 ],
               ),
               drawer: Drawer(

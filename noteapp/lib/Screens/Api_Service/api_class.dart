@@ -1,15 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:hive/hive.dart';
 import 'package:noteapp/Components/snackBar.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Constant/themes.dart';
+import 'package:noteapp/Screens/Add_Note/controller.dart';
 import 'package:noteapp/Screens/Logins/load_home.dart';
 import 'package:noteapp/Screens/Logins/login_SignUp.dart';
 import 'package:noteapp/ThemeStore/theme.dart';
+import 'package:noteapp/state_Management/note_added.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Components/logOutAnimation.dart';
 
@@ -23,7 +25,7 @@ class ApiServiceState {
   final String logOutEndpoint =
       "https://note-api-amz2.onrender.com/api/v1/auth/logout";
   final String createNoteEndpoint =
-      "https://note-api-amz2.onrender.com/users/notes/create-note";
+      "https://note-api-amz2.onrender.com/users/notes/creat-note";
   final String getNoteEndpoint =
       "https://note-api-amz2.onrender.com/users/notes/list-notes";
   final String updateNoteEndpoint =
@@ -68,6 +70,7 @@ class ApiServiceState {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Registration completed successfully.");
         print("Response data: ${response.body}");
+        // ignore: use_build_context_synchronously
         Navigator.pop(context);
 
         // ignore: use_build_context_synchronously
@@ -82,6 +85,8 @@ class ApiServiceState {
         GlobalControllersRegister.email.clear();
         GlobalControllersRegister.password.clear();
       } else {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
@@ -99,11 +104,12 @@ class ApiServiceState {
   }
 
   // Funtion for login
-  // isaiah001
+  // isaiah003
   // big
 
-  //
-  //
+  //john
+  //john
+
 
   Future<void> loginUser(BuildContext context) async {
     print("Login process initiated.");
@@ -114,8 +120,8 @@ class ApiServiceState {
       themeColor,
       const Duration(seconds: 10),
     );
-      // clear the hive storage at all there is still data in it
-      await GlobalControllers.tokenKey.clear();
+    // clear the hive storage at all there is still data in it
+    await GlobalControllers.tokenKey.clear();
 
     final loginData = {
       "username": GlobalControllersLogins.userName.text,
@@ -151,6 +157,9 @@ class ApiServiceState {
             builder: (context) => const LoadHomePage(),
           ),
         );
+           // Save an boolean value to 'repeat' key.
+        PreferenceService.sharedPref.setBool('repeat', true);
+      
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
       } else if (response.statusCode == 404) {
@@ -170,6 +179,7 @@ class ApiServiceState {
           const Duration(seconds: 4),
         );
         print("Error: Unexpected error occurred - ${response.statusCode}");
+        print("\n Response data: ${response.body}");
       }
     } catch (e) {
       print("Error: $e");
@@ -204,7 +214,9 @@ class ApiServiceState {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("User logsOut successfully.");
-         await GlobalControllers.tokenKey.clear();
+        // Save an boolean value to 'repeat' key.
+         PreferenceService.sharedPref.setBool('repeat', false);
+       await GlobalControllers.tokenKey.clear();
 
         // ignore: use_build_context_synchronously
         Navigator.push<void>(
@@ -224,6 +236,81 @@ class ApiServiceState {
 
         print("Failed to LogOut. Status code: ${response.statusCode}");
         print("Response data: ${response.body}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  //save note
+  Future<void> saveUserNote(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return (const LogOutAnimation());
+      },
+    );
+
+    GlobalControllers.providerRef;
+
+    String noteBodyValue = GlobalControllers.providerRef
+        .read(UserNewNotes.noteBody.notifier)
+        .state;
+    String noteTittleValue = GlobalControllers.providerRef
+        .read(UserNewNotes.noteTittle.notifier)
+        .state;
+
+    GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
+    final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
+
+    print('not updating to storage');
+    final imageFile = logics.image;
+    String imagePath = imageFile!.path;
+    try {
+      final response = await http.post(
+        Uri.parse(createNoteEndpoint),
+        headers: {
+          'authorization': tokenStorage.myToken,
+        },
+        body: {
+          'title': noteTittleValue,
+          'note': noteBodyValue,
+          'audio': logics.recordedAudio,
+          'image': imagePath
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Note Saved Successfully ",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+      } else if (response.statusCode == 404) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed to Save: Please try again.",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+      } else {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed to Save note: Please try again.",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+        print("Error: Unexpected error occurred - ${response.statusCode}");
       }
     } catch (e) {
       print("Error: $e");

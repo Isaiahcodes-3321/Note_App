@@ -23,22 +23,13 @@ class ConnectionCheck {
       );
     } else {
       print('Updating note');
-      GlobalControllers.providerRef.read(noteTittle.notifier).state =
-          GlobalControllers.noteTittleContext.text;
-      GlobalControllers.providerRef.read(noteBody.notifier).state =
+      GlobalControllers.providerRef
+          .read(UserNewNotes.noteTittle.notifier)
+          .state = GlobalControllers.noteTittleContext.text;
+      GlobalControllers.providerRef.read(UserNewNotes.noteBody.notifier).state =
           GlobalControllers.noteContext.text;
 
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: themeColor,
-          content: Text(
-            "Note Saved",
-            style: AppTextStyle.textStyle().copyWith(fontSize: 15.sp),
-          ),
-          duration: const Duration(seconds: 5),
-        ),
-      );
+      apiService.saveUserNote(context);
     }
   }
 
@@ -186,7 +177,6 @@ class ConnectionCheck {
 // Playing Audio
   Future<void> playAudio(BuildContext context) async {
     // Ensure that a recorded audio file path is available
-   
 
     try {
       print('Audio is playing now');
@@ -230,7 +220,7 @@ class ConnectionCheck {
                   spacing: 6,
                 ),
               ),
-             const SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
                   await GlobalControllers.playerController.stopPlayer();

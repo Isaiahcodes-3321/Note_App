@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:noteapp/Screens/Add_Note/controller.dart';
 import 'export_note_input.dart';
 
 class AddNote extends StatefulWidget {
@@ -62,7 +63,7 @@ class _AddNoteState extends State<AddNote> {
               actions: [
                 GestureDetector(
                     onTap: () async {
-                      // logics.savedState(context);
+                      logics.savedState(context);
                     },
                     child: Padding(
                         padding: EdgeInsets.all(15.sp),

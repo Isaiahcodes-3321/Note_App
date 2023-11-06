@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 import 'package:noteapp/ThemeStore/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 //my storage Make Hive accessible anywhere,
@@ -26,6 +27,14 @@ class GlobalControllersRegister {
   static late TextEditingController email;
   static late TextEditingController password;
   static late bool registerCheck;
+}
+
+class PreferenceService {
+  static late SharedPreferences sharedPref;
+
+  static Future<void> initialize() async {
+    sharedPref = await SharedPreferences.getInstance();
+  }
 }
 
 class GlobalDismissibleContainer {

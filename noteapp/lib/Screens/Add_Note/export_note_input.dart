@@ -4,7 +4,6 @@ export  '../../Constant/themes.dart';
 export  '../HomePage/home_page.dart';
 export  'full_image.dart';
 export 'package:flutter/services.dart';
-export 'controller.dart';
 export 'dart:io';
 export 'package:noteapp/Constant/global_controllers.dart';
 export 'package:audio_waveforms/audio_waveforms.dart';
@@ -13,4 +12,6 @@ export 'package:image_picker/image_picker.dart';
 export '../../state_Management/theme_state.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:noteapp/state_Management/note_added.dart';
+
+
 

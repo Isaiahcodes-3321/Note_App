@@ -85,47 +85,45 @@ class TrashPageState extends State<TrashPage> {
                                     horizontal: 5.w, vertical: 2.h),
                                 child: Column(
                                   children: [
-                                    Container(
-                                      child: ListTile(
-                                        leading: onTap
-                                            ? Icon(Icons.person, size: 25.sp)
-                                            : Icon(Icons.gpp_good_outlined,
-                                                size: 25.sp),
+                                    ListTile(
+                                      leading: onTap
+                                          ? Icon(Icons.person, size: 25.sp)
+                                          : Icon(Icons.gpp_good_outlined,
+                                              size: 25.sp),
 
-                                        title: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            // tittle
-                                            Text(ltitleTrash[index],
-                                                style: AppTextStyle.textStyle()
-                                                    .copyWith(
-                                                  color: textModeColor,
-                                                  fontSize: 18.sp,
-                                                )),
-                                            // Date
-                                            FittedBox(
-                                              child: Align(
-                                                alignment: Alignment.bottomLeft,
-                                                child: Text(
-                                                    ldateDeleted[index],
-                                                    style:
-                                                        AppTextStyle.textStyle()
-                                                            .copyWith(
-                                                      color: textModeColor,
-                                                      fontSize: 16.sp,
-                                                    )),
-                                              ),
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          // tittle
+                                          Text(ltitleTrash[index],
+                                              style: AppTextStyle.textStyle()
+                                                  .copyWith(
+                                                color: textModeColor,
+                                                fontSize: 18.sp,
+                                              )),
+                                          // Date
+                                          FittedBox(
+                                            child: Align(
+                                              alignment: Alignment.bottomLeft,
+                                              child: Text(
+                                                  ldateDeleted[index],
+                                                  style:
+                                                      AppTextStyle.textStyle()
+                                                          .copyWith(
+                                                    color: textModeColor,
+                                                    fontSize: 16.sp,
+                                                  )),
                                             ),
-                                          ],
-                                        ),
-                                        // Note
-                                        subtitle: Text(
-                                          lnoteTrash[index],
-                                          maxLines: 2,
-                                          style: const TextStyle(
-                                            overflow: TextOverflow.ellipsis,
                                           ),
+                                        ],
+                                      ),
+                                      // Note
+                                      subtitle: Text(
+                                        lnoteTrash[index],
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     ),
