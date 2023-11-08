@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import '../Api_Service/refreshTokenService.dart';
+import '../Api_Service/timer.dart';
 import 'export_home.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,9 +13,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  CountdownManager countdownManager = CountdownManager();
+  RefreshTokenService refreshTokenService = RefreshTokenService();
+
   bool isSearching = false;
-  // var textModeColor;
-  // bool onlongPress = true;
+  void initState() {
+    super.initState();
+    // CountdownManager.isCountdownActive;
+    checkIfTokenExpires();
+  }
+
+  void checkIfTokenExpires() {
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      final remainingTime = countdownManager.getRemainingTime();
+
+      if (remainingTime <= const Duration(seconds: 5) ||
+          remainingTime >= const Duration(minutes: 55)) {
+        // If the remaining time is less than 5 seconds or at 55 minutes, perform the token refresh
+        refreshTokenService.reFreshToken(context);
+        countdownManager.cancelCountdown();
+        countdownManager.startOneHourCountdown();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

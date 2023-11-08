@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noteapp/Screens/Api_Service/api_class.dart';
-
+import '../Api_Service/logOutService.dart';
 import 'export_home.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -11,8 +10,8 @@ class MyDrawer extends StatefulWidget {
   State<MyDrawer> createState() => _MyDrawerState();
 }
 
- ApiServiceState  apiServiceState =  ApiServiceState();
 class _MyDrawerState extends State<MyDrawer> {
+  LogOutService logOutService = LogOutService();
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
@@ -127,12 +126,12 @@ class _MyDrawerState extends State<MyDrawer> {
               alignment: Alignment.bottomCenter,
               child: TextButton(
                 onPressed: () {
-                  apiServiceState.userLogOut(context);
+                  logOutService.userLogOut(context);
                 },
                 child: Padding(
                   padding: EdgeInsets.all(20.sp),
-                  child:
-                     const Text('LOG OUT ', style: TextStyle(color: Colors.red)),
+                  child: const Text('LOG OUT ',
+                      style: TextStyle(color: Colors.red)),
                 ),
               ),
             ),

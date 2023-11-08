@@ -1,11 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import '../Api_Service/api_class.dart';
+import '../Api_Service/saveNoteservice.dart';
 import 'export_note_input.dart';
 
 var logics = ConnectionCheck();
-ApiServiceState apiService = ApiServiceState();
+SaveNoteService saveNoteService = SaveNoteService();
 
 class ConnectionCheck {
   Future<void> savedState(BuildContext context) async {
@@ -29,7 +29,7 @@ class ConnectionCheck {
       GlobalControllers.providerRef.read(UserNewNotes.noteBody.notifier).state =
           GlobalControllers.noteContext.text;
 
-      apiService.saveUserNote(context);
+      saveNoteService.saveUserNote(context);
     }
   }
 

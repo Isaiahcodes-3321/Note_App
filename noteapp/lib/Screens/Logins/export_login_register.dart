@@ -9,5 +9,3 @@ export '../Api_Service/api_class.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'signUpPage.dart';
 export 'controllers_Login.dart';
-
-

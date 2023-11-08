@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
-
-
 LoginAndRegistrationControllers loginControllers =
     LoginAndRegistrationControllers();
 
@@ -68,8 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: loginHidePassword,
                         keyboardType: TextInputType.text,
                         hintText: "Password",
-                        prefixIcon:
-                            const Icon(Icons.lock_outlined, color: Colors.black),
+                        prefixIcon: const Icon(Icons.lock_outlined,
+                            color: Colors.black),
                         suffixIcon: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -99,6 +97,13 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(25.sp)),
                         child: TextButton(
                           onPressed: () {
+                            // Navigator.push<void>(
+                            //   context,
+                            //   MaterialPageRoute<void>(
+                            //     builder: (BuildContext context) =>
+                            //         const HomePage(),
+                            //   ),
+                            // );
                             if (GlobalControllersLogins.password.text.isEmpty ||
                                 GlobalControllersLogins.userName.text.isEmpty) {
                               loginControllers

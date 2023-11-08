@@ -1,11 +1,14 @@
 
 import 'package:flutter/material.dart';
+import '../Api_Service/loginService.dart';
+import '../Api_Service/registrationService.dart';
 import 'export_login_register.dart';
 
-
-ApiServiceState apiService = ApiServiceState();
-
 class LoginAndRegistrationControllers {
+  LoginService loginService = LoginService();
+RegisteredService  registeredService  = RegisteredService();
+
+
   void inputsRequiredSnackbar(BuildContext context) {
     ReusedSnackBar.showCustomSnackBar(
       context,
@@ -24,7 +27,7 @@ class LoginAndRegistrationControllers {
       internetSnackBar(context);
     } else {
       // ignore: use_build_context_synchronously
-      await apiService.registration(context);
+      await registeredService.registration(context);
     }
   }
 
@@ -36,7 +39,7 @@ class LoginAndRegistrationControllers {
       internetSnackBar(context);
     } else {
       // ignore: use_build_context_synchronously
-      await apiService.loginUser(context);
+      await loginService.loginUser(context);
     }
   }
 

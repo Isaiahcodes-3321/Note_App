@@ -14,13 +14,13 @@ class _LogOutAnimationState extends State<LogOutAnimation> {
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
     return
-    //  WillPopScope(
-    //   // Prevent dialog from closing if the user clicks outside the dialog
+     WillPopScope(
+      // Prevent dialog from closing if the user clicks outside the dialog
 
-    //   onWillPop: () async {
-    //     return false;
-    //   },
-    //   child:
+      onWillPop: () async {
+        return false;
+      },
+      child:
        AlertDialog(
         backgroundColor: const Color.fromARGB(255, 133, 135, 181),
         shape: const RoundedRectangleBorder(
@@ -40,7 +40,7 @@ class _LogOutAnimationState extends State<LogOutAnimation> {
             size: 40.sp,
           ),
         ),
-      );
-    // );
+      )
+    );
   }
 }
