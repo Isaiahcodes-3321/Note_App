@@ -235,3 +235,32 @@ class ConnectionCheck {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+//    String noteBodyValue = GlobalControllers.providerRef
+//         .read(UserNewNotes.noteBody.notifier)
+//         .state;
+//     String noteTittleValue = GlobalControllers.providerRef
+//         .read(UserNewNotes.noteTittle.notifier)
+//         .state;
+
+//         if(noteBodyValue.isEmpty || noteTittleValue.isEmpty){
+//  ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(
+//           backgroundColor: themeColor,
+//           content: Text(
+//             "Failed to save, ",
+//             style: AppTextStyle.textStyle().copyWith(fontSize: 15.sp),
+//           ),
+//           duration: const Duration(seconds: 4),
+//         ),
+//       );
+//         }

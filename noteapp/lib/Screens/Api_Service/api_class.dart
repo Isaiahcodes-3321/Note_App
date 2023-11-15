@@ -9,7 +9,7 @@ class ApiServiceState {
   final String logOutEndpoint =
       "https://note-api-amz2.onrender.com/api/v1/auth/logout";
   final String createNoteEndpoint =
-      "https://note-api-amz2.onrender.com/users/notes/creat-note";
+      "https://note-api-amz2.onrender.com/users/notes/create-note";
   final String getNoteEndpoint =
       "https://note-api-amz2.onrender.com/users/notes/list-notes";
   final String updateNoteEndpoint =

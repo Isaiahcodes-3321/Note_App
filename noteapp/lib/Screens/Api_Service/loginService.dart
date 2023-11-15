@@ -1,28 +1,43 @@
-  import 'dart:convert';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:noteapp/Screens/Api_Service/export.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LoginService {
- 
- ApiServiceState apiServiceState = ApiServiceState();
+  ApiServiceState apiServiceState = ApiServiceState();
 
- // Funtion for login
- 
-  //ShelliS
-  //ShelliS
+  // Funtion for login
 
+  //Shellsi
+  //Shellsi
 
   Future<void> loginUser(BuildContext context) async {
     print("Login process initiated.");
-
-    ReusedSnackBar.showCustomSnackBar(
-      context,
-      "Loging in...",
-      themeColor,
-      const Duration(seconds: 10),
+    ScaffoldMessenger.of(context).showMaterialBanner(
+      MaterialBanner(
+        backgroundColor: Colors.white,
+        content: Padding(
+          padding: EdgeInsets.all(5.sp),
+          child: Container(
+            decoration: BoxDecoration(
+              color: themeColor,
+              borderRadius: BorderRadius.circular(10.sp),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(10.sp),
+              child: Text(
+                "Logging in...",
+                textAlign: TextAlign.center,
+                style: textFonts.copyWith(fontSize: 17.sp, color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+        actions: const [Text('')],
+      ),
     );
+
     // clear the hive storage at all there is still data in it
     await GlobalControllers.tokenKey.clear();
 
@@ -52,6 +67,8 @@ class LoginService {
           myRefreshToken: reFreshToken,
         );
         await GlobalControllers.tokenKey.put('accessToken', putToken);
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
 
         // ignore: use_build_context_synchronously
         Navigator.push<void>(
@@ -60,16 +77,16 @@ class LoginService {
             builder: (context) => const LoadHomePage(),
           ),
         );
-           // Save an boolean value to 'repeat' key.
+        // Save an boolean value to 'repeat' key.
         PreferenceService.sharedPref.setBool('repeat', true);
-      
+
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
       } else if (response.statusCode == 404) {
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
-          "Failed to Login: Incorrect username or password",
+          "Failed to Login: Unexpected Error. Please try again.",
           themeColor,
           const Duration(seconds: 4),
         );
@@ -77,7 +94,7 @@ class LoginService {
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
-          "Failed to Login: Unexpected Error. Please try again.",
+          "Failed to Login: Incorrect username or password",
           themeColor,
           const Duration(seconds: 4),
         );

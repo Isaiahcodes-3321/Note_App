@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:noteapp/Screens/Add_Note/controller.dart';
 import 'export_note_input.dart';
@@ -79,8 +78,8 @@ class _AddNoteState extends State<AddNote> {
                 children: [
                   logics.image != null || logics.recordedAudio.isNotEmpty
                       ? Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -107,7 +106,8 @@ class _AddNoteState extends State<AddNote> {
                                                 child: Hero(
                                                   tag: 'imageTag',
                                                   child: Dismissible(
-                                                    key: const Key('your_unique_key'),
+                                                    key: const Key(
+                                                        'your_unique_key'),
                                                     onDismissed: (direction) {
                                                       if (direction ==
                                                               DismissDirection
@@ -140,7 +140,9 @@ class _AddNoteState extends State<AddNote> {
                                         key: const Key('your_unique_key'),
                                         onDismissed: (direction) {
                                           if (direction ==
-                                              DismissDirection.horizontal) {
+                                                  DismissDirection.endToStart ||
+                                              direction ==
+                                                  DismissDirection.startToEnd) {
                                             logics.recordedAudio = '';
                                           }
                                         },
@@ -163,7 +165,7 @@ class _AddNoteState extends State<AddNote> {
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStateProperty.all(
-                                                  const Color.fromRGBO(
+                                                    const Color.fromRGBO(
                                                         42, 42, 92, 1.0),
                                                   ),
                                                 ),
@@ -233,7 +235,8 @@ class _AddNoteState extends State<AddNote> {
                                   ),
                                   focusedBorder: outlineInputBorder,
                                   enabledBorder: outlineInputBorder,
-                                  fillColor: const Color.fromARGB(255, 238, 238, 238),
+                                  fillColor:
+                                      const Color.fromARGB(255, 238, 238, 238),
                                   filled: true,
                                 ),
                               ),
@@ -249,7 +252,7 @@ class _AddNoteState extends State<AddNote> {
             floatingActionButton: Container(
               // color: Colors.black,
               constraints: BoxConstraints(
-                minHeight:  MediaQuery.sizeOf(context).height * 0.35,
+                minHeight: MediaQuery.sizeOf(context).height * 0.35,
               ),
               child: Stack(
                 alignment: Alignment.bottomCenter,

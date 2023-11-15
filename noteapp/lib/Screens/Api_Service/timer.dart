@@ -3,7 +3,7 @@ import 'dart:async';
 class CountdownManager {
   static late Duration _countdownDuration;
   static late Timer countdownTimer;
-  static late bool isCountdownActive;
+  static bool isCountdownActive = false;
   
     void startOneHourCountdown() {
     _countdownDuration = const Duration(hours: 1);

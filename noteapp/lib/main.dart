@@ -14,7 +14,7 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(ProviderScope(child: NoteApp()));
+  runApp(const ProviderScope(child: NoteApp()));
 }
 
 Future<void> setupHive() async {
@@ -26,13 +26,13 @@ Future<void> setupHive() async {
 }
 
 class NoteApp extends StatelessWidget {
-  NoteApp({Key? key}) : super(key: key);
+  const NoteApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return MaterialApp(
+        return const MaterialApp(
           title: 'Material App',
           debugShowCheckedModeBanner: false,
           home: NoteAppInit(),
@@ -43,14 +43,14 @@ class NoteApp extends StatelessWidget {
 }
 
 class NoteAppInit extends StatefulWidget {
-  NoteAppInit({Key? key}) : super(key: key);
+  const NoteAppInit({Key? key}) : super(key: key);
 
   @override
   State<NoteAppInit> createState() => _NoteAppInitState();
 }
 
 class _NoteAppInitState extends State<NoteAppInit> {
-  late bool? checkUserLogin;
+  late bool? checkUserLogin = false;
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _NoteAppInitState extends State<NoteAppInit> {
   @override
   Widget build(BuildContext context) {
     if (checkUserLogin == null) {
-      return LoginSignUpPage();
+      return const LoginSignUpPage();
        } else {
       PreferenceService.sharedPref.setBool('repeat', false);
 

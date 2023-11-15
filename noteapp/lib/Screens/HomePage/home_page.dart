@@ -17,9 +17,9 @@ class _HomePageState extends State<HomePage> {
   RefreshTokenService refreshTokenService = RefreshTokenService();
 
   bool isSearching = false;
+  @override
   void initState() {
     super.initState();
-    // CountdownManager.isCountdownActive;
     checkIfTokenExpires();
   }
 

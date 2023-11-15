@@ -39,6 +39,7 @@ class RefreshTokenService {
         await GlobalControllers.tokenKey.put('accessToken', putToken);
 
       } else {
+        // ignore: use_build_context_synchronously
         reFreshToken(context);
         print(
             "Failed to get refresh Token. Status code: ${response.statusCode}");
