@@ -4,13 +4,16 @@ import 'package:noteapp/Screens/Api_Service/export.dart';
 import 'package:http/http.dart' as http;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'timer.dart';
+
 class LoginService {
   ApiServiceState apiServiceState = ApiServiceState();
+  CountdownManager countdownManager = CountdownManager();
 
   // Funtion for login
 
-  //Shellsi
-  //Shellsi
+  //Vv
+  //Vv
 
   Future<void> loginUser(BuildContext context) async {
     print("Login process initiated.");
@@ -77,20 +80,15 @@ class LoginService {
             builder: (context) => const LoadHomePage(),
           ),
         );
+        countdownManager.startTimerForRefreshToken();
         // Save an boolean value to 'repeat' key.
         PreferenceService.sharedPref.setBool('repeat', true);
 
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
-      } else if (response.statusCode == 404) {
-        // ignore: use_build_context_synchronously
-        ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Failed to Login: Unexpected Error. Please try again.",
-          themeColor,
-          const Duration(seconds: 4),
-        );
       } else {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
@@ -102,6 +100,15 @@ class LoginService {
         print("\n Response data: ${response.body}");
       }
     } catch (e) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+      // ignore: use_build_context_synchronously
+      ReusedSnackBar.showCustomSnackBar(
+        context,
+        "Error: Unexpected error occurred please try again",
+        themeColor,
+        const Duration(seconds: 4),
+      );
       print("Error: $e");
     }
   }

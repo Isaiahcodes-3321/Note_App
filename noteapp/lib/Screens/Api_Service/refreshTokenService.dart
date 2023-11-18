@@ -9,7 +9,7 @@ class RefreshTokenService {
   ApiServiceState apiServiceState = ApiServiceState();
 
 
- Future<void> reFreshToken(BuildContext context) async {
+ Future<void> reFreshToken() async {
    GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
     final tokenStorage = GlobalControllers.tokenKey.getAt(1) as TokenStorage;
   //  final accessToken = tokenStorage.myToken;
@@ -40,7 +40,7 @@ class RefreshTokenService {
 
       } else {
         // ignore: use_build_context_synchronously
-        reFreshToken(context);
+        reFreshToken();
         print(
             "Failed to get refresh Token. Status code: ${response.statusCode}");
         print("Response data: ${response.body}");

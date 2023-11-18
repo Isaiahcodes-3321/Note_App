@@ -47,7 +47,7 @@ class LogOutService {
             builder: (context) => const LoginSignUpPage(),
           ),
         );
-         countdownManager.cancelCountdown();
+          countdownManager.cancelTimer();
 
       } else {
         // ignore: use_build_context_synchronously

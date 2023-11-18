@@ -1,34 +1,32 @@
 import 'dart:async';
 
-class CountdownManager {
-  static late Duration _countdownDuration;
-  static late Timer countdownTimer;
-  static bool isCountdownActive = false;
-  
-    void startOneHourCountdown() {
-    _countdownDuration = const Duration(hours: 1);
-    isCountdownActive = true;
+import 'refreshTokenService.dart';
 
-    countdownTimer = Timer(_countdownDuration, () {
-      isCountdownActive = false;
-      // Callback function or action to perform when the countdown ends
-      print("Countdown completed");
+ 
+class CountdownManager {
+  RefreshTokenService refreshTokenService = RefreshTokenService();
+  Timer? _timer;
+
+  void startTimerForRefreshToken() {
+    _timer = Timer.periodic(const Duration(hours: 1), (timer) {
+      // Calculate the remaining time
+      DateTime now = DateTime.now();
+      DateTime oneHourLater = now.add(Duration(hours: 1));
+      Duration remainingTime = oneHourLater.difference(now);
+
+      // Check if there are 3 minutes remaining
+      if (remainingTime.inMinutes == 3) {
+        refreshTokenService.reFreshToken();
+        timer.cancel();
+      }
     });
   }
 
-  Duration getRemainingTime() {
-    if (isCountdownActive) {
-      return _countdownDuration - Duration(seconds: DateTime.now().second);
-    } else {
-      return Duration.zero;
-    }
-  }
-
-  void cancelCountdown() {
-    countdownTimer.cancel();
-    isCountdownActive = false;
+  void cancelTimer() {
+    _timer?.cancel();
   }
 }
+
 
 
 

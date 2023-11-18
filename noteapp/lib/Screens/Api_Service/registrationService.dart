@@ -60,6 +60,16 @@ class RegisteredService {
         print("Response data: ${response.body}");
       }
     } catch (e) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Opps Failed To Register Please Try Again",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+
       print("Error: $e");
     }
   }
