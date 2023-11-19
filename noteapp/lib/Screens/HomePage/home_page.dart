@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:noteapp/Screens/HomePage/logics.dart';
 import '../../state_Management/note.dart';
 import '../Api_Service/readNote.dart';
 import '../Api_Service/timer.dart';
@@ -15,9 +16,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   ReadUserNote readUserNote = ReadUserNote();
   CountdownManager countdownManager = CountdownManager();
- 
+
   bool isSearching = false;
-    List<Note>? notes = [];
+  List<Note>? notes = [];
 
   @override
   void initState() {
@@ -26,11 +27,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchNotes() async {
-   final note = await readUserNote.getNote();
-   notes = note.notes;
-   print("my notes ${note.notes?.first.title}");
+    final fetchedNotes = await readUserNote.getNote();
+    notes = fetchedNotes.notes;
+    print("my notes ${fetchedNotes.notes?.first.title}");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -104,49 +104,42 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   // display notes
-                  SliverToBoxAdapter(
-                    child: FutureBuilder<void>(
-                      future: fetchNotes(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else if (snapshot.hasError) {
-                          final errorMessage = snapshot.error.toString();
-                          return Center(
-                            child: Text('Error: $errorMessage'),
-                          );
-                        } else {
-                          if (notes!.isEmpty) {
-                            return Center(
-                              child: Text('No data available'),
-                            );
-                          } else {
-                            return notes == null ?  CircularProgressIndicator()
-                             :
-                            ListView.builder(
-                              itemCount: notes!.length,
-                              itemBuilder: (context, index) {
-                                final note = notes![index];
-                                return ListTile(
-                                  title: Text(note.title!,
-                                  style: TextStyle(color: Colors.red)),
-                                  subtitle: Text(
-                                    note.note!,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  trailing: Text(note.date!),
-                                );
-                              },
-                            );
-                          }
-                        }
+                  //worked on
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        final note = notes![index];
+                        String formattedDate =
+                            FormatDate.formatDate(note.date); 
+                            
+                        return Padding(
+                          padding: EdgeInsets.all(15.sp),
+                          child: Card(
+                            child: ListTile(
+                              title: Text(note.title ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                    color: themeColor,
+                                  )),
+                              subtitle: Text(note.note ?? '',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                      color: Color.fromARGB(255, 8, 8, 43),
+                                      fontSize: 17.sp)),
+                              trailing: Text(
+                                formattedDate, 
+                                 style: AppTextStyle.textStyle().copyWith(
+                                      color: Colors.red,
+                                      fontSize: 15.sp)
+                              ),
+                            ),
+                          ),
+                        );
                       },
+                      childCount: notes!.length,
                     ),
-                  ),
+                  )
                 ],
               ),
               drawer: Drawer(
@@ -177,23 +170,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

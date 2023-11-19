@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 ApiServiceState apiServiceState = ApiServiceState();
 
 class ReadUserNote {
+
   Future<Model> getNote() async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
 
@@ -27,3 +28,10 @@ class ReadUserNote {
 }
 
 
+
+  // Function to format date string
+  // String formatDate(String dateString) {
+  //   final DateTime parsedDate = DateTime.parse(dateString);
+  //   final formattedDate = DateFormat.yMMMd().format(parsedDate);
+  //   return formattedDate;
+  // }
