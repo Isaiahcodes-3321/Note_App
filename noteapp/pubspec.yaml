@@ -41,6 +41,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   shared_preferences: ^2.2.2
   intl: ^0.18.1
+  jwt_decoder: ^2.0.1
 
 
 dev_dependencies:

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
-
+import '../../Constant/global_controllers.dart';
+import '../../ThemeStore/theme.dart';
 
 class LoginSignUpPage extends StatefulWidget {
   const LoginSignUpPage({super.key});
@@ -21,7 +24,9 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
       length: 2,
       vsync: this,
     );
-    }
+  }
+
+
 
   @override
   void dispose() {
@@ -59,7 +64,12 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
                   child: FittedBox(child: Text("Sign Up", style: textFonts)),
                 ),
                 Tab(
-                  child: FittedBox(child: Text("Login", style: textFonts)),
+                  child: FittedBox(
+                      child:
+                          // TextButton(onPressed: (){
+                          //   //  checkLoginUser();
+                          // }, child: Text("Login", style: textFonts))
+                          Text("Login", style: textFonts)),
                 ),
               ],
               isScrollable: false,

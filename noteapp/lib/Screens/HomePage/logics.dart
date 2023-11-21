@@ -1,6 +1,10 @@
 
 import 'package:intl/intl.dart';
+import 'package:noteapp/Screens/Api_Service/readNote.dart';
 
+import '../../Constant/global_controllers.dart';
+
+ReadUserNote readUserNote = ReadUserNote();
 class FormatDate{
 
     // Function to format date string
@@ -12,5 +16,13 @@ class FormatDate{
     } else {
       return '';
     }
+  }
+
+
+
+   static Future<void> fetchNotes() async {
+    final fetchedNotes = await readUserNote.getNote();
+    GlobalControllers.notes = fetchedNotes.notes;
+    // print("my notes ${fetchedNotes.notes?.first.title}");
   }
 }

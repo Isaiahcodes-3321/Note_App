@@ -82,7 +82,7 @@ class LoginService {
         );
         countdownManager.startTimerForRefreshToken();
         // Save an boolean value to 'repeat' key.
-        PreferenceService.sharedPref.setBool('repeat', true);
+        // PreferenceService.sharedPref.setBool('repeat', true);
 
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();

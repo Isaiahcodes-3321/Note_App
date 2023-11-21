@@ -1,8 +1,7 @@
-import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:noteapp/Screens/HomePage/logics.dart';
-import '../../state_Management/note.dart';
-import '../Api_Service/readNote.dart';
+import 'package:noteapp/state_Management/noteFromDB.dart';
 import '../Api_Service/timer.dart';
 import 'export_home.dart';
 
@@ -13,23 +12,16 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  ReadUserNote readUserNote = ReadUserNote();
-  CountdownManager countdownManager = CountdownManager();
+CountdownManager countdownManager = CountdownManager();
+UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
 
+class _HomePageState extends State<HomePage> {
   bool isSearching = false;
-  List<Note>? notes = [];
 
   @override
   void initState() {
     super.initState();
-    fetchNotes();
-  }
-
-  Future<void> fetchNotes() async {
-    final fetchedNotes = await readUserNote.getNote();
-    notes = fetchedNotes.notes;
-    print("my notes ${fetchedNotes.notes?.first.title}");
+    FormatDate.fetchNotes();
   }
 
   @override
@@ -37,6 +29,13 @@ class _HomePageState extends State<HomePage> {
     return Consumer(
       builder: (context, ref, child) {
         GlobalControllers.providerRef = ref;
+        final noteItem = ref.watch(userNewNoteFromDB.noteItems).when(
+            data: (data) {
+              GlobalControllers.notes = data.notes;
+              print("my notes ${data.notes?.first.title}");
+            },
+            error: (error, s) {},
+            loading: () {});
 
         var currentTheme = GlobalControllers.providerRef.watch(themeInit);
         var textModeColor =
@@ -51,6 +50,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: currentTheme
                   ? BackgroundColor.darkMode
                   : BackgroundColor.lightMode,
+                  
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar(
@@ -104,14 +104,12 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   // display notes
-                  //worked on
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                        final note = notes![index];
-                        String formattedDate =
-                            FormatDate.formatDate(note.date); 
-                            
+                        final note = GlobalControllers.notes![index];
+                        String formattedDate = FormatDate.formatDate(note.date);
+
                         return Padding(
                           padding: EdgeInsets.all(15.sp),
                           child: Card(
@@ -127,17 +125,14 @@ class _HomePageState extends State<HomePage> {
                                   style: AppTextStyle.textStyle().copyWith(
                                       color: Color.fromARGB(255, 8, 8, 43),
                                       fontSize: 17.sp)),
-                              trailing: Text(
-                                formattedDate, 
-                                 style: AppTextStyle.textStyle().copyWith(
-                                      color: Colors.red,
-                                      fontSize: 15.sp)
-                              ),
+                              trailing: Text(formattedDate,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                      color: Colors.red, fontSize: 15.sp)),
                             ),
                           ),
                         );
                       },
-                      childCount: notes!.length,
+                      childCount: GlobalControllers.notes!.length,
                     ),
                   )
                 ],

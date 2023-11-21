@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/HomePage/home_page.dart';
 import 'package:noteapp/Screens/Logins/login_SignUp.dart';
@@ -50,31 +51,81 @@ class NoteAppInit extends StatefulWidget {
 }
 
 class _NoteAppInitState extends State<NoteAppInit> {
-  late bool? checkUserLogin = false;
+  late var token = '';
 
   @override
   void initState() {
     super.initState();
-    initializePreferences();
+    checkLoginUser();
   }
 
-  Future<void> initializePreferences() async {
-    await PreferenceService.initialize();
-    setState(() {
-      checkUserLogin = PreferenceService.sharedPref.getBool('repeat');
-    });
+  void checkLoginUser() async {
+    GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
+    final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
+    token = tokenStorage.myToken;
+
+    // Call the build method after fetching the token
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (checkUserLogin == null) {
-      return const LoginSignUpPage();
+    if (token.isEmpty) {
+      // If the token is empty, navigate to LoginSignUpPage
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const LoginSignUpPage()),
+        );
+      });
+      return Container(); 
        } else {
-      PreferenceService.sharedPref.setBool('repeat', false);
+      bool hasExpired = JwtDecoder.isExpired(token);
 
-      return checkUserLogin == true
-          ? const HomePage()
-          : const SafeArea(child: LoginSignUpPage());
-    }
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => hasExpired
+                ? const SafeArea(child: LoginSignUpPage())
+                : const HomePage(),
+          ),
+        );
+      });
+      return Container();
+       }
   }
 }
+
+
+
+
+
+
+ //   if (checkUserLogin == null) {
+  //     return const LoginSignUpPage();
+  //      } else {
+  //     PreferenceService.sharedPref.setBool('repeat', false);
+
+  //     return checkUserLogin == true
+  //         ? const HomePage()
+  //         : const SafeArea(child: LoginSignUpPage());
+  //   }
+  // }
+
+
+
+
+  // void checkLoginUser() async {
+  //   GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
+  //   final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
+
+  //   // print('My token ${tokenStorage.myToken}');
+  //   //   // String token = '';
+  //   bool hasExpired = JwtDecoder.isExpired(tokenStorage.myToken);
+  //   if (hasExpired) {
+  //     print('Has expired');
+  //     const HomePage();
+  //   } else {
+  //     print('Not expired');
+  //     const SafeArea(child: LoginSignUpPage());
+  //   }
+  // }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
+import 'package:noteapp/Screens/Logins/login_SignUp.dart';
 
 LoginAndRegistrationControllers loginControllers =
     LoginAndRegistrationControllers();
@@ -97,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(25.sp)),
                         child: TextButton(
                           onPressed: () {
+                             
                             // Navigator.push<void>(
                             //   context,
                             //   MaterialPageRoute<void>(
