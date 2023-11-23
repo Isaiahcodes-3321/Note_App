@@ -15,11 +15,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      GlobalControllers.getTheme = GlobalControllers.themeStorage.get('myKey');
-
-      var textModeColor = GlobalControllers.getTheme
-          ? BackgroundColor.lightMode
-          : BackgroundColor.darkMode;
+     
       return ListView(
         children: <Widget>[
           DrawerHeader(
@@ -35,7 +31,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   TextSpan(
                       text: 'Isaiah Shell',
                       style: AppTextStyle.textStyle()
-                          .copyWith(color: textModeColor, fontSize: 17.sp)),
+                          .copyWith(color: BackgroundColor.darkMode, fontSize: 17.sp)),
                 ],
               ),
             ),
@@ -52,13 +48,11 @@ class _MyDrawerState extends State<MyDrawer> {
               },
               child: Text('Trash',
                   style: AppTextStyle.textStyle()
-                      .copyWith(color: textModeColor, fontSize: 18.sp)),
+                      .copyWith(color: BackgroundColor.darkMode, fontSize: 18.sp)),
             ),
           ),
           Divider(
-            color: GlobalControllers.getTheme
-                ? BackgroundColor.lightMode
-                : BackgroundColor.darkMode,
+            color:  BackgroundColor.darkMode,
           ),
           ListTile(
             title: Row(
@@ -67,58 +61,52 @@ class _MyDrawerState extends State<MyDrawer> {
               children: [
                 Text('Theme',
                     style: AppTextStyle.textStyle()
-                        .copyWith(color: textModeColor, fontSize: 18.sp)),
-                GestureDetector(
-                    onTap: () {},
-                    child: Consumer(
-                      builder: (context, ref, child) {
-                        // Get the current theme state from your Riverpod provider
-                        final theme = ref.watch(themeInit);
+                        .copyWith(color: BackgroundColor.darkMode, fontSize: 18.sp)),
+                // GestureDetector(
+                //     onTap: () {},
+                //     child: Consumer(
+                //       builder: (context, ref, child) {
+                //         // Get the current theme state from your Riverpod provider
+                //         final theme = ref.watch(themeInit);
 
-                        return CupertinoSwitch(
-                          activeColor: Colors.white,
-                          thumbColor: Colors.green,
-                          trackColor: const Color.fromARGB(255, 35, 35, 36),
-                          value: theme,
-                          onChanged: (value) async {
-                            // Toggle the theme state in your Riverpod provider
-                            ref.read(themeInit.notifier).state = value;
+                //         return CupertinoSwitch(
+                //           activeColor: Colors.white,
+                //           thumbColor: Colors.green,
+                //           trackColor: const Color.fromARGB(255, 35, 35, 36),
+                //           value: theme,
+                //           onChanged: (value) async {
+                //             // Toggle the theme state in your Riverpod provider
+                //             ref.read(themeInit.notifier).state = value;
 
-                            // Update the theme value in Hive
-                            await GlobalControllers.themeStorage
-                                .put('myKey', value);
-                            // themeInit = GlobalControllers.getTheme  as StateProvider<bool>;
-                          },
-                        );
-                      },
-                    )),
+                //             // Update the theme value in Hive
+                //             await GlobalControllers.themeStorage
+                //                 .put('myKey', value);
+                //             // themeInit = GlobalControllers.getTheme  as StateProvider<bool>;
+                //           },
+                //         );
+                //       },
+                //     )),
               ],
             ),
           ),
           Divider(
-            color: GlobalControllers.getTheme
-                ? BackgroundColor.lightMode
-                : BackgroundColor.darkMode,
+            color:BackgroundColor.darkMode,
           ),
           ListTile(
             title: Text('Developers',
                 style: AppTextStyle.textStyle()
-                    .copyWith(color: textModeColor, fontSize: 18.sp)),
+                    .copyWith(color: BackgroundColor.darkMode, fontSize: 18.sp)),
           ),
           Divider(
-            color: GlobalControllers.getTheme
-                ? BackgroundColor.lightMode
-                : BackgroundColor.darkMode,
+            color: BackgroundColor.darkMode,
           ),
           ListTile(
             title: Text('Rate Us',
                 style: AppTextStyle.textStyle()
-                    .copyWith(color: textModeColor, fontSize: 18.sp)),
+                    .copyWith(color: BackgroundColor.darkMode, fontSize: 18.sp)),
           ),
           Divider(
-            color: GlobalControllers.getTheme
-                ? BackgroundColor.lightMode
-                : BackgroundColor.darkMode,
+            color: BackgroundColor.darkMode,
           ),
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.25,

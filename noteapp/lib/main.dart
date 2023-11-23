@@ -98,34 +98,3 @@ class _NoteAppInitState extends State<NoteAppInit> {
 
 
 
-
-
- //   if (checkUserLogin == null) {
-  //     return const LoginSignUpPage();
-  //      } else {
-  //     PreferenceService.sharedPref.setBool('repeat', false);
-
-  //     return checkUserLogin == true
-  //         ? const HomePage()
-  //         : const SafeArea(child: LoginSignUpPage());
-  //   }
-  // }
-
-
-
-
-  // void checkLoginUser() async {
-  //   GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
-  //   final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
-
-  //   // print('My token ${tokenStorage.myToken}');
-  //   //   // String token = '';
-  //   bool hasExpired = JwtDecoder.isExpired(tokenStorage.myToken);
-  //   if (hasExpired) {
-  //     print('Has expired');
-  //     const HomePage();
-  //   } else {
-  //     print('Not expired');
-  //     const SafeArea(child: LoginSignUpPage());
-  //   }
-  // }

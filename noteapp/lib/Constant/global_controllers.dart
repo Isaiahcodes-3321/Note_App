@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
+import 'package:flutter/material.dart';
 import 'package:noteapp/ThemeStore/theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 
-import '../state_Management/note.dart';
 
 //my storage Make Hive accessible anywhere,
 class GlobalControllers {
@@ -16,7 +14,7 @@ class GlobalControllers {
   static late TextEditingController noteTittleContext;
   static var providerRef;
   static var getTheme;
-  static List<Note>? notes = [];
+  // static List<Note>? notes = [];
 }
 
 class GlobalControllersLogins {

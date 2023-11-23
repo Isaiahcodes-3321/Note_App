@@ -20,9 +20,9 @@ class FormatDate{
 
 
 
-   static Future<void> fetchNotes() async {
-    final fetchedNotes = await readUserNote.getNote();
-    GlobalControllers.notes = fetchedNotes.notes;
-    // print("my notes ${fetchedNotes.notes?.first.title}");
-  }
+  //  static Future<void> fetchNotes() async {
+  //   final fetchedNotes = await readUserNote.getNote();
+  //   GlobalControllers.notes = fetchedNotes.notes;
+  //   // print("my notes ${fetchedNotes.notes?.first.title}");
+  // }
 }
