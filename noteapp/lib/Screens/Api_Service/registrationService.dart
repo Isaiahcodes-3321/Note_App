@@ -46,7 +46,7 @@ class RegisteredService {
         GlobalControllersRegister.email.clear();
         GlobalControllersRegister.password.clear();
       } else {
-        // ignore: use_build_context_synchronously
+       
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(

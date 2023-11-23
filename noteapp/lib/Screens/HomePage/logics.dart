@@ -1,8 +1,6 @@
-
 import 'package:intl/intl.dart';
 import 'package:noteapp/Screens/Api_Service/readNote.dart';
 
-import '../../Constant/global_controllers.dart';
 
 ReadUserNote readUserNote = ReadUserNote();
 class FormatDate{

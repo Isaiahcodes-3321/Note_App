@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
-import '../../Constant/global_controllers.dart';
-import '../../ThemeStore/theme.dart';
+
 
 class LoginSignUpPage extends StatefulWidget {
   const LoginSignUpPage({super.key});
