@@ -1,6 +1,5 @@
 import 'export_note_input.dart';
 import 'package:flutter/material.dart';
-import 'package:noteapp/Screens/Add_Note/controller.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});

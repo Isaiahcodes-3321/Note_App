@@ -1,8 +1,7 @@
-
-import 'package:noteapp/Screens/Add_Note/controller.dart';
-
 import 'export_note_input.dart';
 import 'package:flutter/material.dart';
+
+
 
 
 class ImageFullScreen extends StatelessWidget {

@@ -1,11 +1,7 @@
 import 'export_home.dart';
 import '../Api_Service/timer.dart';
-import '../Api_Service/readNote.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:noteapp/Screens/HomePage/logics.dart';
-import 'package:noteapp/Screens/HomePage/MyAppBar.dart';
-import 'package:noteapp/state_Management/noteFromDB.dart';
+
+
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

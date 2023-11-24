@@ -1,5 +1,5 @@
+export '../HomePage/home_page.dart';
 export 'package:noteapp/Screens/Api_Service/api_class.dart';
-
 export 'package:noteapp/Screens/Logins/load_home.dart';
 export 'package:noteapp/ThemeStore/theme.dart';
 export '../../Components/snackBar.dart';

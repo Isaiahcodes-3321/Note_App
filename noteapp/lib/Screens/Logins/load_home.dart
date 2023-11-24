@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'export_login_register.dart';
+import 'package:flutter/material.dart';
+
 
 class LoadHomePage extends StatefulWidget {
   const LoadHomePage({super.key});

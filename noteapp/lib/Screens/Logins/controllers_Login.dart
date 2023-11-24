@@ -1,8 +1,6 @@
-
-import 'package:flutter/material.dart';
-import '../Api_Service/loginService.dart';
-import '../Api_Service/registrationService.dart';
 import 'export_login_register.dart';
+import 'package:flutter/material.dart';
+
 
 class LoginAndRegistrationControllers {
   LoginService loginService = LoginService();
