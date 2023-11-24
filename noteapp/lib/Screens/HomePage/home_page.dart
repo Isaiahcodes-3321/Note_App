@@ -4,8 +4,8 @@ import '../Api_Service/readNote.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:noteapp/Screens/HomePage/logics.dart';
+import 'package:noteapp/Screens/HomePage/MyAppBar.dart';
 import 'package:noteapp/state_Management/noteFromDB.dart';
-
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -13,13 +13,10 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-
 class _HomePageState extends ConsumerState<HomePage> {
   ReadUserNote readUserNote = ReadUserNote();
   CountdownManager countdownManager = CountdownManager();
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
-
-  bool isSearching = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,57 +26,8 @@ class _HomePageState extends ConsumerState<HomePage> {
       body: ref.watch(userNewNoteFromDB.noteItems).when(data: (data) {
         return CustomScrollView(
           slivers: [
-            SliverAppBar(
-              floating: true,
-              snap: true,
-              backgroundColor: themeColor,
-              flexibleSpace: FlexibleSpaceBar(
-                title: isSearching
-                    ? SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.55,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Search...',
-                            hintStyle:
-                                TextStyle(color: AppTextStyle.appBarTextColor),
-                            border: InputBorder.none,
-                          ),
-                          style: TextStyle(color: AppTextStyle.appBarTextColor),
-                        ),
-                      )
-                    : Text('Notes', style: AppTextStyle.textStyle()),
-              ),
-              leading: Builder(
-                builder: (BuildContext context) {
-                  return IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: AppTextStyle.appBarTextColor,
-                      size: 23.sp,
-                    ),
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                  );
-                },
-              ),
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    isSearching ? Icons.cancel_outlined : Icons.search,
-                    color: AppTextStyle.appBarTextColor,
-                    size: 23.sp,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isSearching = !isSearching;
-                    });
-                  },
-                ),
-              ],
-            ),
+            const MyAppBar(),
             // display notes
-            //worked on
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -121,11 +69,24 @@ class _HomePageState extends ConsumerState<HomePage> {
         return SizedBox(
             width: double.infinity,
             height: double.infinity,
-            child: Center(
-              child: SpinKitChasingDots(
-                color: themeColor,
-                size: 40.sp,
-              ),
+            child: Column(
+              children: [
+                const Expanded(
+                  flex: 2,
+                  child: CustomScrollView(
+                    slivers: [MyAppBar()],
+                  ),
+                ),
+                Expanded(
+                  flex: 8,
+                  child: Center(
+                    child: SpinKitChasingDots(
+                      color: themeColor,
+                      size: 40.sp,
+                    ),
+                  ),
+                ),
+              ],
             ));
       }),
       floatingActionButton: FloatingActionButton(
@@ -156,3 +117,5 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 }
+
+
