@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
-
-
 class LoginSignUpPage extends StatefulWidget {
   const LoginSignUpPage({super.key});
 
@@ -23,8 +21,6 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
     );
   }
 
-
-
   @override
   void dispose() {
     _tabController.dispose();
@@ -38,7 +34,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Change this to 2
+      length: 2, 
       child: Scaffold(
         key: GlobalKey<ScaffoldState>(),
         appBar: PreferredSize(
@@ -58,15 +54,14 @@ class _LoginSignUpPageState extends State<LoginSignUpPage>
               indicator: const BoxDecoration(),
               tabs: [
                 Tab(
-                  child: FittedBox(child: Text("Sign Up", style: textFonts)),
+                  child: FittedBox(
+                    child: Text("Sign Up", style: textFonts),
+                  ),
                 ),
                 Tab(
                   child: FittedBox(
-                      child:
-                          // TextButton(onPressed: (){
-                          //   //  checkLoginUser();
-                          // }, child: Text("Login", style: textFonts))
-                          Text("Login", style: textFonts)),
+                    child: Text("Login", style: textFonts),
+                  ),
                 ),
               ],
               isScrollable: false,

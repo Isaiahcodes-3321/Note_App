@@ -4,7 +4,7 @@ export '../Api_Service/readNote.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:noteapp/Screens/HomePage/logics.dart';
-export 'package:noteapp/Screens/HomePage/MyAppBar.dart';
+export 'package:noteapp/Components/MyAppBar.dart';
 export 'package:noteapp/state_Management/noteFromDB.dart';
 export 'Trash/trash_page.dart';
 export 'drawer.dart';
