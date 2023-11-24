@@ -1,6 +1,6 @@
 export '../../state_Management/note.dart';
 export '../Api_Service/logOutService.dart';
-export '../Api_Service/readNote.dart';
+export '../Api_Service/listOFNote.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';
 export 'package:noteapp/Screens/HomePage/logics.dart';

@@ -1,7 +1,4 @@
 import 'export_home.dart';
-import '../Api_Service/timer.dart';
-
-
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -10,8 +7,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  ReadUserNote readUserNote = ReadUserNote();
-  CountdownManager countdownManager = CountdownManager();
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
 
   @override
@@ -32,22 +27,25 @@ class _HomePageState extends ConsumerState<HomePage> {
 
                   return Padding(
                     padding: EdgeInsets.all(15.sp),
-                    child: Card(
-                      child: ListTile(
-                        title: Text(note.title ?? '',
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyle.textStyle().copyWith(
-                              color: themeColor,
-                            )),
-                        subtitle: Text(note.note ?? '',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyle.textStyle().copyWith(
-                                color: Color.fromARGB(255, 8, 8, 43),
-                                fontSize: 17.sp)),
-                        trailing: Text(formattedDate,
-                            style: AppTextStyle.textStyle()
-                                .copyWith(color: Colors.red, fontSize: 15.sp)),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Card(
+                        child: ListTile(
+                          title: Text(note.title ?? '',
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyle.textStyle().copyWith(
+                                color: themeColor,
+                              )),
+                          subtitle: Text(note.note ?? '',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyle.textStyle().copyWith(
+                                  color: Color.fromARGB(255, 8, 8, 43),
+                                  fontSize: 17.sp)),
+                          trailing: Text(formattedDate,
+                              style: AppTextStyle.textStyle().copyWith(
+                                  color: Colors.red, fontSize: 15.sp)),
+                        ),
                       ),
                     ),
                   );
@@ -58,9 +56,24 @@ class _HomePageState extends ConsumerState<HomePage> {
           ],
         );
       }, error: (erorr, stacktrace) {
-        return const Center(
-          child: Text("some error occurred "),
-        );
+        return const SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: CustomScrollView(
+                    slivers: [MyAppBar()],
+                  ),
+                ),
+                Expanded(
+                    flex: 8,
+                    child: Center(
+                      child: Text("some error occurred "),
+                    ))
+              ],
+            ));
       }, loading: () {
         return SizedBox(
             width: double.infinity,
@@ -113,5 +126,3 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 }
-
-

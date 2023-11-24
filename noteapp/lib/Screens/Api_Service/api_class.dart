@@ -1,4 +1,3 @@
-
 class ApiServiceState {
   final String registrationEndpoint =
       "https://note-api-amz2.onrender.com/api/v1/auth/signup";
@@ -10,8 +9,10 @@ class ApiServiceState {
       "https://note-api-amz2.onrender.com/api/v1/auth/logout";
   final String createNoteEndpoint =
       "https://note-api-amz2.onrender.com/users/notes/create-note";
-  final String getNoteEndpoint =
+  final String getListNoteEndpoint =
       "https://note-api-amz2.onrender.com/users/notes/list-notes";
+  final String redUserNOTE =
+      "https://note-api-amz2.onrender.com/users/notes/readnote/5";
   final String updateNoteEndpoint =
       "https://note-api-amz2.onrender.com/users/notes/updatenotes/5";
   final String deleteNoteEndpoint =
@@ -26,5 +27,4 @@ class ApiServiceState {
       "https://note-api-amz2.onrender.com/users/notes/trash/delete/:noteId";
   final String emptyTrash =
       "https://note-api-amz2.onrender.com/users/notes/trash/empty-trash";
-
 }
