@@ -17,7 +17,7 @@ class Model {
     if (json['notes'] != null) {
       notes = <Note>[];
       json['notes'].forEach((e) {
-        notes!.add(new Note.fromJson(e));
+        notes!.add(Note.fromJson(e));
       });
     }
   }
@@ -25,11 +25,11 @@ class Model {
   get noteItems => null;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    if (this.notes != null) {
-      data['notes'] = this.notes!.map((e) => e.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
+    if (notes != null) {
+      data['notes'] = notes!.map((e) => e.toJson()).toList();
     }
     return data;
   }
@@ -40,14 +40,14 @@ class Model {
 
 
 class Note {
-  // int? noteId;
+  String? noteId;
   // int? userId;
   String? title;
   String? note;
   String? date;
 
   Note({
-    // this.noteId,
+    this.noteId,
     // this.userId,
     this.title,
     this.note,
@@ -55,7 +55,7 @@ class Note {
   });
 
   Note.fromJson(Map<String, dynamic> json) {
-    // noteId = json['noteid'];
+    noteId = json['note_id'];
     // userId = json['user_id'];
     title = json['title'];
     note = json['note'];
@@ -63,12 +63,12 @@ class Note {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    // data['note_id'] = this.noteId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['note_id'] = noteId;
     // data['user_id'] = this.userId;
-    data['title'] = this.title;
-    data['note'] = this.note;
-    data['created_at'] = this.date;
+    data['title'] = title;
+    data['note'] = note;
+    data['created_at'] = date;
     return data;
   }
 }

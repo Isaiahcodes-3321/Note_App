@@ -7,7 +7,7 @@ import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 class UserNewNoteFromDB {
 
    final noteItems = FutureProvider<Model>( (ref){
-      ReadUserNote readUserNote = ReadUserNote();
+      ListUserNote readUserNote = ListUserNote();
     final fetchedNotes = readUserNote.getNote();
  
     return fetchedNotes;

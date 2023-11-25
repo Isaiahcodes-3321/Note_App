@@ -8,6 +8,7 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+  ReadUserNote readUserNote = ReadUserNote();
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,17 @@ class _HomePageState extends ConsumerState<HomePage> {
                 (BuildContext context, int index) {
                   final note = data.notes![index];
                   String formattedDate = FormatDate.formatDate(note.date);
+                  String noteID = note.noteId ?? '';
+                  int parsedNoteID = int.tryParse(noteID) ?? 0;
 
                   return Padding(
                     padding: EdgeInsets.all(15.sp),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        // if(parsedNoteID == parsedNoteID){
+                        //   readUserNote.readNote();
+                        // }
+                      },
                       child: Card(
                         child: ListTile(
                           title: Text(note.title ?? '',
@@ -42,7 +49,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               style: AppTextStyle.textStyle().copyWith(
                                   color: Color.fromARGB(255, 8, 8, 43),
                                   fontSize: 17.sp)),
-                          trailing: Text(formattedDate,
+                          trailing: Text( formattedDate,
                               style: AppTextStyle.textStyle().copyWith(
                                   color: Colors.red, fontSize: 15.sp)),
                         ),

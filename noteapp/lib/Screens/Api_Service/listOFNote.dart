@@ -6,11 +6,11 @@ import 'package:http/http.dart' as http;
 
 ApiServiceState apiServiceState = ApiServiceState();
 
-class ReadUserNote {
+class ListUserNote{
 
   Future<Model> getNote() async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
-
+    
     final response = await http.get(
       Uri.parse(apiServiceState.getListNoteEndpoint),
       headers: {

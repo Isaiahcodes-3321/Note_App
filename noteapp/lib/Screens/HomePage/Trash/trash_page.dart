@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import '../export_home.dart';
+import 'package:flutter/material.dart';
+import '../../Api_Service/emptyTrash.dart';
 
 class TrashPage extends StatefulWidget {
   const TrashPage({super.key});
@@ -49,7 +50,9 @@ class TrashPageState extends State<TrashPage> {
             ),
             actions: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  EmptyTrash.emptyNote();
+                },
                 child: Padding(
                   padding: EdgeInsets.all(15.sp),
                   child: Text(

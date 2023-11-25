@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:noteapp/Screens/Api_Service/listOFNote.dart';
 
 
-ReadUserNote readUserNote = ReadUserNote();
+ListUserNote readUserNote = ListUserNote();
 class FormatDate{
 
     // Function to format date string
