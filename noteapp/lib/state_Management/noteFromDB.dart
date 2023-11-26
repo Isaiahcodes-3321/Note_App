@@ -13,4 +13,7 @@ class UserNewNoteFromDB {
     return fetchedNotes;
    });
    
+
+  static final isSearchinG = StateProvider<bool>((ref) => false);
+
 }

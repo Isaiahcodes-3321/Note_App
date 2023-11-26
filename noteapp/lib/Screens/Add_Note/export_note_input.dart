@@ -3,7 +3,7 @@ export '../Api_Service/saveNoteservice.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:responsive_sizer/responsive_sizer.dart';
 export '../../Constant/themes.dart';
-export '../HomePage/home_page.dart';
+export '../HomePage/UserNoteList/home_page.dart';
 export 'full_image.dart';
 export 'package:flutter/services.dart';
 export 'dart:io';

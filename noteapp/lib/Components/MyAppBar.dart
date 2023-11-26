@@ -54,12 +54,34 @@ class _MyAppBarState extends State<MyAppBar> {
             size: 23.sp,
           ),
           onPressed: () {
-            setState(() {
-              isSearching = !isSearching;
-            });
+          setState(() {
+            isSearching = !isSearching;
+              GlobalControllers.providerRef
+                    .read(UserNewNoteFromDB.isSearchinG.notifier)
+                    .state = isSearching;
+          });
           },
         ),
       ],
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // GlobalControllers.providerRef
+  //                   .read(UserNewNoteFromDB.isSearchinG)
+  //                   .state =
+  //               !GlobalControllers.providerRef
+  //                   .read(UserNewNoteFromDB.isSearchinG)
+  //                   .state;

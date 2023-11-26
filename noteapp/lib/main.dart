@@ -1,13 +1,13 @@
+import 'ThemeStore/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:noteapp/Constant/global_controllers.dart';
-import 'package:noteapp/Screens/HomePage/home_page.dart';
-import 'package:noteapp/Screens/Logins/login_SignUp.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'ThemeStore/theme.dart';
+import 'package:noteapp/Constant/global_controllers.dart';
+import 'package:noteapp/Screens/Logins/login_SignUp.dart';
+import 'package:noteapp/Screens/HomePage/UserNoteList/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -5,6 +5,8 @@ class UserNewNotes{
 
 static final noteTittle = StateProvider<String>((ref) => '');
 static final noteBody = StateProvider<String>((ref) => '');
+
+
 }
 
 

@@ -28,7 +28,7 @@ class SaveNoteService {
 
     print('saving note to storage');
     final imageFile = logics.image;
-    String imagePath = imageFile?.path ?? '';
+    // String imagePath = imageFile?.path ?? '';
 
     try {
       var request = http.MultipartRequest(
