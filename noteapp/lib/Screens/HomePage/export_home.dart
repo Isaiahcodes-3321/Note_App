@@ -1,5 +1,5 @@
 export '../Api_Service/readNote.dart';
-export '../../state_Management/note.dart';
+export '../../state_Management/ModelNote/note.dart';
 export '../Api_Service/logOutService.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_spinkit/flutter_spinkit.dart';

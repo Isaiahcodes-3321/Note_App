@@ -1,4 +1,6 @@
 import 'searchList.dart';
+import 'loadingNote.dart';
+import 'errorLoading.dart';
 import '../export_home.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -23,25 +25,19 @@ class _HomePageState extends ConsumerState<HomePage> {
         return CustomScrollView(
           slivers: [
             const MyAppBar(),
-            // display notes
+            // display search notes
             isSearching
-                ? const SearchList()
-                : SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        final note = data.notes![index];
-                        String formattedDate = FormatDate.formatDate(note.date);
-                        // String noteID = note.noteId ?? '';
-                        // int parsedNoteID = int.tryParse(noteID) ?? 0;
+                ? ref.watch(userNewNoteFromDB.searchNoteItems).when(
+                    data: (searchData) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          final note = searchData.notes![index];
+                          String formattedDate =
+                              FormatDate.formatDate(note.date);
 
-                        return Padding(
-                          padding: EdgeInsets.all(15.sp),
-                          child: GestureDetector(
-                            onTap: () {
-                              // if(parsedNoteID == parsedNoteID){
-                              //   readUserNote.readNote();
-                              // }
-                            },
+                          return Padding(
+                            padding: EdgeInsets.all(15.sp),
                             child: Card(
                               child: ListTile(
                                 title: Text(note.title ?? '',
@@ -60,6 +56,46 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         color: Colors.red, fontSize: 15.sp)),
                               ),
                             ),
+                          );
+                        },
+                        childCount: data.notes!.length,
+                      ),
+                    );
+                  }, error: (erorr, stacktrace) {
+                    return const ErrorLoading();
+                  }, loading: () {
+                    return const Loading();
+                  })
+                // SearchList()
+
+                : // display Normal notes
+                SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        final note = data.notes![index];
+                        String formattedDate = FormatDate.formatDate(note.date);
+                        // String noteID = note.noteId ?? '';
+                        // int parsedNoteID = int.tryParse(noteID) ?? 0;
+
+                        return Padding(
+                          padding: EdgeInsets.all(15.sp),
+                          child: Card(
+                            child: ListTile(
+                              title: Text(note.title ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                    color: themeColor,
+                                  )),
+                              subtitle: Text(note.note ?? '',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                      color: Color.fromARGB(255, 8, 8, 43),
+                                      fontSize: 17.sp)),
+                              trailing: Text(formattedDate,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                      color: Colors.red, fontSize: 15.sp)),
+                            ),
                           ),
                         );
                       },
@@ -69,47 +105,9 @@ class _HomePageState extends ConsumerState<HomePage> {
           ],
         );
       }, error: (erorr, stacktrace) {
-        return const SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: CustomScrollView(
-                    slivers: [MyAppBar()],
-                  ),
-                ),
-                Expanded(
-                    flex: 8,
-                    child: Center(
-                      child: Text("some error occurred "),
-                    ))
-              ],
-            ));
+        return const ErrorLoading();
       }, loading: () {
-        return SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              children: [
-                const Expanded(
-                  flex: 2,
-                  child: CustomScrollView(
-                    slivers: [MyAppBar()],
-                  ),
-                ),
-                Expanded(
-                  flex: 8,
-                  child: Center(
-                    child: SpinKitChasingDots(
-                      color: themeColor,
-                      size: 40.sp,
-                    ),
-                  ),
-                ),
-              ],
-            ));
+        return const Loading();
       }),
       floatingActionButton: FloatingActionButton(
           focusElevation: 30,

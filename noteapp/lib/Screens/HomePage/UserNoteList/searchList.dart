@@ -9,6 +9,8 @@ class SearchList extends StatefulWidget {
 }
 
 class _SearchListState extends State<SearchList> {
+   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+   
   @override
   Widget build(BuildContext context) {
     return SliverList(
@@ -36,3 +38,56 @@ class _SearchListState extends State<SearchList> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+//  ref.watch(userNewNoteFromDB.searchNoteItems).when(
+//                     data: (searchData){
+//                       return SliverList(
+//                     delegate: SliverChildBuilderDelegate(
+//                       (BuildContext context, int index) {
+//                         final note = searchData.notes![index];
+//                         String formattedDate = FormatDate.formatDate(note.date);
+                    
+//                         return Padding(
+//                           padding: EdgeInsets.all(15.sp),
+//                           child: GestureDetector(
+//                             onTap: () {
+//                             },
+//                             child: Card(
+//                               child: ListTile(
+//                                 title: Text(note.title ?? '',
+//                                     overflow: TextOverflow.ellipsis,
+//                                     style: AppTextStyle.textStyle().copyWith(
+//                                       color: themeColor,
+//                                     )),
+//                                 subtitle: Text(note.note ?? '',
+//                                     maxLines: 2,
+//                                     overflow: TextOverflow.ellipsis,
+//                                     style: AppTextStyle.textStyle().copyWith(
+//                                         color: Color.fromARGB(255, 8, 8, 43),
+//                                         fontSize: 17.sp)),
+//                                 trailing: Text(formattedDate,
+//                                     style: AppTextStyle.textStyle().copyWith(
+//                                         color: Colors.red, fontSize: 15.sp)),
+//                               ),
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                       childCount: data.notes!.length,
+//                     ),
+//                   );
+//                     },
+//                     error: (erorr, stacktrace) {
+//                       return const ErrorLoading();
+//                     },
+//                     loading: () {
+//                       return const Loading();
+//                     })
