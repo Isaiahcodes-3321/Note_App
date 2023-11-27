@@ -4,15 +4,21 @@ import 'package:http/http.dart' as http;
 
 ApiServiceState apiServiceState = ApiServiceState();
 
-class EmptyTrash {
-  static Future<void> emptyNote() async {
+class SearchingForNote{
+  static Future<void> search() async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
+   final String searchQuery = GlobalControllers.searching.text; 
 
-    final response = await http.delete(
-      Uri.parse(apiServiceState.emptyTrash),
+    final Uri url =
+        Uri.parse(apiServiceState.searchNoteEndpoint).replace(queryParameters: {
+      'searchQuery': searchQuery,
+    });
+
+    final response = await http.get(
       headers: {
         'authorization': tokenStorage.myToken,
       },
+      url,
     );
 
     final responseData = jsonDecode(response.body);

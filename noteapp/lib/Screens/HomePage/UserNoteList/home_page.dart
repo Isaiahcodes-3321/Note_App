@@ -24,7 +24,6 @@ class _HomePageState extends ConsumerState<HomePage> {
           slivers: [
             const MyAppBar(),
             // display notes
-
             isSearching
                 ? const SearchList()
                 : SliverList(

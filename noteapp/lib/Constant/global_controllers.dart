@@ -11,6 +11,7 @@ class GlobalControllers {
   static late RecorderController controller;
   static late PlayerController playerController;
   static late TextEditingController noteContext;
+  static late TextEditingController searching;
   static late TextEditingController noteTittleContext;
   static var providerRef;
   static var getTheme;

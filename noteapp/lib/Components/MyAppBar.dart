@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Screens/HomePage/export_home.dart';
+import '../Screens/Api_Service/searchingNote.dart';
 
 class MyAppBar extends StatefulWidget {
   const MyAppBar({super.key});
@@ -12,6 +13,13 @@ class _MyAppBarState extends State<MyAppBar> {
   bool isSearching = false;
 
   @override
+  void initState() {
+    super.initState();
+    GlobalControllers.searching = TextEditingController();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       floating: true,
@@ -22,12 +30,16 @@ class _MyAppBarState extends State<MyAppBar> {
             ? SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.55,
                 child: TextField(
+                  controller: GlobalControllers.searching,
                   decoration: InputDecoration(
                     hintText: 'Search...',
                     hintStyle: TextStyle(color: AppTextStyle.appBarTextColor),
                     border: InputBorder.none,
                   ),
                   style: TextStyle(color: AppTextStyle.appBarTextColor),
+                  onChanged: (value) {
+                    SearchingForNote.search();
+                  },
                 ),
               )
             : Text('Notes', style: AppTextStyle.textStyle()),
@@ -54,34 +66,22 @@ class _MyAppBarState extends State<MyAppBar> {
             size: 23.sp,
           ),
           onPressed: () {
-          setState(() {
-            isSearching = !isSearching;
+            setState(() {
+              isSearching = !isSearching;
               GlobalControllers.providerRef
-                    .read(UserNewNoteFromDB.isSearchinG.notifier)
-                    .state = isSearching;
-          });
+                  .read(UserNewNoteFromDB.isSearchinG.notifier)
+                  .state = isSearching;
+            });
           },
         ),
       ],
     );
   }
+
+  
+  // @override
+  // void dispose() {
+  //   GlobalControllers.searching.dispose();
+  //   super.dispose();
+  // }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // GlobalControllers.providerRef
-  //                   .read(UserNewNoteFromDB.isSearchinG)
-  //                   .state =
-  //               !GlobalControllers.providerRef
-  //                   .read(UserNewNoteFromDB.isSearchinG)
-  //                   .state;
