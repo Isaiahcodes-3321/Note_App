@@ -45,6 +45,7 @@ class RefreshTokenService {
         print("Response data: ${response.body}");
       }
     } catch (e) {
+      reFreshToken();
       print("Error: $e");
     }
   }

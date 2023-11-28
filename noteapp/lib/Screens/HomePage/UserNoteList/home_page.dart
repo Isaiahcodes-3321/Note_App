@@ -2,7 +2,6 @@ import 'loadingNote.dart';
 import 'errorLoading.dart';
 import '../export_home.dart';
 
-
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
   @override
@@ -15,7 +14,12 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //  var currentTheme = GlobalControllers.providerRef.watch(themeInit);
+     @override
+  void initState() {
+    super.initState();
+    HomePageLogics.checkTokenExpires();
+  }
+
     GlobalControllers.providerRef = ref;
     final isSearching =
         GlobalControllers.providerRef.watch(UserNewNoteFromDB.isSearchinG);
@@ -27,15 +31,14 @@ class _HomePageState extends ConsumerState<HomePage> {
           return CustomScrollView(
             slivers: [
               const MyAppBar(),
-              isSearching
-                  ?  SliverList(
+              isSearching  
+                  ? SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          final note =
-                              searchData.notes?[index]; 
+                          final note = searchData.notes?[index];
                           if (note != null) {
                             String formattedDate =
-                                FormatDate.formatDate(note.date);
+                                HomePageLogics.formatDate(note.date);
 
                             return Padding(
                               padding: EdgeInsets.all(15.sp),
@@ -60,21 +63,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ),
                             );
                           } else {
-                            return SizedBox(); 
+                            return SizedBox();
                           }
                         },
-                        childCount:
-                            data.notes?.length ?? 0, 
+                        childCount: data.notes?.length ?? 0,
                       ),
                     )
                   : SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          final note =
-                              data.notes?[index]; 
+                          final note = data.notes?[index];
                           if (note != null) {
                             String formattedDate =
-                                FormatDate.formatDate(note.date);
+                                HomePageLogics.formatDate(note.date);
 
                             return Padding(
                               padding: EdgeInsets.all(15.sp),
@@ -99,11 +100,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ),
                             );
                           } else {
-                            return const SizedBox(); 
+                            return const SizedBox();
                           }
                         },
-                        childCount:
-                            data.notes?.length ?? 0, 
+                        childCount: data.notes?.length ?? 0,
                       ),
                     )
             ],
@@ -118,8 +118,6 @@ class _HomePageState extends ConsumerState<HomePage> {
       }, loading: () {
         return const Loading();
       }),
-
-
       floatingActionButton: FloatingActionButton(
           focusElevation: 30,
           onPressed: () {

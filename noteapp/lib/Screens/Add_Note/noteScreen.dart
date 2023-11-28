@@ -1,4 +1,5 @@
 import 'export_note_input.dart';
+import '../HomePage/export_home.dart';
 import 'package:flutter/material.dart';
 
 class AddNote extends StatefulWidget {
@@ -15,7 +16,7 @@ class _AddNoteState extends State<AddNote> {
     GlobalControllers.playerController = PlayerController();
     GlobalControllers.noteContext = TextEditingController();
     GlobalControllers.noteTittleContext = TextEditingController();
-
+    HomePageLogics.checkTokenExpires();
     super.initState();
   }
 
@@ -40,9 +41,9 @@ class _AddNoteState extends State<AddNote> {
       return SafeArea(
         child: Scaffold(
             backgroundColor:
-            //  currentTheme
-            //     ? BackgroundColor.darkMode
-            //     : 
+                //  currentTheme
+                //     ? BackgroundColor.darkMode
+                //     :
                 BackgroundColor.lightMode,
             appBar: AppBar(
               backgroundColor: themeColor,

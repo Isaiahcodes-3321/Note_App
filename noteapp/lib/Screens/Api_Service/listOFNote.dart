@@ -8,7 +8,7 @@ ApiServiceState apiServiceState = ApiServiceState();
 
 class ListUserNote{
 
-  Future<Model> getNote() async {
+  static Future<Model> getNote() async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
     
     final response = await http.get(

@@ -18,7 +18,6 @@ class _MyAppBarState extends State<MyAppBar> {
     GlobalControllers.searching = TextEditingController();
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -38,6 +37,9 @@ class _MyAppBarState extends State<MyAppBar> {
                   ),
                   style: TextStyle(color: AppTextStyle.appBarTextColor),
                   onChanged: (value) {
+                     GlobalControllers.providerRef
+                  .read(UserNewNoteFromDB.isSearchinG.notifier)
+                  .state = isSearching;
                     SearchingForNote.search();
                   },
                 ),
@@ -68,9 +70,7 @@ class _MyAppBarState extends State<MyAppBar> {
           onPressed: () {
             setState(() {
               isSearching = !isSearching;
-              GlobalControllers.providerRef
-                  .read(UserNewNoteFromDB.isSearchinG.notifier)
-                  .state = isSearching;
+              GlobalControllers.searching.clear();
             });
           },
         ),

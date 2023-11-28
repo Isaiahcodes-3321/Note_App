@@ -1,10 +1,10 @@
+import 'timer.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:noteapp/Screens/Api_Service/export.dart';
 import 'package:http/http.dart' as http;
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:noteapp/Screens/Api_Service/export.dart';
 
-import 'timer.dart';
 
 class LoginService {
   ApiServiceState apiServiceState = ApiServiceState();
@@ -80,10 +80,6 @@ class LoginService {
             builder: (context) => const LoadHomePage(),
           ),
         );
-        countdownManager.startTimerForRefreshToken();
-        // Save an boolean value to 'repeat' key.
-        // PreferenceService.sharedPref.setBool('repeat', true);
-
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
       } else {
