@@ -70,19 +70,7 @@ class SaveNoteService {
           themeColor,
           const Duration(seconds: 4),
         );
-      } else if (response.statusCode == 404) {
-        // Handle 404 error
-        // ignore: use_build_context_synchronously
-        Navigator.pop(context);
-        // ignore: use_build_context_synchronously
-        ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Failed to Save: Please try again.",
-          themeColor,
-          const Duration(seconds: 4),
-        );
       } else {
-        // Handle other errors
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
@@ -96,6 +84,15 @@ class SaveNoteService {
         print("\n Response data: ${response.body}");
       }
     } catch (e) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed to Save note: Please try again.",
+          themeColor,
+          const Duration(seconds: 4),
+        );
       // Handle exceptions
       print("Error: $e");
     }

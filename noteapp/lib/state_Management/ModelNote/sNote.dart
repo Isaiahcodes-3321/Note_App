@@ -3,7 +3,7 @@
 class Model2 {
   bool? success;
   String? message;
-  List<Note2>? notes;
+  List<NoteS>? notes;
 
   Model2({
     this.success,
@@ -15,9 +15,9 @@ class Model2 {
     success = json['success'];
     message = json['message'];
     if (json['notes'] != null) {
-      notes = <Note2>[];
+      notes = <NoteS>[];
       json['notes'].forEach((e) {
-        notes!.add(Note2.fromJson(e));
+        notes!.add(NoteS.fromJson(e));
       });
     }
   }
@@ -39,14 +39,14 @@ class Model2 {
 
 
 
-class Note2 {
+class NoteS {
   String? noteId;
   // int? userId;
   String? title;
   String? note;
   String? date;
 
-  Note2({
+  NoteS({
     this.noteId,
     // this.userId,
     this.title,
@@ -54,7 +54,7 @@ class Note2 {
     this.date,
   });
 
-  Note2.fromJson(Map<String, dynamic> json) {
+  NoteS.fromJson(Map<String, dynamic> json) {
     noteId = json['note_id'];
     // userId = json['user_id'];
     title = json['title'];
