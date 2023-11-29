@@ -113,7 +113,6 @@ class ConnectionCheck {
                       .copyWith(fontSize: 18.sp, color: Colors.black)),
               onTap: () {
                 recordingAudio(context);
-                print(" click is working");
               },
             ),
           ],
@@ -190,7 +189,6 @@ class ConnectionCheck {
     try {
       print('Audio is playing now');
 
-      print('audio is about to play');
       await GlobalControllers.playerController.preparePlayer(
         path: recordedAudio,
         shouldExtractWaveform: true,
@@ -244,32 +242,3 @@ class ConnectionCheck {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-//    String noteBodyValue = GlobalControllers.providerRef
-//         .read(UserNewNotes.noteBody.notifier)
-//         .state;
-//     String noteTittleValue = GlobalControllers.providerRef
-//         .read(UserNewNotes.noteTittle.notifier)
-//         .state;
-
-//         if(noteBodyValue.isEmpty || noteTittleValue.isEmpty){
-//  ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//           backgroundColor: themeColor,
-//           content: Text(
-//             "Failed to save, ",
-//             style: AppTextStyle.textStyle().copyWith(fontSize: 15.sp),
-//           ),
-//           duration: const Duration(seconds: 4),
-//         ),
-//       );
-//         }

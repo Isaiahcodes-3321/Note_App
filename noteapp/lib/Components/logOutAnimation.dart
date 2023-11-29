@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
 class LogOutAnimation extends StatefulWidget {

@@ -12,9 +12,6 @@ class LoginService {
 
   // Funtion for login
 
-  //Vv
-  //Vv
-
   Future<void> loginUser(BuildContext context) async {
     print("Login process initiated.");
     ScaffoldMessenger.of(context).showMaterialBanner(

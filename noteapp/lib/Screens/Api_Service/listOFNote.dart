@@ -24,12 +24,3 @@ class ListUserNote{
    
   }
 }
-
-
-
-  // Function to format date string
-  // String formatDate(String dateString) {
-  //   final DateTime parsedDate = DateTime.parse(dateString);
-  //   final formattedDate = DateFormat.yMMMd().format(parsedDate);
-  //   return formattedDate;
-  // }
