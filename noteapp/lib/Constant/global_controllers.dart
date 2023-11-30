@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:noteapp/ThemeStore/theme.dart';
 import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 
-
 //my storage Make Hive accessible anywhere,
 class GlobalControllers {
   static late Box<TokenStorage> tokenKey;
@@ -17,6 +16,11 @@ class GlobalControllers {
   static var getTheme;
   static late int id;
   // static List<Note>? notes = [];
+}
+
+class UpdateControllers {
+   static late TextEditingController noteContext;
+  static late TextEditingController noteTittleContext;
 }
 
 class GlobalControllersLogins {

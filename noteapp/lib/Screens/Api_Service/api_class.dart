@@ -14,9 +14,9 @@ class ApiServiceState {
   final String redUserNOTE =
       "https://note-api-amz2.onrender.com/users/notes/readnote/";
   final String updateNoteEndpoint =
-      "https://note-api-amz2.onrender.com/users/notes/updatenotes/5";
+      "https://note-api-amz2.onrender.com/users/notes/updatenotes/";
   final String deleteNoteEndpoint =
-      "https://note-api-amz2.onrender.com/users/notes/deletenotes/5";
+      "https://note-api-amz2.onrender.com/users/notes/deletenotes/";
   final String searchNoteEndpoint =
       "https://note-api-amz2.onrender.com/users/notes/search?searchQuery=My ";
   final String viewTrash =

@@ -1,11 +1,37 @@
 import 'export_note_input.dart';
 import 'package:flutter/material.dart';
+import '../Api_Service/updateNote.dart';
 // ignore_for_file: use_build_context_synchronously
 
 var logics = ConnectionCheck();
 SaveNoteService saveNoteService = SaveNoteService();
+Update update = Update();
 
 class ConnectionCheck {
+
+
+ Future<void> updateNote(BuildContext context) async {
+   var connectivityResult = await Connectivity().checkConnectivity();
+  if (connectivityResult == ConnectivityResult.none) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: themeColor,
+          content: Text(
+            "Failed to Save. Please check your internet connection.",
+            style: AppTextStyle.textStyle().copyWith(fontSize: 16.sp),
+          ),
+          duration: const Duration(seconds: 4),
+        ),
+      );
+    } else {
+      update.updating(context);
+    }
+
+ }
+ 
+
+
+
   Future<void> savedState(BuildContext context) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (GlobalControllers.noteTittleContext.text.isEmpty) {

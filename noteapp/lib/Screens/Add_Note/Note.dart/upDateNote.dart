@@ -11,8 +11,8 @@ class UpdatePage extends StatefulWidget {
 class _UpdatePageState extends State<UpdatePage> {
   @override
   void initState() {
-    GlobalControllers.noteContext = TextEditingController();
-    GlobalControllers.noteTittleContext = TextEditingController();
+    UpdateControllers.noteTittleContext = TextEditingController();
+    UpdateControllers.noteContext = TextEditingController();
     HomePageLogics.checkTokenExpires();
     super.initState();
   }
@@ -21,8 +21,8 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   void dispose() {
-    GlobalControllers.noteContext = TextEditingController();
-    GlobalControllers.noteTittleContext = TextEditingController();
+     UpdateControllers.noteTittleContext = TextEditingController();
+    UpdateControllers.noteContext = TextEditingController();
     super.dispose();
   }
 
@@ -51,7 +51,7 @@ class _UpdatePageState extends State<UpdatePage> {
             actions: [
               GestureDetector(
                   onTap: () async {
-                    // logics.savedState(context);
+                    logics.updateNote(context);
                   },
                   child: Padding(
                       padding: EdgeInsets.all(15.sp),
@@ -63,10 +63,12 @@ class _UpdatePageState extends State<UpdatePage> {
           body: Consumer(builder: (context, ref, child) {
             return ref.watch(userNewNoteFromDB.readNoteItems).when(
                 data: (data) {
-                    final note = data.notes;
-                    var getTittle = note?.first.title;
-                    var getnote = note?.first.note;
-                    
+              final note = data.notes;
+              var getTittle = note?.first.title;
+              var getNote = note?.first.note;
+              UpdateControllers.noteTittleContext.text = getTittle ?? '';
+              UpdateControllers.noteContext.text = getNote ?? '';
+
               return SizedBox(
                 height: double.infinity,
                 width: double.infinity,
@@ -199,7 +201,7 @@ class _UpdatePageState extends State<UpdatePage> {
                         style: AppTextStyle.textStyle().copyWith(
                             color: const Color.fromARGB(255, 28, 28, 28),
                             fontSize: 20.sp),
-                        controller: GlobalControllers.noteTittleContext,
+                        controller: UpdateControllers.noteTittleContext,
                         decoration: InputDecoration(
                           focusColor: Colors.white,
                           hintText: "Note title",
@@ -229,7 +231,7 @@ class _UpdatePageState extends State<UpdatePage> {
                                           GlobalControllers.noteContext.text));
                                 },
                                 child: TextFormField(
-                                  controller: GlobalControllers.noteContext,
+                                  controller: UpdateControllers.noteContext,
                                   maxLines: null,
                                   decoration: InputDecoration(
                                     focusColor: Colors.white,
