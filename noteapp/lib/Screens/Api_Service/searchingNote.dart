@@ -6,7 +6,7 @@ import '../../state_Management/ModelNote/sNote.dart';
 ApiServiceState apiServiceState = ApiServiceState();
 
 class SearchingForNote{
-  static Future<Model2> search() async {
+  static Future<ModelS> searchNote() async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
    final String searchQuery = GlobalControllers.searching.text; 
 
@@ -23,7 +23,7 @@ class SearchingForNote{
     );
 
     final responseData = jsonDecode(response.body);
-    print('Note state $responseData');
-    return Model2.fromJson(responseData);
+    print('Search Note state $responseData');
+    return ModelS.fromJson(responseData);
   }
 }

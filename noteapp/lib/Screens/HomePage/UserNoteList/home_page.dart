@@ -1,6 +1,7 @@
 import 'loadingNote.dart';
 import 'errorLoading.dart';
 import '../export_home.dart';
+import '../../Add_Note/Note.dart/upDateNote.dart';
 import '../DrawerAndFloatingButton.dart/drawer.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -11,17 +12,15 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
-  ReadUserNote readUserNote = ReadUserNote();
   DrawerAndFloatingButton drawerAndFloatingButton = DrawerAndFloatingButton();
+  @override
+  void initState() {
+    super.initState();
+    HomePageLogics.checkTokenExpires();
+  }
 
   @override
   Widget build(BuildContext context) {
-    @override
-    void initState() {
-      super.initState();
-      HomePageLogics.checkTokenExpires();
-    }
-
     GlobalControllers.providerRef = ref;
 
     return Scaffold(
@@ -33,11 +32,25 @@ class _HomePageState extends ConsumerState<HomePage> {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   final note = data.notes?[index];
-                  if (note != null) {
-                    String formattedDate = HomePageLogics.formatDate(note.date);
+                  String userNoteId = note!.noteId ?? '';
+                  int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
 
-                    return Padding(
-                      padding: EdgeInsets.all(15.sp),
+                  String formattedDate = HomePageLogics.formatDate(note.date);
+
+                  return Padding(
+                    padding: EdgeInsets.all(15.sp),
+                    child: GestureDetector(
+                      onTap: () {
+                        GlobalControllers.id = userNoteIdINT;
+                        print('User note Id its $userNoteIdINT');
+                        ReadUserNote.readNote();
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => const UpdatePage(),
+                          ),
+                        );
+                      },
                       child: Card(
                         child: ListTile(
                           title: Text(note.title ?? '',
@@ -56,10 +69,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   color: Colors.red, fontSize: 15.sp)),
                         ),
                       ),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
+                    ),
+                  );
                 },
                 childCount: data.notes?.length ?? 0,
               ),

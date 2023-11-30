@@ -1,4 +1,6 @@
 import 'ModelNote/sNote.dart';
+import 'ModelNote/readNote.dart';
+import '../Screens/HomePage/export_home.dart';
 import '../Screens/Api_Service/searchingNote.dart';
 import 'package:noteapp/Screens/Api_Service/listOfNote.dart';
 import 'package:noteapp/state_Management/ModelNote/note.dart';
@@ -11,16 +13,24 @@ class UserNewNoteFromDB {
 
    final noteItems = FutureProvider<Model>( (ref){
     final fetchedNotes = ListUserNote.getNote();
- 
+     print('ListNote state ${fetchedNotes}');
+    return fetchedNotes;
+   });
+
+   final readNoteItems = FutureProvider<ModelR>( (ref){
+    final fetchedNotes = ReadUserNote.readNote();
+     print('ListNote state ${fetchedNotes}');
     return fetchedNotes;
    });
    
 
   static final isSearchinG = StateProvider<bool>((ref) => false);
 
- final searchNoteItems = FutureProvider<Model2>( (ref){
-    final searchFetchedNotes = SearchingForNote.search();
- 
-    return searchFetchedNotes;
-   });
+final searchNoteItems = FutureProvider<ModelS>((ref) async {
+  final searchFetchedNotes = await SearchingForNote.searchNote();
+  // print('Search Note state ${searchFetchedNotes}');
+
+  return searchFetchedNotes;
+});
+
 }

@@ -69,7 +69,7 @@ class _SearchListState extends State<SearchList> {
                       .read(UserNewNoteFromDB.isSearchinG.notifier)
                       .state = checkIfSearching;
                 });
-                SearchingForNote.search();
+                SearchingForNote.searchNote();
               },
             ),
           ),
@@ -93,11 +93,13 @@ class _SearchListState extends State<SearchList> {
         ),
         body: isSearching
             ? ref.watch(userNewNoteFromDB.searchNoteItems).when(
-                data: (searchData) {
+                data: (data) {
+                 
                 ListView.builder(
-                  itemCount: searchData.notes?.length ?? 0,
+                  itemCount: data.notes?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
-                    final note = searchData.notes?[index];
+                    final note = data.notes?[index];
+                   
                     if (note != null) {
                       String formattedDate =
                           HomePageLogics.formatDate(note.date);
@@ -106,13 +108,11 @@ class _SearchListState extends State<SearchList> {
                         padding: EdgeInsets.all(15.sp),
                         child: Card(
                           child: ListTile(
-                            title: Text(
-                              note.title ?? '',
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.textStyle().copyWith(
-                                color: themeColor,
-                              ),
-                            ),
+                            title: Text(note.title ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyle.textStyle().copyWith(
+                                  color: themeColor,
+                                )),
                             subtitle: Text(
                               note.note ?? '',
                               maxLines: 2,
@@ -133,7 +133,7 @@ class _SearchListState extends State<SearchList> {
                         ),
                       );
                     } else {
-                      return SizedBox();
+                      return const SizedBox();
                     }
                   },
                 );

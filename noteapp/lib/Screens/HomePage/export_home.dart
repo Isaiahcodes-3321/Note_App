@@ -1,3 +1,4 @@
+
 export '../Api_Service/readNote.dart';
 export '../../state_Management/ModelNote/note.dart';
 export '../Api_Service/logOutService.dart';
@@ -9,7 +10,7 @@ export 'package:noteapp/state_Management/noteFromDB.dart';
 export 'Trash/trash_page.dart';
 export 'drawer.dart';
 export '../../Constant/themes.dart';
-export '../Add_Note/noteScreen.dart';
+export '../Add_Note/Note.dart/noteScreen.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:responsive_sizer/responsive_sizer.dart';
 export '../../../state_Management/trash_bin.dart';

@@ -20,6 +20,7 @@ class ListUserNote{
 
    
     final responseData = jsonDecode(response.body);
+     print('ListNote state $responseData');
     return Model.fromJson(responseData);
    
   }

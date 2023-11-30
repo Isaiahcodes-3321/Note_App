@@ -1,22 +1,23 @@
 
-class ModelS {
+
+class ModelR {
   bool? success;
   String? message;
-  List<NoteS>? notes;
+  List<NoteR>? notes;
 
-  ModelS({
+  ModelR({
     this.success,
     this.message,
     this.notes,
   });
 
-  ModelS.fromJson(Map<String, dynamic> json) {
+  ModelR.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
     if (json['note'] != null) {
-      notes = <NoteS>[];
+      notes = <NoteR>[];
       json['note'].forEach((e) {
-        notes!.add(NoteS.fromJson(e));
+        notes!.add(NoteR.fromJson(e));
       });
     }
   }
@@ -38,14 +39,14 @@ class ModelS {
 
 
 
-class NoteS {
+class NoteR {
   String? noteId;
   // int? userId;
   String? title;
   String? note;
   String? date;
 
-  NoteS({
+  NoteR({
     this.noteId,
     // this.userId,
     this.title,
@@ -53,7 +54,7 @@ class NoteS {
     this.date,
   });
 
-  NoteS.fromJson(Map<String, dynamic> json) {
+  NoteR.fromJson(Map<String, dynamic> json) {
     noteId = json['note_id'];
     // userId = json['user_id'];
     title = json['title'];

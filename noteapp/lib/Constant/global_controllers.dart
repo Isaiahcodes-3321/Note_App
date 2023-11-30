@@ -15,6 +15,7 @@ class GlobalControllers {
   static late TextEditingController noteTittleContext;
   static var providerRef;
   static var getTheme;
+  static late int id;
   // static List<Note>? notes = [];
 }
 
