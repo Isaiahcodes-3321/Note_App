@@ -10,30 +10,14 @@ class TrashPage extends StatefulWidget {
 }
 
 class TrashPageState extends State<TrashPage> {
+  UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+
   bool onTap = true;
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
-      final theme = ref.watch(themeInit);
-      final titleTrashB = ref.watch(titleTrash);
-      final noteTrashB = ref.watch(noteTrash);
-      final dateDeletedB = ref.watch(dateDeleted);
-
-      List<String> ltitleTrash = [];
-      List<String> lnoteTrash = [];
-      List<String> ldateDeleted = [];
-
-      ltitleTrash.add(titleTrashB);
-      lnoteTrash.add(noteTrashB);
-      ldateDeleted.add(dateDeletedB);
-
-      var textModeColor =
-          theme ? BackgroundColor.lightMode : BackgroundColor.darkMode;
-
       return SafeArea(
         child: Scaffold(
-          backgroundColor:
-              theme ? BackgroundColor.darkMode : BackgroundColor.lightMode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -65,87 +49,71 @@ class TrashPageState extends State<TrashPage> {
           ),
           body: Column(
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
+              ref.watch(userNewNoteFromDB.trashItems).when(
+                  data: (trashData) {
                       ListView.builder(
                         shrinkWrap: true,
                         reverse: true,
-                        itemCount: ltitleTrash.length,
-                        itemBuilder: (context, index) {
-                          if (index < ltitleTrash.length &&
-                              index < lnoteTrash.length &&
-                              index < ldateDeleted.length) {
-                            return GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  onTap = !onTap;
-                                });
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5.w, vertical: 2.h),
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      leading: onTap
-                                          ? Icon(Icons.person, size: 25.sp)
-                                          : Icon(Icons.gpp_good_outlined,
-                                              size: 25.sp),
+                  itemCount: trashData.notes?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final note = trashData.notes?[index];
+                   if(index < trashData.notes!.length){
+                      String formattedDate =
+                          HomePageLogics.formatDate(note?.date);
+                          print('Note title ${note?.title}');
 
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          // tittle
-                                          Text(ltitleTrash[index],
-                                              style: AppTextStyle.textStyle()
-                                                  .copyWith(
-                                                color: textModeColor,
-                                                fontSize: 18.sp,
-                                              )),
-                                          // Date
-                                          FittedBox(
-                                            child: Align(
-                                              alignment: Alignment.bottomLeft,
-                                              child: Text(
-                                                  ldateDeleted[index],
-                                                  style:
-                                                      AppTextStyle.textStyle()
-                                                          .copyWith(
-                                                    color: textModeColor,
-                                                    fontSize: 16.sp,
-                                                  )),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      // Note
-                                      subtitle: Text(
-                                        lnoteTrash[index],
-                                        maxLines: 2,
-                                        style: const TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: textModeColor,
-                                    )
-                                  ],
-                                ),
+                      return Padding(
+                        padding: EdgeInsets.all(15.sp),
+                        child: Card(
+                          child: ListTile(
+                            title: Text(note?.title ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyle.textStyle().copyWith(
+                                  color: themeColor,
+                                )),
+                            subtitle: Text(
+                              note?.note ?? '',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyle.textStyle().copyWith(
+                                color: const Color.fromARGB(255, 8, 8, 43),
+                                fontSize: 17.sp,
                               ),
-                            );
-                          } else {
-                            return const SizedBox();
-                          }
-                        },
+                            ),
+                            trailing: Text(
+                              formattedDate,
+                              style: AppTextStyle.textStyle().copyWith(
+                                color: Colors.red,
+                                fontSize: 15.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                   }
+                   return null;
+                  },
+                );
+                 return const SizedBox();
+                  },
+                  error: (error, stacktrace) {
+                    return const Expanded(
+                        flex: 8,
+                        child: Center(
+                          child: Text("some error occurred "),
+                        ));
+                  },
+                  loading: () {
+                    return Expanded(
+                      flex: 8,
+                      child: Center(
+                        child: SpinKitChasingDots(
+                          color: themeColor,
+                          size: 40.sp,
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    );
+                  }),
               onTap
                   ? const Text("")
                   : Container(

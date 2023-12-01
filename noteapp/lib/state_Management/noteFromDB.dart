@@ -1,7 +1,9 @@
 import 'ModelNote/sNote.dart';
 import 'ModelNote/readNote.dart';
+import 'ModelNote/rTrashNote.dart';
 import '../Screens/HomePage/export_home.dart';
 import '../Screens/Api_Service/searchingNote.dart';
+import 'package:noteapp/Screens/Api_Service/viewTrash.dart';
 import 'package:noteapp/Screens/Api_Service/listOfNote.dart';
 import 'package:noteapp/state_Management/ModelNote/note.dart';
 import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
@@ -29,5 +31,12 @@ class UserNewNoteFromDB {
     // print('Search Note state ${searchFetchedNotes}');
 
     return searchFetchedNotes;
+  });
+
+  // list of note in Trash
+  final trashItems = FutureProvider<ModelReadTrash>((ref) {
+    final trashNotes = ViewTrash.trashNote();
+    print('Search Note state $trashNotes');
+    return trashNotes;
   });
 }

@@ -1,4 +1,5 @@
 
+
 class ModelS {
   bool? success;
   String? message;
@@ -44,6 +45,7 @@ class NoteS {
   String? title;
   String? note;
   String? date;
+  // XFile? image;
 
   NoteS({
     this.noteId,
@@ -51,6 +53,7 @@ class NoteS {
     this.title,
     this.note,
     this.date,
+    // this.image,
   });
 
   NoteS.fromJson(Map<String, dynamic> json) {
@@ -59,6 +62,7 @@ class NoteS {
     title = json['title'];
     note = json['note'];
     date = json['created_at'];
+    // image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -68,6 +72,7 @@ class NoteS {
     data['title'] = title;
     data['note'] = note;
     data['created_at'] = date;
+    // data['image'] = image;
     return data;
   }
 }

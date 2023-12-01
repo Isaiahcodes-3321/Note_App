@@ -45,6 +45,7 @@ class Note {
   String? title;
   String? note;
   String? date;
+  // XFile? image;
 
   Note({
     this.noteId,
@@ -52,6 +53,7 @@ class Note {
     this.title,
     this.note,
     this.date,
+    // this.image,
   });
 
   Note.fromJson(Map<String, dynamic> json) {
@@ -60,6 +62,7 @@ class Note {
     title = json['title'];
     note = json['note'];
     date = json['created_at'];
+    // image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +72,7 @@ class Note {
     data['title'] = title;
     data['note'] = note;
     data['created_at'] = date;
+    // data['image'] = image;
     return data;
   }
 }

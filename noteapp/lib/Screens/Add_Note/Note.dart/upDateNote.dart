@@ -67,6 +67,8 @@ class _UpdatePageState extends State<UpdatePage> {
               var getTittle = note?.first.title;
               var getNote = note?.first.note;
               String? getId = note!.first.noteId;
+              // XFile? image = note.first.
+
               int? pushId = int.tryParse(getId!);
               UpdateControllers .id = pushId!;
               print('note id when updating $pushId');
@@ -109,34 +111,15 @@ class _UpdatePageState extends State<UpdatePage> {
                                                   },
                                                   child: Hero(
                                                     tag: 'imageTag',
-                                                    child: Dismissible(
-                                                      key: const Key(
-                                                          'your_unique_key'),
-                                                      onDismissed: (direction) {
-                                                        if (direction ==
-                                                                DismissDirection
-                                                                    .endToStart ||
-                                                            direction ==
-                                                                DismissDirection
-                                                                    .startToEnd) {
-                                                          logics.image = null;
-                                                        }
-                                                      },
-                                                      background:
-                                                          GlobalDismissibleContainer
-                                                              .container(
-                                                                  context),
-                                                      child:
-                                                          logics.image != null
-                                                              ? Image.file(
-                                                                  File(logics
-                                                                      .image!
-                                                                      .path),
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                )
-                                                              : Container(),
-                                                    ),
+                                                    child: logics.image != null
+                                                        ? Image.file(
+                                                            File(logics
+                                                                .image!
+                                                                .path),
+                                                            width: 100,
+                                                            height: 100,
+                                                          )
+                                                        : Container(),
                                                   ))),
                                         ))
                                     : const Text(''),

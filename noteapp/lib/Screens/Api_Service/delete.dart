@@ -4,7 +4,6 @@ import 'package:noteapp/Screens/Api_Service/export.dart';
 
 class Delete {
   ApiServiceState apiServiceState = ApiServiceState();
-// Funtion for registration
   bool checkRegistration = true;
   Future<void> deleteAnote(BuildContext context) async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;

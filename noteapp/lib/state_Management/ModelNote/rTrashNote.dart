@@ -1,23 +1,23 @@
 
 
-class ModelR {
+class ModelReadTrash {
   bool? success;
   String? message;
-  List<NoteR>? notes;
+  List<NoteTrash>? notes;
 
-  ModelR({
+  ModelReadTrash({
     this.success,
     this.message,
     this.notes,
   });
 
-  ModelR.fromJson(Map<String, dynamic> json) {
+  ModelReadTrash.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    if (json['note'] != null) {
-      notes = <NoteR>[];
-      json['note'].forEach((e) {
-        notes!.add(NoteR.fromJson(e));
+    if (json['notes'] != null) {
+      notes = <NoteTrash>[];
+      json['notes'].forEach((e) {
+        notes!.add(NoteTrash.fromJson(e));
       });
     }
   }
@@ -29,7 +29,7 @@ class ModelR {
     data['success'] = success;
     data['message'] = message;
     if (notes != null) {
-      data['note'] = notes!.map((e) => e.toJson()).toList();
+      data['notes'] = notes!.map((e) => e.toJson()).toList();
     }
     return data;
   }
@@ -39,7 +39,7 @@ class ModelR {
 
 
 
-class NoteR {
+class NoteTrash {
   String? noteId;
   // int? userId;
   String? title;
@@ -47,16 +47,16 @@ class NoteR {
   String? date;
   // XFile? image;
 
-  NoteR({
+  NoteTrash({
     this.noteId,
     // this.userId,
     this.title,
     this.note,
     this.date,
-    // this.image,
+    // this.image
   });
 
-  NoteR.fromJson(Map<String, dynamic> json) {
+  NoteTrash.fromJson(Map<String, dynamic> json) {
     noteId = json['note_id'];
     // userId = json['user_id'];
     title = json['title'];

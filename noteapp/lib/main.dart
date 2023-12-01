@@ -9,6 +9,8 @@ import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/login_SignUp.dart';
 import 'package:noteapp/Screens/HomePage/UserNoteList/home_page.dart';
 
+
+// error 503
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupHive();
