@@ -23,6 +23,9 @@ class UserNewNoteFromDB {
     return fetchedNotes;
   });
 
+  // Full image checker
+ static final isImageFull = StateProvider<bool>((ref) => false);
+
 // searching for not
   static final isSearchinG = StateProvider<bool>((ref) => false);
 

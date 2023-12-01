@@ -18,8 +18,9 @@ class GlobalControllers {
 }
 
 class UpdateControllers {
-   static late int id;
-   static late TextEditingController noteContext;
+  static late int id;
+  static String largeImage = '';
+  static late TextEditingController noteContext;
   static late TextEditingController noteTittleContext;
 }
 

@@ -38,6 +38,12 @@ class _UpdatePageState extends State<UpdatePage> {
                 color: AppTextStyle.appBarTextColor,
                 iconSize: 23.sp,
                 onPressed: () {
+                  GlobalControllers.providerRef
+                          .read(UserNewNoteFromDB.isImageFull.notifier)
+                          .state =
+                      !GlobalControllers.providerRef
+                          .read(UserNewNoteFromDB.isImageFull.notifier)
+                          .state;
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(
@@ -67,12 +73,13 @@ class _UpdatePageState extends State<UpdatePage> {
               var getTittle = note?.first.title;
               var getNote = note?.first.note;
               String? getId = note!.first.noteId;
-              // XFile? image = note.first.
+              String? image = note.first.image;
+              UpdateControllers.largeImage = image!;
 
               int? pushId = int.tryParse(getId!);
-              UpdateControllers .id = pushId!;
+              UpdateControllers.id = pushId!;
               print('note id when updating $pushId');
-           
+
               UpdateControllers.noteTittleContext.text = getTittle ?? '';
               UpdateControllers.noteContext.text = getNote ?? '';
 
@@ -81,14 +88,14 @@ class _UpdatePageState extends State<UpdatePage> {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    logics.image != null || logics.recordedAudio.isNotEmpty
+                    image != null || logics.recordedAudio.isNotEmpty
                         ? Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                logics.image != null
+                                image != null
                                     ? Expanded(
                                         flex: 4,
                                         child: SizedBox(
@@ -97,30 +104,39 @@ class _UpdatePageState extends State<UpdatePage> {
                                                   .width *
                                               0.30,
                                           child: Align(
-                                              alignment: Alignment.center,
-                                              child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.push<void>(
-                                                      context,
-                                                      MaterialPageRoute<void>(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            const ImageFullScreen(),
-                                                      ),
-                                                    );
-                                                  },
-                                                  child: Hero(
-                                                    tag: 'imageTag',
-                                                    child: logics.image != null
-                                                        ? Image.file(
-                                                            File(logics
-                                                                .image!
-                                                                .path),
-                                                            width: 100,
-                                                            height: 100,
-                                                          )
-                                                        : Container(),
-                                                  ))),
+                                            alignment: Alignment.center,
+                                            child: InkWell(
+                                              onTap: () {
+                                                Navigator.push<void>(
+                                                  context,
+                                                  MaterialPageRoute<void>(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        const ImageFullScreen(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Hero(
+                                                tag: 'imageTag',
+                                                child: Image.network(
+                                                        image,
+                                                        width: 100,
+                                                        height: 100,
+                                                      )
+                                              ),
+                                              //  Hero(
+                                              //   tag: 'imageTag',
+                                              //   child: logics.image != null
+                                              //       ? Image.file(
+                                              //           File(
+                                              //               logics.image!.path),
+                                              //           width: 100,
+                                              //           height: 100,
+                                              //         )
+                                              //       : Container(),
+                                              // ),
+                                            ),
+                                          ),
                                         ))
                                     : const Text(''),
                                 logics.recordedAudio.isNotEmpty

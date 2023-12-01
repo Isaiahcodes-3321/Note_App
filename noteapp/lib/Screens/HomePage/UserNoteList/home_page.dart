@@ -22,6 +22,8 @@ class _HomePageState extends ConsumerState<HomePage> {
     HomePageLogics.checkTokenExpires();
   }
 
+  bool imageFull = false;
+
   @override
   Widget build(BuildContext context) {
     GlobalControllers.providerRef = ref;
@@ -47,7 +49,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           direction == DismissDirection.startToEnd) {
                         String userNoteId = note.noteId ?? '';
                         int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
-                         GlobalControllers.id = userNoteIdINT;
+                        GlobalControllers.id = userNoteIdINT;
                         delete.deleteAnote(context);
                       }
                     },
@@ -59,6 +61,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                           GlobalControllers.id = userNoteIdINT;
                           print('User note Id its $userNoteIdINT');
                           ReadUserNote.readNote();
+                          setState(() {
+                            imageFull = !imageFull;
+                            GlobalControllers.providerRef
+                                .read(UserNewNoteFromDB.isImageFull.notifier)
+                                .state = imageFull;
+                          });
                           Navigator.push<void>(
                             context,
                             MaterialPageRoute<void>(

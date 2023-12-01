@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../HomePage/export_home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
@@ -34,6 +35,14 @@ class Update {
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
+        GlobalControllers.providerRef
+                .read(UserNewNoteFromDB.isImageFull.notifier)
+                .state =
+            !GlobalControllers.providerRef
+                .read(UserNewNoteFromDB.isImageFull.notifier)
+                .state;
+                
+        // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(
@@ -49,18 +58,17 @@ class Update {
           const Duration(seconds: 4),
         );
       } else {
-         // ignore: use_build_context_synchronously
-          Navigator.pop(context);
-          // ignore: use_build_context_synchronously
-          ReusedSnackBar.showCustomSnackBar(
-            context,
-            "Failed To Update Note Please Try Again",
-            themeColor,
-            const Duration(seconds: 4),
-          );
-          print("Error: Unexpected error occurred - ${response.statusCode}");
-          print("\n Response data: ${response.body}");
-       
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed To Update Note Please Try Again",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+        print("Error: Unexpected error occurred - ${response.statusCode}");
+        print("\n Response data: ${response.body}");
       }
     } catch (e) {
       // ignore: use_build_context_synchronously

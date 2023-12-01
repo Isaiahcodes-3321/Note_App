@@ -1,5 +1,6 @@
 
 
+
 class ModelR {
   bool? success;
   String? message;
@@ -45,7 +46,7 @@ class NoteR {
   String? title;
   String? note;
   String? date;
-  // XFile? image;
+  String? image;
 
   NoteR({
     this.noteId,
@@ -53,7 +54,7 @@ class NoteR {
     this.title,
     this.note,
     this.date,
-    // this.image,
+    this.image,
   });
 
   NoteR.fromJson(Map<String, dynamic> json) {
@@ -62,7 +63,7 @@ class NoteR {
     title = json['title'];
     note = json['note'];
     date = json['created_at'];
-    // image = json['image'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,7 +73,7 @@ class NoteR {
     data['title'] = title;
     data['note'] = note;
     data['created_at'] = date;
-    // data['image'] = image;
+    data['image'] = image;
     return data;
   }
 }
