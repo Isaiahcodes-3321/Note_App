@@ -1,7 +1,6 @@
 import '../export_note_input.dart';
 import '../../HomePage/export_home.dart';
 
-
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
 
@@ -21,6 +20,8 @@ class _AddNoteState extends State<AddNote> {
   }
 
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+  ImageFullScreen imageFullScreen = ImageFullScreen();
+
   bool isButtonVisible = false;
 
   @override
@@ -95,10 +96,11 @@ class _AddNoteState extends State<AddNote> {
                                                 Navigator.push<void>(
                                                   context,
                                                   MaterialPageRoute<void>(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        const ImageFullScreen(),
-                                                  ),
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          imageFullScreen
+                                                              .newNoteFullImage(
+                                                                  context)),
                                                 );
                                               },
                                               child: Hero(

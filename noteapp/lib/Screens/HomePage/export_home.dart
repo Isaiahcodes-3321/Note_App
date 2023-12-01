@@ -1,7 +1,6 @@
 
 export 'package:jwt_decoder/jwt_decoder.dart';
 export 'package:noteapp/Screens/Api_Service/listOfNote.dart';
-
 export '../../state_Management/ModelNote/note.dart';
 export '../Api_Service/logOutService.dart';
 export 'package:flutter/material.dart';

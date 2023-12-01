@@ -23,7 +23,6 @@ class _HomePageState extends ConsumerState<HomePage> {
     HomePageLogics.checkTokenExpires();
   }
 
-  bool imageFull = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +61,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           GlobalControllers.id = userNoteIdINT;
                           print('User note Id its $userNoteIdINT');
                           ReadUserNote.readNote();
-                          setState(() {
-                            imageFull = !imageFull;
-                            GlobalControllers.providerRef
-                                .read(UserNewNoteFromDB.isImageFull.notifier)
-                                .state = imageFull;
-                          });
+                         
                           Navigator.push<void>(
                             context,
                             MaterialPageRoute<void>(

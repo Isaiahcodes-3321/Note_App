@@ -55,7 +55,7 @@ class SaveNoteService {
         // Handle success
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        // logics.image = null;
+        logics.image = null;
         // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,

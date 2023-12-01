@@ -34,14 +34,7 @@ class Update {
       if (response.statusCode == 200 || response.statusCode == 201) {
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        // ignore: use_build_context_synchronously
-        GlobalControllers.providerRef
-                .read(UserNewNoteFromDB.isImageFull.notifier)
-                .state =
-            !GlobalControllers.providerRef
-                .read(UserNewNoteFromDB.isImageFull.notifier)
-                .state;
-                
+
         // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,

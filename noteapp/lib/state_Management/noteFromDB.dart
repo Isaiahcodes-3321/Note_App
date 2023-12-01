@@ -5,27 +5,21 @@ import '../Screens/Api_Service/readNote.dart';
 import '../Screens/HomePage/export_home.dart';
 import '../Screens/Api_Service/searchingNote.dart';
 import 'package:noteapp/Screens/Api_Service/viewTrash.dart';
-import 'package:noteapp/Screens/Api_Service/listOfNote.dart';
-import 'package:noteapp/state_Management/ModelNote/note.dart';
-import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 
 class UserNewNoteFromDB {
 // list of note
   final noteItems = FutureProvider<Model>((ref) {
     final fetchedNotes = ListUserNote.getNote();
-    print('ListNote state ${fetchedNotes}');
+    print('ListNote state $fetchedNotes');
     return fetchedNotes;
   });
 
 // read note
   final readNoteItems = FutureProvider<ModelR>((ref) {
     final fetchedNotes = ReadUserNote.readNote();
-    print('ListNote state ${fetchedNotes}');
+    print('ListNote state $fetchedNotes');
     return fetchedNotes;
   });
-
-  // Full image checker
- static final isImageFull = StateProvider<bool>((ref) => false);
 
 // searching for not
   static final isSearchinG = StateProvider<bool>((ref) => false);

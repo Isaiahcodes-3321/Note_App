@@ -18,6 +18,7 @@ class _UpdatePageState extends State<UpdatePage> {
   }
 
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+  ImageFullScreen imageFullScreen = ImageFullScreen();
 
   @override
   void dispose() {
@@ -39,12 +40,6 @@ class _UpdatePageState extends State<UpdatePage> {
                 color: AppTextStyle.appBarTextColor,
                 iconSize: 23.sp,
                 onPressed: () {
-                  GlobalControllers.providerRef
-                          .read(UserNewNoteFromDB.isImageFull.notifier)
-                          .state =
-                      !GlobalControllers.providerRef
-                          .read(UserNewNoteFromDB.isImageFull.notifier)
-                          .state;
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(
@@ -74,8 +69,7 @@ class _UpdatePageState extends State<UpdatePage> {
               var getTittle = note?.first.title;
               var getNote = note?.first.note;
               String? getId = note!.first.noteId;
-              var image = note.first.image;
-              // UpdateControllers.largeImage = image;
+              UpdateControllers.image = note.first.image;
 
               int? pushId = int.tryParse(getId!);
               UpdateControllers.id = pushId!;
@@ -89,14 +83,15 @@ class _UpdatePageState extends State<UpdatePage> {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    image != null || logics.recordedAudio.isNotEmpty
+                    UpdateControllers.image != null ||
+                            logics.recordedAudio.isNotEmpty
                         ? Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                image != null
+                                UpdateControllers.image != null
                                     ? Expanded(
                                         flex: 4,
                                         child: SizedBox(
@@ -113,17 +108,21 @@ class _UpdatePageState extends State<UpdatePage> {
                                                     MaterialPageRoute<void>(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          const ImageFullScreen(),
+                                                          imageFullScreen
+                                                              .updateNoteFullImage(
+                                                                  context),
                                                     ),
                                                   );
                                                 },
                                                 child: Stack(
                                                   children: [
                                                     Hero(
-                                                      tag: 'imageTag',
-                                                      child: image.isNotEmpty
+                                                      tag: 'imageTagUpdate',
+                                                      child: UpdateControllers
+                                                              .image.isNotEmpty
                                                           ? Image.network(
-                                                              image,
+                                                              UpdateControllers
+                                                                  .image,
                                                               width: 100,
                                                               height: 100,
                                                               loadingBuilder:
@@ -143,7 +142,7 @@ class _UpdatePageState extends State<UpdatePage> {
                                                                       color:
                                                                           themeColor,
                                                                       size:
-                                                                          20.sp,
+                                                                          25.sp,
                                                                     ),
                                                                   );
                                                                 }

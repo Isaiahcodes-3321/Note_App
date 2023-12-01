@@ -19,7 +19,7 @@ class GlobalControllers {
 
 class UpdateControllers {
   static late int id;
-  static String largeImage = '';
+  static var image;
   static late TextEditingController noteContext;
   static late TextEditingController noteTittleContext;
 }

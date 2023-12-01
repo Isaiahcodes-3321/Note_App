@@ -11,7 +11,7 @@ class CountdownManager {
     _timer = Timer.periodic(const Duration(hours: 1), (timer) {
       // Calculate the remaining time
       DateTime now = DateTime.now();
-      DateTime oneHourLater = now.add(Duration(hours: 1));
+      DateTime oneHourLater = now.add(const Duration(hours: 1));
       Duration remainingTime = oneHourLater.difference(now);
 
       // Check if there are 3 minutes remaining
@@ -28,10 +28,6 @@ class CountdownManager {
 }
 
 
-
-
-
- // bool onlongPress = true;
 
 
 
