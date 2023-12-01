@@ -21,17 +21,19 @@ class ImageFullScreen extends StatelessWidget {
           },
           child: Hero(
               tag: 'imageTag',
-              child: fullImage
-                  ? Image.file(
+              child: 
+              // fullImage!?
+               Image.file(
                       File(logics.image!.path),
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                     )
-                  : Image.network(
-                      UpdateControllers.largeImage,
-                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                    )),
+                  // : Image.network(
+                  //     UpdateControllers.largeImage,
+                  //      width: MediaQuery.of(context).size.width,
+                  //     height: MediaQuery.of(context).size.height,
+                  //   ),
+                    ),
         ),
       ),
     );

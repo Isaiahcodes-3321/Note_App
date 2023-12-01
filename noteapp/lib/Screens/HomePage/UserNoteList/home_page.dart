@@ -2,6 +2,7 @@ import 'loadingNote.dart';
 import 'errorLoading.dart';
 import '../export_home.dart';
 import '../../Api_Service/delete.dart';
+import '../../Api_Service/readNote.dart';
 import '../../Add_Note/Note.dart/upDateNote.dart';
 import '../DrawerAndFloatingButton.dart/drawer.dart';
 

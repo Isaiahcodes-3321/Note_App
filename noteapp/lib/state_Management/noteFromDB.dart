@@ -1,6 +1,7 @@
 import 'ModelNote/sNote.dart';
 import 'ModelNote/readNote.dart';
 import 'ModelNote/rTrashNote.dart';
+import '../Screens/Api_Service/readNote.dart';
 import '../Screens/HomePage/export_home.dart';
 import '../Screens/Api_Service/searchingNote.dart';
 import 'package:noteapp/Screens/Api_Service/viewTrash.dart';

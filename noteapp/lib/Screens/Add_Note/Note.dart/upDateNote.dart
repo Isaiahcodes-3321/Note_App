@@ -29,6 +29,7 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
+      GlobalControllers.providerRef = ref;
       return SafeArea(
         child: Scaffold(
           backgroundColor: BackgroundColor.lightMode,
@@ -73,8 +74,8 @@ class _UpdatePageState extends State<UpdatePage> {
               var getTittle = note?.first.title;
               var getNote = note?.first.note;
               String? getId = note!.first.noteId;
-              String? image = note.first.image;
-              UpdateControllers.largeImage = image!;
+              var image = note.first.image;
+              // UpdateControllers.largeImage = image;
 
               int? pushId = int.tryParse(getId!);
               UpdateControllers.id = pushId!;
@@ -106,36 +107,52 @@ class _UpdatePageState extends State<UpdatePage> {
                                           child: Align(
                                             alignment: Alignment.center,
                                             child: InkWell(
-                                              onTap: () {
-                                                Navigator.push<void>(
-                                                  context,
-                                                  MaterialPageRoute<void>(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        const ImageFullScreen(),
-                                                  ),
-                                                );
-                                              },
-                                              child: Hero(
-                                                tag: 'imageTag',
-                                                child: Image.network(
-                                                        image,
-                                                        width: 100,
-                                                        height: 100,
-                                                      )
-                                              ),
-                                              //  Hero(
-                                              //   tag: 'imageTag',
-                                              //   child: logics.image != null
-                                              //       ? Image.file(
-                                              //           File(
-                                              //               logics.image!.path),
-                                              //           width: 100,
-                                              //           height: 100,
-                                              //         )
-                                              //       : Container(),
-                                              // ),
-                                            ),
+                                                onTap: () {
+                                                  Navigator.push<void>(
+                                                    context,
+                                                    MaterialPageRoute<void>(
+                                                      builder: (BuildContext
+                                                              context) =>
+                                                          const ImageFullScreen(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Stack(
+                                                  children: [
+                                                    Hero(
+                                                      tag: 'imageTag',
+                                                      child: image.isNotEmpty
+                                                          ? Image.network(
+                                                              image,
+                                                              width: 100,
+                                                              height: 100,
+                                                              loadingBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      Widget
+                                                                          child,
+                                                                      ImageChunkEvent?
+                                                                          loadingProgress) {
+                                                                if (loadingProgress ==
+                                                                    null) {
+                                                                  return child;
+                                                                } else {
+                                                                  return Center(
+                                                                    child:
+                                                                        SpinKitChasingDots(
+                                                                      color:
+                                                                          themeColor,
+                                                                      size:
+                                                                          20.sp,
+                                                                    ),
+                                                                  );
+                                                                }
+                                                              },
+                                                            )
+                                                          : Container(),
+                                                    ),
+                                                  ],
+                                                )),
                                           ),
                                         ))
                                     : const Text(''),
