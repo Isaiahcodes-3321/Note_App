@@ -1,7 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
-
 
 class SaveNoteService {
   ApiServiceState apiServiceState = ApiServiceState();
@@ -15,7 +15,6 @@ class SaveNoteService {
         return (const LogOutAnimation());
       },
     );
-
     String noteBodyValue = GlobalControllers.providerRef
         .read(UserNewNotes.noteBody.notifier)
         .state;
@@ -71,28 +70,29 @@ class SaveNoteService {
           const Duration(seconds: 4),
         );
       } else {
-        // ignore: use_build_context_synchronously
-        Navigator.pop(context);
-        // ignore: use_build_context_synchronously
-        ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Failed to Save note: Please try again.",
-          themeColor,
-          const Duration(seconds: 4),
-        );
-        print("Error: Unexpected error occurred - ${response.statusCode}");
-        print("\n Response data: ${response.body}");
+       // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          // ignore: use_build_context_synchronously
+          ReusedSnackBar.showCustomSnackBar(
+            context,
+            "Failed to Save note: Please try again.",
+            themeColor,
+            const Duration(seconds: 4),
+          );
+          print("Error: Unexpected error occurred - ${response.statusCode}");
+          print("\n Response data: ${response.body}");
+      
       }
     } catch (e) {
-        // ignore: use_build_context_synchronously
-        Navigator.pop(context);
-        // ignore: use_build_context_synchronously
-        ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Failed to Save note: Please try again.",
-          themeColor,
-          const Duration(seconds: 4),
-        );
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+      // ignore: use_build_context_synchronously
+      ReusedSnackBar.showCustomSnackBar(
+        context,
+        "Failed to Save note: Please try again.",
+        themeColor,
+        const Duration(seconds: 4),
+      );
       // Handle exceptions
       print("Error: $e");
     }

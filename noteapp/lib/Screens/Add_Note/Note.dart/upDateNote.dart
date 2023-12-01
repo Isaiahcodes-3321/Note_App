@@ -21,7 +21,7 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   void dispose() {
-     UpdateControllers.noteTittleContext = TextEditingController();
+    UpdateControllers.noteTittleContext = TextEditingController();
     UpdateControllers.noteContext = TextEditingController();
     super.dispose();
   }
@@ -66,6 +66,11 @@ class _UpdatePageState extends State<UpdatePage> {
               final note = data.notes;
               var getTittle = note?.first.title;
               var getNote = note?.first.note;
+              String? getId = note!.first.noteId;
+              int? pushId = int.tryParse(getId!);
+              UpdateControllers .id = pushId!;
+              print('note id when updating $pushId');
+           
               UpdateControllers.noteTittleContext.text = getTittle ?? '';
               UpdateControllers.noteContext.text = getNote ?? '';
 

@@ -15,10 +15,10 @@ class GlobalControllers {
   static var providerRef;
   static var getTheme;
   static late int id;
-  // static List<Note>? notes = [];
 }
 
 class UpdateControllers {
+   static late int id;
    static late TextEditingController noteContext;
   static late TextEditingController noteTittleContext;
 }
@@ -52,9 +52,8 @@ class GlobalDismissibleContainer {
       color: Colors.red,
       child: const Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(Icons.delete, size: 30, color: Colors.white),
           Icon(Icons.delete, size: 30, color: Colors.white),
           Icon(Icons.delete, size: 30, color: Colors.white),
         ],

@@ -6,31 +6,28 @@ import 'package:noteapp/Screens/Api_Service/listOfNote.dart';
 import 'package:noteapp/state_Management/ModelNote/note.dart';
 import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 
-
-
-
 class UserNewNoteFromDB {
-
-   final noteItems = FutureProvider<Model>( (ref){
+// list of note
+  final noteItems = FutureProvider<Model>((ref) {
     final fetchedNotes = ListUserNote.getNote();
-     print('ListNote state ${fetchedNotes}');
+    print('ListNote state ${fetchedNotes}');
     return fetchedNotes;
-   });
+  });
 
-   final readNoteItems = FutureProvider<ModelR>( (ref){
+// read note
+  final readNoteItems = FutureProvider<ModelR>((ref) {
     final fetchedNotes = ReadUserNote.readNote();
-     print('ListNote state ${fetchedNotes}');
+    print('ListNote state ${fetchedNotes}');
     return fetchedNotes;
-   });
-   
+  });
 
+// searching for not
   static final isSearchinG = StateProvider<bool>((ref) => false);
 
-final searchNoteItems = FutureProvider<ModelS>((ref) async {
-  final searchFetchedNotes = await SearchingForNote.searchNote();
-  // print('Search Note state ${searchFetchedNotes}');
+  final searchNoteItems = FutureProvider<ModelS>((ref) async {
+    final searchFetchedNotes = await SearchingForNote.searchNote();
+    // print('Search Note state ${searchFetchedNotes}');
 
-  return searchFetchedNotes;
-});
-
+    return searchFetchedNotes;
+  });
 }

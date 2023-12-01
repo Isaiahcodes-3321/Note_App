@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
@@ -12,8 +13,7 @@ class Update {
         return (const LogOutAnimation());
       },
     );
-
-    final noteId = GlobalControllers.id;
+    final noteId = UpdateControllers.id;
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
 
     final Map<String, String> updatingNote = {
@@ -49,16 +49,18 @@ class Update {
           const Duration(seconds: 4),
         );
       } else {
-        Navigator.pop(context);
-        // ignore: use_build_context_synchronously
-        ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Failed To Update Note Please Try Again",
-          themeColor,
-          const Duration(seconds: 4),
-        );
-        print("Error: Unexpected error occurred - ${response.statusCode}");
-        print("\n Response data: ${response.body}");
+         // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          // ignore: use_build_context_synchronously
+          ReusedSnackBar.showCustomSnackBar(
+            context,
+            "Failed To Update Note Please Try Again",
+            themeColor,
+            const Duration(seconds: 4),
+          );
+          print("Error: Unexpected error occurred - ${response.statusCode}");
+          print("\n Response data: ${response.body}");
+       
       }
     } catch (e) {
       // ignore: use_build_context_synchronously

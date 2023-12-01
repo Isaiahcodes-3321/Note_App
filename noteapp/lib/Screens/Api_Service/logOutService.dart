@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
-
 class LogOutService {
   ApiServiceState apiServiceState = ApiServiceState();
   CountdownManager countdownManager = CountdownManager();
@@ -39,7 +38,7 @@ class LogOutService {
         // Save an boolean value to 'repeat' key.
         // PreferenceService.sharedPref.setBool('repeat', false);
         await GlobalControllers.tokenKey.clear();
-       
+
         // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,
@@ -48,6 +47,8 @@ class LogOutService {
           ),
         );
       } else {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
         // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
@@ -62,13 +63,13 @@ class LogOutService {
     } catch (e) {
       // ignore: use_build_context_synchronously
       Navigator.pop(context);
-       // ignore: use_build_context_synchronously
-       ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Opps Failed To LogOut Please Try Again",
-          themeColor,
-          const Duration(seconds: 4),
-        );
+      // ignore: use_build_context_synchronously
+      ReusedSnackBar.showCustomSnackBar(
+        context,
+        "Opps Failed To LogOut Please Try Again",
+        themeColor,
+        const Duration(seconds: 4),
+      );
       print("Error: $e");
     }
   }

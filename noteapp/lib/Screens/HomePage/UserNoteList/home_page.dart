@@ -1,6 +1,7 @@
 import 'loadingNote.dart';
 import 'errorLoading.dart';
 import '../export_home.dart';
+import '../../Api_Service/delete.dart';
 import '../../Add_Note/Note.dart/upDateNote.dart';
 import '../DrawerAndFloatingButton.dart/drawer.dart';
 
@@ -11,11 +12,13 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
+  Delete delete = Delete();
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
   DrawerAndFloatingButton drawerAndFloatingButton = DrawerAndFloatingButton();
   @override
   void initState() {
     super.initState();
+    // GlobalControllers.id = 0;
     HomePageLogics.checkTokenExpires();
   }
 
@@ -37,36 +40,50 @@ class _HomePageState extends ConsumerState<HomePage> {
 
                   String formattedDate = HomePageLogics.formatDate(note.date);
 
-                  return Padding(
-                    padding: EdgeInsets.all(15.sp),
-                    child: GestureDetector(
-                      onTap: () {
-                        GlobalControllers.id = userNoteIdINT;
-                        print('User note Id its $userNoteIdINT');
-                        ReadUserNote.readNote();
-                        Navigator.push<void>(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const UpdatePage(),
+                  return Dismissible(
+                    key: const Key('your_unique_key'),
+                    onDismissed: (direction) {
+                      if (direction == DismissDirection.endToStart ||
+                          direction == DismissDirection.startToEnd) {
+                        String userNoteId = note.noteId ?? '';
+                        int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
+                         GlobalControllers.id = userNoteIdINT;
+                        delete.deleteAnote(context);
+                      }
+                    },
+                    background: GlobalDismissibleContainer.container(context),
+                    child: Padding(
+                      padding: EdgeInsets.all(15.sp),
+                      child: GestureDetector(
+                        onTap: () {
+                          GlobalControllers.id = userNoteIdINT;
+                          print('User note Id its $userNoteIdINT');
+                          ReadUserNote.readNote();
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const UpdatePage(),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text(note.title ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyle.textStyle().copyWith(
+                                  color: themeColor,
+                                )),
+                            subtitle: Text(note.note ?? '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyle.textStyle().copyWith(
+                                    color: const Color.fromARGB(255, 8, 8, 43),
+                                    fontSize: 17.sp)),
+                            trailing: Text(formattedDate,
+                                style: AppTextStyle.textStyle().copyWith(
+                                    color: Colors.red, fontSize: 15.sp)),
                           ),
-                        );
-                      },
-                      child: Card(
-                        child: ListTile(
-                          title: Text(note.title ?? '',
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.textStyle().copyWith(
-                                color: themeColor,
-                              )),
-                          subtitle: Text(note.note ?? '',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.textStyle().copyWith(
-                                  color: const Color.fromARGB(255, 8, 8, 43),
-                                  fontSize: 17.sp)),
-                          trailing: Text(formattedDate,
-                              style: AppTextStyle.textStyle().copyWith(
-                                  color: Colors.red, fontSize: 15.sp)),
                         ),
                       ),
                     ),
