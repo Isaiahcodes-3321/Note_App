@@ -10,7 +10,7 @@ class UserNewNoteFromDB {
 // list of note
   final noteItems = FutureProvider<Model>((ref) {
     final fetchedNotes = ListUserNote.getNote();
-    print('ListNote state $fetchedNotes');
+    // print('ListNote state $fetchedNotes');
     return fetchedNotes;
   });
 
@@ -32,9 +32,16 @@ class UserNewNoteFromDB {
   });
 
   // list of note in Trash
-  final trashItems = FutureProvider<ModelReadTrash>((ref) {
-    final trashNotes = ViewTrash.trashNote();
-    print('Search Note state $trashNotes');
-    return trashNotes;
+final trashItems = FutureProvider<ModelReadTrash>((ref) {
+  final trashNotes = ViewTrash.trashNote();
+  trashNotes.then((modelReadTrash) {
+    // Access the title of the first note
+    final titleOfFirstNote = modelReadTrash.notes?.first.title;
+    print('Title of the first note: $titleOfFirstNote');
   });
+  return trashNotes;
+});
+
+
 }
+

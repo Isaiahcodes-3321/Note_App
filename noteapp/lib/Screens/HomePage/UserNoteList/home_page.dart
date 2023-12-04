@@ -39,7 +39,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                   final note = data.notes?[index];
                   String userNoteId = note!.noteId ?? '';
                   int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
-
                   String formattedDate = HomePageLogics.formatDate(note.date);
 
                   return Dismissible(

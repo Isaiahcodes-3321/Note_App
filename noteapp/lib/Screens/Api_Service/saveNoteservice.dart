@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
-
+// import 'dart:io';
+// import 'dart:convert';
 
 // ignore_for_file: use_build_context_synchronously
 class SaveNoteService {
@@ -29,8 +30,8 @@ class SaveNoteService {
 
     print('saving note to storage');
     final imageFile = logics.image;
-    final audioFile = logics.recordedAudio;
-
+    // final audioFile = logics.recordedAudio;
+  
     try {
       var request = http.MultipartRequest(
         'POST',
@@ -51,10 +52,23 @@ class SaveNoteService {
         );
       }
 
+
+  // String base64Audio = base64Encode(utf8.encode(audioFile));
+
+  //    // converting Audio to file
+  //     if (base64Audio.isNotEmpty) {
+  //       List<int> audioBytes = base64.decode(base64Audio);
+  //       File tempAudioFile = File('lib/Audio_file/recorded_audio');
+  //       await tempAudioFile.writeAsBytes(audioBytes);
+
+  //       request.files.add(
+  //         await http.MultipartFile.fromPath('audio_note', tempAudioFile.path),
+  //       );
+  //     }
+
       var response = await http.Response.fromStream(await request.send());
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        
         Navigator.pop(context);
         logics.image = null;
         Navigator.push<void>(
@@ -70,16 +84,15 @@ class SaveNoteService {
           const Duration(seconds: 4),
         );
       } else {
-          Navigator.pop(context);
-          ReusedSnackBar.showCustomSnackBar(
-            context,
-            "Failed to Save note: Please try again.",
-            themeColor,
-            const Duration(seconds: 4),
-          );
-          print("Error: Unexpected error occurred - ${response.statusCode}");
-          print("\n Response data: ${response.body}");
-      
+        Navigator.pop(context);
+        ReusedSnackBar.showCustomSnackBar(
+          context,
+          "Failed to Save note: Please try again.",
+          themeColor,
+          const Duration(seconds: 4),
+        );
+        print("Error: Unexpected error occurred - ${response.statusCode}");
+        print("\n Response data: ${response.body}");
       }
     } catch (e) {
       Navigator.pop(context);

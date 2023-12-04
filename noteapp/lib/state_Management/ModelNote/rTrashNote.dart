@@ -39,7 +39,7 @@ class ModelReadTrash {
 
 
 
-class NoteTrash {
+class NoteTrash{
   String? noteId;
   // int? userId;
   String? title;
@@ -63,6 +63,7 @@ class NoteTrash {
     note = json['note'];
     date = json['created_at'];
     // image = json['image'];
+    print('From dataBase.. $note');
   }
 
   Map<String, dynamic> toJson() {

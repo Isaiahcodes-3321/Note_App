@@ -48,18 +48,23 @@ class TrashPageState extends State<TrashPage> {
           ),
           body: Column(
             children: [
-              ref.watch(userNewNoteFromDB.trashItems).when(
-                  data: (trashData) {
-                      ListView.builder(
-                        shrinkWrap: true,
-                        reverse: true,
-                  itemCount: trashData.notes?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final note = trashData.notes?[index];
-                   if(index < trashData.notes!.length){
+              ref.watch(userNewNoteFromDB.trashItems).when(data: (data) {
+                // Print to check if data is received
+                print('Number of notes: ${data.notes?.length}');
+                print('Note ${data.notes?.first.title}');
+
+                if (data.notes != null && data.notes!.isNotEmpty) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    // reverse: true,
+                    itemCount: data.notes?.length,
+                    itemBuilder: (context, index) {
+                      final note = data.notes?[index];
+                      print('Note .,.,., ${data.notes!.first}');
+
                       String formattedDate =
                           HomePageLogics.formatDate(note?.date);
-                          print('Note title ${note?.title}');
+                      print('Note title ${note?.title}');
 
                       return Padding(
                         padding: EdgeInsets.all(15.sp),
@@ -89,30 +94,27 @@ class TrashPageState extends State<TrashPage> {
                           ),
                         ),
                       );
-                   }
-                   return null;
-                  },
+                    },
+                  );
+                }
+                return const SizedBox();
+              }, error: (error, stacktrace) {
+                return const Expanded(
+                    flex: 8,
+                    child: Center(
+                      child: Text("some error occurred "),
+                    ));
+              }, loading: () {
+                return Expanded(
+                  flex: 8,
+                  child: Center(
+                    child: SpinKitChasingDots(
+                      color: themeColor,
+                      size: 40.sp,
+                    ),
+                  ),
                 );
-                 return const SizedBox();
-                  },
-                  error: (error, stacktrace) {
-                    return const Expanded(
-                        flex: 8,
-                        child: Center(
-                          child: Text("some error occurred "),
-                        ));
-                  },
-                  loading: () {
-                    return Expanded(
-                      flex: 8,
-                      child: Center(
-                        child: SpinKitChasingDots(
-                          color: themeColor,
-                          size: 40.sp,
-                        ),
-                      ),
-                    );
-                  }),
+              }),
               onTap
                   ? const Text("")
                   : Container(
