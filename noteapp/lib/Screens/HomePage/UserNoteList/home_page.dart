@@ -49,7 +49,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         String userNoteId = note.noteId ?? '';
                         int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
                         GlobalControllers.id = userNoteIdINT;
-                        delete.deleteAnote(context);
+                        delete.deleteNote(context);
                       }
                     },
                     background: GlobalDismissibleContainer.container(context),

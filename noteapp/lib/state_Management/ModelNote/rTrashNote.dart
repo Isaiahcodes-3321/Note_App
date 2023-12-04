@@ -63,7 +63,7 @@ class NoteTrash{
     note = json['note'];
     date = json['created_at'];
     // image = json['image'];
-    print('From dataBase.. $note');
+    // print('From dataBase.. $note');
   }
 
   Map<String, dynamic> toJson() {

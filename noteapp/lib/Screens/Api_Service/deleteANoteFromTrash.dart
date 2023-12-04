@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
-class Delete {
+class DeleteANoteFromTrash {
   ApiServiceState apiServiceState = ApiServiceState();
-  Future<void> deleteNote(BuildContext context) async {
+  Future<void> deleteANote(BuildContext context) async {
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
     final noteId = GlobalControllers.id;
 
     try {
       final response = await http.delete(
-        Uri.parse('${apiServiceState.deleteNoteEndpoint}$noteId'),
+        Uri.parse('${apiServiceState.deleteTrash }$noteId'),
         headers: {
           'authorization': tokenStorage.myToken,
         },

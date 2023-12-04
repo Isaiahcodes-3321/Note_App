@@ -7,7 +7,6 @@ import 'package:noteapp/Screens/Api_Service/export.dart';
 
 class RegisteredService {
   ApiServiceState apiServiceState = ApiServiceState();
-  bool checkRegistration = true;
   Future<void> registration(BuildContext context) async {
     print("Registration its going on now");
 

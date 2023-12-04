@@ -17,7 +17,6 @@ class ViewTrash {
       },
     );
     final responseData = jsonDecode(response.body);
-    print('User note in Trash $responseData');
     return ModelReadTrash.fromJson(responseData);
   }
 }

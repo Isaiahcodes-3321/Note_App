@@ -21,7 +21,7 @@ class UserNewNoteFromDB {
     return fetchedNotes;
   });
 
-// searching for not
+// searching for note
   static final isSearchinG = StateProvider<bool>((ref) => false);
 
   final searchNoteItems = FutureProvider<ModelS>((ref) async {
@@ -34,11 +34,10 @@ class UserNewNoteFromDB {
   // list of note in Trash
 final trashItems = FutureProvider<ModelReadTrash>((ref) {
   final trashNotes = ViewTrash.trashNote();
-  trashNotes.then((modelReadTrash) {
-    // Access the title of the first note
-    final titleOfFirstNote = modelReadTrash.notes?.first.title;
-    print('Title of the first note: $titleOfFirstNote');
-  });
+  // trashNotes.then((modelReadTrash) {
+  //   final titleOfFirstNote = modelReadTrash.notes?.first.title;
+  //   print('Title of the first note: $titleOfFirstNote');
+  // });
   return trashNotes;
 });
 

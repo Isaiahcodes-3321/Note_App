@@ -40,6 +40,14 @@ class _UpdatePageState extends State<UpdatePage> {
                 color: AppTextStyle.appBarTextColor,
                 iconSize: 23.sp,
                 onPressed: () {
+                  setState(() {
+                     GlobalControllers.providerRef
+                          .read(UserNewNoteFromDB.isSearchinG.notifier)
+                          .state =
+                      !GlobalControllers.providerRef
+                          .read(UserNewNoteFromDB.isSearchinG.notifier)
+                          .state;
+                  });
                   Navigator.push<void>(
                     context,
                     MaterialPageRoute<void>(

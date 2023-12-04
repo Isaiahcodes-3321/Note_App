@@ -1,5 +1,6 @@
 import '../export_home.dart';
 import '../../Api_Service/emptyTrash.dart';
+import '../../Api_Service/deleteANoteFromTrash.dart';
 
 class TrashPage extends StatefulWidget {
   const TrashPage({super.key});
@@ -10,6 +11,7 @@ class TrashPage extends StatefulWidget {
 
 class TrashPageState extends State<TrashPage> {
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+  DeleteANoteFromTrash deleteANoteFromTrash = DeleteANoteFromTrash();
 
   bool onTap = true;
   @override
@@ -48,47 +50,68 @@ class TrashPageState extends State<TrashPage> {
           ),
           body: Column(
             children: [
-              ref.watch(userNewNoteFromDB.trashItems).when(data: (data) {
+              ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
                 // Print to check if data is received
-                print('Number of notes: ${data.notes?.length}');
-                print('Note ${data.notes?.first.title}');
+                print('Number of notes: ${trashData.notes?.length}');
+                print('Note ${trashData.notes?.first.title}');
 
-                if (data.notes != null && data.notes!.isNotEmpty) {
+                if (trashData.notes != null && trashData.notes!.isNotEmpty) {
                   return ListView.builder(
                     shrinkWrap: true,
                     // reverse: true,
-                    itemCount: data.notes?.length,
+                    itemCount: trashData.notes?.length,
                     itemBuilder: (context, index) {
-                      final note = data.notes?[index];
-                      print('Note .,.,., ${data.notes!.first}');
+                      final note = trashData.notes?[index];
+                          String userNoteId = note!.noteId ?? '';
+                      int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
+
+                      // print('Note .,.,., ${data.notes!.first}');
 
                       String formattedDate =
-                          HomePageLogics.formatDate(note?.date);
-                      print('Note title ${note?.title}');
+                          HomePageLogics.formatDate(note.date);
 
                       return Padding(
                         padding: EdgeInsets.all(15.sp),
-                        child: Card(
-                          child: ListTile(
-                            title: Text(note?.title ?? '',
+                        child: GestureDetector(
+                          onTap: () {
+                             GlobalControllers.id = userNoteIdINT;
+                            setState(() {
+                              onTap = !onTap;
+                            });
+                          },
+                          child: Card(
+                            child: ListTile(
+                              leading: onTap ? const Text('') :
+                              Align(alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding:  EdgeInsets.only(top: 2.h),
+                                  child: Icon(
+                                      Icons.gpp_good_outlined,
+                                      color: Colors.red,
+                                      size: 20.sp,
+                                    ),
+                                ),
+                              ),
+                              title: Text(note.title ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                    color: themeColor,
+                                  )),
+                              subtitle: Text(
+                                note.note ?? '',
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: AppTextStyle.textStyle().copyWith(
-                                  color: themeColor,
-                                )),
-                            subtitle: Text(
-                              note?.note ?? '',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyle.textStyle().copyWith(
-                                color: const Color.fromARGB(255, 8, 8, 43),
-                                fontSize: 17.sp,
+                                  color: const Color.fromARGB(255, 8, 8, 43),
+                                  fontSize: 17.sp,
+                                ),
                               ),
-                            ),
-                            trailing: Text(
-                              formattedDate,
-                              style: AppTextStyle.textStyle().copyWith(
-                                color: Colors.red,
-                                fontSize: 15.sp,
+                              trailing: Text(
+                                formattedDate,
+                                style: AppTextStyle.textStyle().copyWith(
+                                  color: Colors.red,
+                                  fontSize: 15.sp,
+                                ),
                               ),
                             ),
                           ),
@@ -115,6 +138,10 @@ class TrashPageState extends State<TrashPage> {
                   ),
                 );
               }),
+            ],
+          ),
+
+           bottomNavigationBar: 
               onTap
                   ? const Text("")
                   : Container(
@@ -134,7 +161,9 @@ class TrashPageState extends State<TrashPage> {
                                   size: 25.sp,
                                 ))),
                             GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  // deleteANoteFromTrash.deleteANote(context);
+                                },
                                 child: Expanded(
                                     child: Icon(
                                   Icons.delete_forever,
@@ -143,8 +172,6 @@ class TrashPageState extends State<TrashPage> {
                                 )))
                           ]),
                     ),
-            ],
-          ),
         ),
       );
     });
