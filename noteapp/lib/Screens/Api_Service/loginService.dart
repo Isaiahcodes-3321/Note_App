@@ -6,11 +6,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
 
+// ignore_for_file: use_build_context_synchronously
 class LoginService {
   ApiServiceState apiServiceState = ApiServiceState();
   CountdownManager countdownManager = CountdownManager();
-
-  // Funtion for login
 
   Future<void> loginUser(BuildContext context) async {
     print("Login process initiated.");
@@ -67,10 +66,9 @@ class LoginService {
           myRefreshToken: reFreshToken,
         );
         await GlobalControllers.tokenKey.put('accessToken', putToken);
-        // ignore: use_build_context_synchronously
+      
         ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
 
-        // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(
@@ -80,10 +78,7 @@ class LoginService {
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
       } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-        // ignore: use_build_context_synchronously
-        ReusedSnackBar.showCustomSnackBar(
+        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();        ReusedSnackBar.showCustomSnackBar(
           context,
           "Failed to Login: Incorrect username or password",
           themeColor,
@@ -93,9 +88,7 @@ class LoginService {
         print("\n Response data: ${response.body}");
       }
     } catch (e) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-      // ignore: use_build_context_synchronously
       ReusedSnackBar.showCustomSnackBar(
         context,
         "Error: Unexpected error occurred please try again",

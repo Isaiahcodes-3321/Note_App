@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
+
+// ignore_for_file: use_build_context_synchronously
 class LogOutService {
   ApiServiceState apiServiceState = ApiServiceState();
   CountdownManager countdownManager = CountdownManager();
@@ -39,7 +41,6 @@ class LogOutService {
         // PreferenceService.sharedPref.setBool('repeat', false);
         await GlobalControllers.tokenKey.clear();
 
-        // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(
@@ -47,9 +48,7 @@ class LogOutService {
           ),
         );
       } else {
-        // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Opps Failed To LogOut Please Try Again",
@@ -61,9 +60,7 @@ class LogOutService {
         print("Response data: ${response.body}");
       }
     } catch (e) {
-      // ignore: use_build_context_synchronously
       Navigator.pop(context);
-      // ignore: use_build_context_synchronously
       ReusedSnackBar.showCustomSnackBar(
         context,
         "Opps Failed To LogOut Please Try Again",

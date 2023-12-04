@@ -148,7 +148,6 @@ class ConnectionCheck {
   }
 
 // Recording Audio
-  // String recordedAudioFile = 'lib/Audio_file/recorded_audio';
   String recordedAudio = '';
   Future<void> recordingAudio(BuildContext context) async {
     GlobalControllers.controller.reset();

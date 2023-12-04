@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
+
+// ignore_for_file: use_build_context_synchronously
 class Update {
   ApiServiceState apiServiceState = ApiServiceState();
 
@@ -32,10 +34,8 @@ class Update {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // ignore: use_build_context_synchronously
         Navigator.pop(context);
 
-        // ignore: use_build_context_synchronously
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(
@@ -43,7 +43,6 @@ class Update {
           ),
         );
 
-        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Note Updated Successfully ",
@@ -51,9 +50,7 @@ class Update {
           const Duration(seconds: 4),
         );
       } else {
-        // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Failed To Update Note Please Try Again",
@@ -64,9 +61,7 @@ class Update {
         print("\n Response data: ${response.body}");
       }
     } catch (e) {
-      // ignore: use_build_context_synchronously
       Navigator.pop(context);
-      // ignore: use_build_context_synchronously
       ReusedSnackBar.showCustomSnackBar(
         context,
         "Failed To Update Note Please Try Again",

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
+
+// ignore_for_file: use_build_context_synchronously
+
 class RegisteredService {
   ApiServiceState apiServiceState = ApiServiceState();
-// Funtion for registration
   bool checkRegistration = true;
   Future<void> registration(BuildContext context) async {
     print("Registration its going on now");
@@ -31,10 +33,8 @@ class RegisteredService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Registration completed successfully.");
         print("Response data: ${response.body}");
-        // ignore: use_build_context_synchronously
         Navigator.pop(context);
 
-        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Registration completed successfully",
@@ -48,7 +48,6 @@ class RegisteredService {
       } else {
        
         Navigator.pop(context);
-        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Opps Failed To Register Please Try Again",
@@ -60,9 +59,7 @@ class RegisteredService {
         print("Response data: ${response.body}");
       }
     } catch (e) {
-        // ignore: use_build_context_synchronously
         Navigator.pop(context);
-        // ignore: use_build_context_synchronously
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Opps Failed To Register Please Try Again",
