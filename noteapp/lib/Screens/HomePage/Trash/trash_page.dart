@@ -1,6 +1,8 @@
 import '../export_home.dart';
 import '../../Api_Service/emptyTrash.dart';
+import '../../Api_Service/restoreNote.dart';
 import '../../Api_Service/deleteANoteFromTrash.dart';
+import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
 
 class TrashPage extends StatefulWidget {
   const TrashPage({super.key});
@@ -11,6 +13,7 @@ class TrashPage extends StatefulWidget {
 
 class TrashPageState extends State<TrashPage> {
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
+  RestoreNoteFromTrash restoreNoteFromTrash = RestoreNoteFromTrash();
   DeleteANoteFromTrash deleteANoteFromTrash = DeleteANoteFromTrash();
 
   bool onTap = true;
@@ -25,7 +28,12 @@ class TrashPageState extends State<TrashPage> {
               color: AppTextStyle.appBarTextColor,
               iconSize: 23.sp,
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const HomePage(),
+                  ),
+                );
               },
               icon: const Icon(Icons.arrow_back_rounded),
             ),
@@ -62,7 +70,7 @@ class TrashPageState extends State<TrashPage> {
                     itemCount: trashData.notes?.length,
                     itemBuilder: (context, index) {
                       final note = trashData.notes?[index];
-                          String userNoteId = note!.noteId ?? '';
+                      String userNoteId = note!.noteId ?? '';
                       int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
 
                       // print('Note .,.,., ${data.notes!.first}');
@@ -72,26 +80,28 @@ class TrashPageState extends State<TrashPage> {
 
                       return Padding(
                         padding: EdgeInsets.all(15.sp),
-                        child: GestureDetector(
-                          onTap: () {
-                             GlobalControllers.id = userNoteIdINT;
-                            setState(() {
-                              onTap = !onTap;
-                            });
-                          },
-                          child: Card(
+                        child: Card(
+                          child: GestureDetector(
+                            onTap: () {
+                              GlobalControllers.id = userNoteIdINT;
+                              setState(() {
+                                onTap = !onTap;
+                              });
+                            },
                             child: ListTile(
-                              leading: onTap ? const Text('') :
-                              Align(alignment: Alignment.topLeft,
-                                child: Padding(
-                                  padding:  EdgeInsets.only(top: 2.h),
-                                  child: Icon(
-                                      Icons.gpp_good_outlined,
-                                      color: Colors.red,
-                                      size: 20.sp,
+                              leading: onTap
+                                  ? const Text('')
+                                  : Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(top: 2.h),
+                                        child: Icon(
+                                          Icons.gpp_good_outlined,
+                                          color: Colors.red,
+                                          size: 20.sp,
+                                        ),
+                                      ),
                                     ),
-                                ),
-                              ),
                               title: Text(note.title ?? '',
                                   overflow: TextOverflow.ellipsis,
                                   style: AppTextStyle.textStyle().copyWith(
@@ -140,38 +150,49 @@ class TrashPageState extends State<TrashPage> {
               }),
             ],
           ),
-
-           bottomNavigationBar: 
-              onTap
-                  ? const Text("")
-                  : Container(
-                      color: themeColor,
-                      width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 0.10,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                                onTap: () {},
-                                child: Expanded(
-                                    child: Icon(
-                                  Icons.replay_outlined,
-                                  color: Colors.white,
-                                  size: 25.sp,
-                                ))),
-                            GestureDetector(
-                                onTap: () {
-                                  // deleteANoteFromTrash.deleteANote(context);
-                                },
-                                child: Expanded(
-                                    child: Icon(
-                                  Icons.delete_forever,
-                                  color: Colors.white,
-                                  size: 25.sp,
-                                )))
-                          ]),
-                    ),
+          bottomNavigationBar: onTap
+              ? const Text("")
+              : Container(
+                  color: themeColor,
+                  width: double.infinity,
+                  height: MediaQuery.sizeOf(context).height * 0.10,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              restoreNoteFromTrash.restoreNote(context);
+                            },
+                            child: Expanded(
+                                child: Padding(
+                              padding: EdgeInsets.all(20.sp),
+                              child: Icon(
+                                Icons.replay_outlined,
+                                color: Colors.white,
+                                size: 25.sp,
+                              ),
+                            ))),
+                        Container(
+                          width: 1,
+                          height: 100,
+                          color: Colors.grey,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              deleteANoteFromTrash.deleteANote(context);
+                            },
+                            child: Expanded(
+                                child: Padding(
+                              padding: EdgeInsets.all(20.sp),
+                              child: Icon(
+                                Icons.delete_forever,
+                                color: Colors.white,
+                                size: 25.sp,
+                              ),
+                            )))
+                      ]),
+                ),
         ),
       );
     });

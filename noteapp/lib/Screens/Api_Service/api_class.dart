@@ -22,9 +22,9 @@ class ApiServiceState {
   final String viewTrash =
       "https://note-api-amz2.onrender.com/users/notes/trash";
   final String restoreTrash =
-      "https://note-api-amz2.onrender.com/users/notes/trash/restore/:noteId";
+      "https://note-api-amz2.onrender.com/users/notes/trash/restore/";
   final String deleteTrash =
-      "https://note-api-amz2.onrender.com/users/notes/trash/delete/:noteId";
+      "https://note-api-amz2.onrender.com/users/notes/trash/delete/";
   final String emptyTrash =
       "https://note-api-amz2.onrender.com/users/notes/trash/empty-trash";
 }
