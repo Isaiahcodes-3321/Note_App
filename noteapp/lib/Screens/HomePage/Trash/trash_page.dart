@@ -90,7 +90,7 @@ class TrashPageState extends State<TrashPage> {
                             },
                             child: ListTile(
                               leading: onTap
-                                  ? const Text('')
+                                  ? const SizedBox()
                                   : Align(
                                       alignment: Alignment.topLeft,
                                       child: Padding(
@@ -165,13 +165,10 @@ class TrashPageState extends State<TrashPage> {
                               restoreNoteFromTrash.restoreNote(context);
                             },
                             child: Expanded(
-                                child: Padding(
-                              padding: EdgeInsets.all(20.sp),
-                              child: Icon(
-                                Icons.replay_outlined,
-                                color: Colors.white,
-                                size: 25.sp,
-                              ),
+                                child: Icon(
+                              Icons.replay_outlined,
+                              color: Colors.white,
+                              size: 25.sp,
                             ))),
                         Container(
                           width: 1,
@@ -183,13 +180,10 @@ class TrashPageState extends State<TrashPage> {
                               deleteANoteFromTrash.deleteANote(context);
                             },
                             child: Expanded(
-                                child: Padding(
-                              padding: EdgeInsets.all(20.sp),
-                              child: Icon(
-                                Icons.delete_forever,
-                                color: Colors.white,
-                                size: 25.sp,
-                              ),
+                                child: Icon(
+                              Icons.delete_forever,
+                              color: Colors.white,
+                              size: 25.sp,
                             )))
                       ]),
                 ),

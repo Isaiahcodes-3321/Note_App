@@ -1,12 +1,15 @@
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:noteapp/ThemeStore/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:noteapp/Screens/Add_Note/export_note_input.dart';
+
 
 //my storage Make Hive accessible anywhere,
 class GlobalControllers {
   static late Box<TokenStorage> tokenKey;
-  static late Box themeStorage;
+  static late Box<UserNameAndEmailStorage> userNameAndEmail;
+ static late SharedPreferences themeController;
   static late RecorderController controller;
   static late PlayerController playerController;
   static late TextEditingController noteContext;
@@ -15,6 +18,7 @@ class GlobalControllers {
   static var providerRef;
   static var getTheme;
   static late int id;
+
 }
 
 class UpdateControllers {

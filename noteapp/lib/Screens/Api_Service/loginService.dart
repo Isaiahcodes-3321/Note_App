@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
-
 // ignore_for_file: use_build_context_synchronously
 class LoginService {
   ApiServiceState apiServiceState = ApiServiceState();
@@ -66,7 +65,7 @@ class LoginService {
           myRefreshToken: reFreshToken,
         );
         await GlobalControllers.tokenKey.put('accessToken', putToken);
-      
+
         ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
 
         Navigator.push<void>(
@@ -78,7 +77,8 @@ class LoginService {
         GlobalControllersLogins.userName.clear();
         GlobalControllersLogins.password.clear();
       } else {
-        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();        ReusedSnackBar.showCustomSnackBar(
+        ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+        ReusedSnackBar.showCustomSnackBar(
           context,
           "Failed to Login: Incorrect username or password",
           themeColor,

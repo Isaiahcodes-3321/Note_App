@@ -19,3 +19,17 @@ class TokenStorage{
 
 //  flutter packages pub run build_runner build
 
+@HiveType(typeId: 1)
+class UserNameAndEmailStorage{
+  UserNameAndEmailStorage({
+    required this.userName,
+    required this.email,
+  });
+
+  @HiveField(0)
+  String userName;
+
+  @HiveField(1)
+  String email;
+}
+

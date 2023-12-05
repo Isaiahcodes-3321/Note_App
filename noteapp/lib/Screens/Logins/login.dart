@@ -1,6 +1,7 @@
+import '../Api_Service/export.dart';
 import 'export_login_register.dart';
 import 'package:flutter/material.dart';
-
+import '../../Components/forgetUserNameAni.dart';
 
 LoginAndRegistrationControllers loginControllers =
     LoginAndRegistrationControllers();
@@ -97,7 +98,6 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(25.sp)),
                         child: TextButton(
                           onPressed: () {
-                             
                             // Navigator.push<void>(
                             //   context,
                             //   MaterialPageRoute<void>(
@@ -123,6 +123,38 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return (const LogOutAnimation());
+                        },
+                      );
+
+                      Future.delayed(const Duration(seconds: 5), () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const ForgetUserName();
+                          },
+                        );
+                      });
+                    },
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text('Forget Username?',
+                          style: textFonts.copyWith(
+                              color: themeColor,
+                              fontSize: 17.sp,
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 6.sp,
+                              decorationColor: themeColor)),
+                    ),
+                  )
                 ],
               ),
             )),

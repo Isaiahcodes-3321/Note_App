@@ -7,8 +7,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noteapp/Constant/global_controllers.dart';
 import 'package:noteapp/Screens/Logins/login_SignUp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:noteapp/Screens/HomePage/UserNoteList/home_page.dart';
-
 
 // error 503
 Future<void> main() async {
@@ -23,9 +23,11 @@ Future<void> main() async {
 Future<void> setupHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TokenStorageAdapter());
+  Hive.registerAdapter(UserNameAndEmailStorageAdapter());
   // Opening the hive storage for theme storage
-  GlobalControllers.themeStorage = await Hive.openBox('themeBox');
   GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
+  GlobalControllers.themeController = await SharedPreferences.getInstance();
+  GlobalControllers.userNameAndEmail = await Hive.openBox('userNameBox');
 }
 
 class NoteApp extends StatelessWidget {
@@ -79,8 +81,8 @@ class _NoteAppInitState extends State<NoteAppInit> {
           MaterialPageRoute(builder: (_) => const LoginSignUpPage()),
         );
       });
-      return Container(); 
-       } else {
+      return Container();
+    } else {
       bool hasExpired = JwtDecoder.isExpired(token);
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -93,10 +95,6 @@ class _NoteAppInitState extends State<NoteAppInit> {
         );
       });
       return Container();
-       }
+    }
   }
 }
-
-
-
-
