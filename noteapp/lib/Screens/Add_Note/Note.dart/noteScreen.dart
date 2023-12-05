@@ -38,11 +38,6 @@ class _AddNoteState extends State<AddNote> {
     return Consumer(builder: (context, ref, child) {
       return SafeArea(
         child: Scaffold(
-          backgroundColor:
-              //  currentTheme
-              //     ? BackgroundColor.darkMode
-              //     :
-              BackgroundColor.lightMode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -71,7 +66,7 @@ class _AddNoteState extends State<AddNote> {
                               .copyWith(fontSize: 18.sp))))
             ],
           ),
-          body: SizedBox(
+          body: Container(
             height: double.infinity,
             width: double.infinity,
             child: Column(

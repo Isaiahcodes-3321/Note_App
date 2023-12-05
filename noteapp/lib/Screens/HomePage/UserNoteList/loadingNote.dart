@@ -6,7 +6,8 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      // color: GlobalControllers.backGroundThemeColor,
             width: double.infinity,
             height: double.infinity,
             child: Column(

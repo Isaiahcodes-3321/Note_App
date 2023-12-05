@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../Screens/Api_Service/export.dart';
 import '../Screens/Logins/login_SignUp.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
-
 
 class ForgetUserName extends StatefulWidget {
   const ForgetUserName({super.key});
@@ -12,8 +12,21 @@ class ForgetUserName extends StatefulWidget {
 
 class _ShowUserNameState extends State<ForgetUserName> {
   @override
+  void initState() {
+    openHive();
+    super.initState();
+  }
+
+  openHive() async {
+    GlobalControllers.tokenKey = await Hive.openBox('userNameBox');
+  }
+
+  @override
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
+    final userName =
+        GlobalControllers.userNameAndEmail.getAt(0) as UserNameAndEmailStorage;
+
     return WillPopScope(
         // Prevent dialog from closing if the user clicks outside the dialog
 
@@ -55,7 +68,7 @@ class _ShowUserNameState extends State<ForgetUserName> {
                         textFonts.copyWith(fontSize: 18.sp, color: themeColor),
                   ),
                   Text(
-                    ' bla anhdik',
+                    userName.userName,
                     style:
                         textFonts.copyWith(fontSize: 18.sp, color: themeColor),
                   ),

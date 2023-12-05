@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
-
 // ignore_for_file: use_build_context_synchronously
 
 class RegisteredService {
@@ -33,6 +32,12 @@ class RegisteredService {
         print("Registration completed successfully.");
         print("Response data: ${response.body}");
         Navigator.pop(context);
+        // Store user name and email on hive
+        final putToken = UserNameAndEmailStorage(
+          userName: GlobalControllersRegister.userName.text,
+          email: GlobalControllersRegister.email.text,
+        );
+        await GlobalControllers.userNameAndEmail.put('userNameBox', putToken);
 
         ReusedSnackBar.showCustomSnackBar(
           context,
@@ -45,7 +50,6 @@ class RegisteredService {
         GlobalControllersRegister.email.clear();
         GlobalControllersRegister.password.clear();
       } else {
-       
         Navigator.pop(context);
         ReusedSnackBar.showCustomSnackBar(
           context,
@@ -58,16 +62,15 @@ class RegisteredService {
         print("Response data: ${response.body}");
       }
     } catch (e) {
-        Navigator.pop(context);
-        ReusedSnackBar.showCustomSnackBar(
-          context,
-          "Opps Failed To Register Please Try Again",
-          themeColor,
-          const Duration(seconds: 4),
-        );
+      Navigator.pop(context);
+      ReusedSnackBar.showCustomSnackBar(
+        context,
+        "Opps Failed To Register Please Try Again",
+        themeColor,
+        const Duration(seconds: 4),
+      );
 
       print("Error: $e");
     }
   }
-
 }

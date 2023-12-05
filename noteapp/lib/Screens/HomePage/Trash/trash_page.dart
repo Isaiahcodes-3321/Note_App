@@ -56,102 +56,110 @@ class TrashPageState extends State<TrashPage> {
               )
             ],
           ),
-          body: Column(
-            children: [
-              ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
-                // Print to check if data is received
-                print('Number of notes: ${trashData.notes?.length}');
-                print('Note ${trashData.notes?.first.title}');
+          body: Container(
+            // color: GlobalControllers.backGroundThemeColor,
+            child: Column(
+              children: [
+                ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
+                  // Print to check if data is received
+                  // print('Number of notes: ${trashData.notes?.length}');
+                  // print('Note ${trashData.notes?.first.title}');
 
-                if (trashData.notes != null && trashData.notes!.isNotEmpty) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    // reverse: true,
-                    itemCount: trashData.notes?.length,
-                    itemBuilder: (context, index) {
-                      final note = trashData.notes?[index];
-                      String userNoteId = note!.noteId ?? '';
-                      int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
+                  if (trashData.notes != null && trashData.notes!.isNotEmpty) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      // reverse: true,
+                      itemCount: trashData.notes?.length,
+                      itemBuilder: (context, index) {
+                        final note = trashData.notes?[index];
+                        String userNoteId = note!.noteId ?? '';
+                        int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
 
-                      // print('Note .,.,., ${data.notes!.first}');
+                        // print('Note .,.,., ${data.notes!.first}');
 
-                      String formattedDate =
-                          HomePageLogics.formatDate(note.date);
+                        String formattedDate =
+                            HomePageLogics.formatDate(note.date);
 
-                      return Padding(
-                        padding: EdgeInsets.all(15.sp),
-                        child: Card(
-                          child: GestureDetector(
-                            onTap: () {
-                              GlobalControllers.id = userNoteIdINT;
-                              setState(() {
-                                onTap = !onTap;
-                              });
-                            },
-                            child: ListTile(
-                              leading: onTap
-                                  ? const SizedBox()
-                                  : Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(top: 2.h),
-                                        child: Icon(
-                                          Icons.gpp_good_outlined,
-                                          color: Colors.red,
-                                          size: 20.sp,
+                        return Padding(
+                          padding: EdgeInsets.all(15.sp),
+                          child: Card(
+                            child: GestureDetector(
+                              onTap: () {
+                                GlobalControllers.id = userNoteIdINT;
+                                setState(() {
+                                  onTap = !onTap;
+                                });
+                              },
+                              child: ListTile(
+                                leading: onTap
+                                    ? const SizedBox()
+                                    : Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 2.h),
+                                          child: Icon(
+                                            Icons.gpp_good_outlined,
+                                            color: Colors.red,
+                                            size: 20.sp,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                              title: Text(note.title ?? '',
+                                title: Text(note.title ?? '',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: AppTextStyle.textStyle().copyWith(
+                                      color: themeColor,
+                                    )),
+                                subtitle: Text(
+                                  note.note ?? '',
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: AppTextStyle.textStyle().copyWith(
-                                    color: themeColor,
-                                  )),
-                              subtitle: Text(
-                                note.note ?? '',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTextStyle.textStyle().copyWith(
-                                  color: const Color.fromARGB(255, 8, 8, 43),
-                                  fontSize: 17.sp,
+                                    color: const Color.fromARGB(255, 8, 8, 43),
+                                    fontSize: 17.sp,
+                                  ),
                                 ),
-                              ),
-                              trailing: Text(
-                                formattedDate,
-                                style: AppTextStyle.textStyle().copyWith(
-                                  color: Colors.red,
-                                  fontSize: 15.sp,
+                                trailing: Text(
+                                  formattedDate,
+                                  style: AppTextStyle.textStyle().copyWith(
+                                    color: Colors.red,
+                                    fontSize: 15.sp,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    );
+                  }
+                  return Container(
+                    // color: GlobalControllers.backGroundThemeColor,
                   );
-                }
-                return const SizedBox();
-              }, error: (error, stacktrace) {
-                return const Expanded(
+                }, error: (error, stacktrace) {
+                  return const Expanded(
+                      flex: 8,
+                      child: Center(
+                        child: Text("some error occurred "),
+                      ));
+                }, loading: () {
+                  return Expanded(
                     flex: 8,
                     child: Center(
-                      child: Text("some error occurred "),
-                    ));
-              }, loading: () {
-                return Expanded(
-                  flex: 8,
-                  child: Center(
-                    child: SpinKitChasingDots(
-                      color: themeColor,
-                      size: 40.sp,
+                      child: SpinKitChasingDots(
+                        color: themeColor,
+                        size: 40.sp,
+                      ),
                     ),
-                  ),
-                );
-              }),
-            ],
+                  );
+                }),
+              ],
+            ),
           ),
           bottomNavigationBar: onTap
-              ? const Text("")
+              ? Container(
+                  height: 1,
+                  // color: GlobalControllers.backGroundThemeColor,
+                )
               : Container(
                   color: themeColor,
                   width: double.infinity,

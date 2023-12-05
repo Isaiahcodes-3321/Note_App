@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+// Lp  or Nn
 class _LoginPageState extends State<LoginPage> {
   bool loginHidePassword = true;
 
@@ -146,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Align(
                       alignment: Alignment.bottomRight,
-                      child: Text('Forget Username?',
+                      child: Text('Forgot Username?',
                           style: textFonts.copyWith(
                               color: themeColor,
                               fontSize: 17.sp,
