@@ -44,7 +44,7 @@ class TrashPageState extends State<TrashPage> {
             actions: [
               GestureDetector(
                 onTap: () {
-                  EmptyTrash.emptyNote();
+                  EmptyTrash.emptyNote(context);
                 },
                 child: Padding(
                   padding: EdgeInsets.all(15.sp),
@@ -58,107 +58,106 @@ class TrashPageState extends State<TrashPage> {
           ),
           body: Container(
             // color: GlobalControllers.backGroundThemeColor,
-            child: Column(
-              children: [
-                ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
-                  // Print to check if data is received
-                  // print('Number of notes: ${trashData.notes?.length}');
-                  // print('Note ${trashData.notes?.first.title}');
+            height: MediaQuery.sizeOf(context).height * 100.0,
+            width: MediaQuery.sizeOf(context).width * 100.0,
 
-                  if (trashData.notes != null && trashData.notes!.isNotEmpty) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      // reverse: true,
-                      itemCount: trashData.notes?.length,
-                      itemBuilder: (context, index) {
-                        final note = trashData.notes?[index];
-                        String userNoteId = note!.noteId ?? '';
-                        int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
-
-                        // print('Note .,.,., ${data.notes!.first}');
-
-                        String formattedDate =
-                            HomePageLogics.formatDate(note.date);
-
-                        return Padding(
-                          padding: EdgeInsets.all(15.sp),
-                          child: Card(
-                            child: GestureDetector(
-                              onTap: () {
-                                GlobalControllers.id = userNoteIdINT;
-                                setState(() {
-                                  onTap = !onTap;
-                                });
-                              },
-                              child: ListTile(
-                                leading: onTap
-                                    ? const SizedBox()
-                                    : Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(top: 2.h),
-                                          child: Icon(
-                                            Icons.gpp_good_outlined,
-                                            color: Colors.red,
-                                            size: 20.sp,
+            child: ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
+               
+              if (trashData.notes != null && trashData.notes!.isNotEmpty) {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: trashData.notes?.length,
+                        itemBuilder: (context, index) {
+                          final note = trashData.notes?[index];
+                          String userNoteId = note!.noteId ?? '';
+                          int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
+                            
+                       
+                          String formattedDate =
+                              HomePageLogics.formatDate(note.date);
+                          String noteTitle = note.title ?? '';
+                          String noteBody = note.note ?? '';
+                            
+                          return Padding(
+                            padding: EdgeInsets.all(15.sp),
+                            child: Card(
+                              child: GestureDetector(
+                                onTap: () {
+                                  GlobalControllers.id = userNoteIdINT;
+                                  setState(() {
+                                    onTap = !onTap;
+                                  });
+                                },
+                                child: ListTile(
+                                  leading: onTap
+                                      ? const SizedBox()
+                                      : Align(
+                                          alignment: Alignment.topLeft,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 2.h),
+                                            child: Icon(
+                                              Icons.gpp_good_outlined,
+                                              color: Colors.red,
+                                              size: 20.sp,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                title: Text(note.title ?? '',
+                                  title: Text(noteTitle,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: AppTextStyle.textStyle().copyWith(
+                                        color: themeColor,
+                                      )),
+                                  subtitle: Text(
+                                    noteBody,
+                                    maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: AppTextStyle.textStyle().copyWith(
-                                      color: themeColor,
-                                    )),
-                                subtitle: Text(
-                                  note.note ?? '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.textStyle().copyWith(
-                                    color: const Color.fromARGB(255, 8, 8, 43),
-                                    fontSize: 17.sp,
+                                      color: const Color.fromARGB(255, 8, 8, 43),
+                                      fontSize: 17.sp,
+                                    ),
                                   ),
-                                ),
-                                trailing: Text(
-                                  formattedDate,
-                                  style: AppTextStyle.textStyle().copyWith(
-                                    color: Colors.red,
-                                    fontSize: 15.sp,
+                                  trailing: Text(
+                                    formattedDate,
+                                    style: AppTextStyle.textStyle().copyWith(
+                                      color: Colors.red,
+                                      fontSize: 15.sp,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  }
-                  return Container(
-                    // color: GlobalControllers.backGroundThemeColor,
-                  );
-                }, error: (error, stacktrace) {
-                  return const Expanded(
-                      flex: 8,
-                      child: Center(
-                        child: Text("some error occurred "),
-                      ));
-                }, loading: () {
-                  return Expanded(
-                    flex: 8,
-                    child: Center(
-                      child: SpinKitChasingDots(
-                        color: themeColor,
-                        size: 40.sp,
+                          );
+                        },
                       ),
-                    ),
+                    ],
+                  ),
+                );
+              }
+              return Container(
+                  // color: GlobalControllers.backGroundThemeColor,
                   );
-                }),
-              ],
-            ),
+            }, error: (error, stacktrace) {
+              return const Expanded(
+                  child: Center(
+                child: Text("some error occurred "),
+              ));
+            }, loading: () {
+              return Expanded(
+                child: Center(
+                  child: SpinKitChasingDots(
+                    color: themeColor,
+                    size: 40.sp,
+                  ),
+                ),
+              );
+            }),
           ),
           bottomNavigationBar: onTap
               ? Container(
                   height: 1,
-                  // color: GlobalControllers.backGroundThemeColor,
                 )
               : Container(
                   color: themeColor,
@@ -200,3 +199,23 @@ class TrashPageState extends State<TrashPage> {
     });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   // Print to check if data is received
+                  // print('Number of notes: ${trashData.notes?.length}');
+                  // print('Note ${trashData.notes?.first.title}');
+               // print('Note .,.,., ${data.notes!.first}');
+            

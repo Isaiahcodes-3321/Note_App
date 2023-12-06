@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
+
+// ignore_for_file: avoid_print
 // ignore_for_file: use_build_context_synchronously
 class LoginService {
   ApiServiceState apiServiceState = ApiServiceState();

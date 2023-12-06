@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../Screens/Api_Service/export.dart';
-import '../Screens/Logins/login_SignUp.dart';
 import 'package:noteapp/Screens/Logins/export_login_register.dart';
 
 class ForgetUserName extends StatefulWidget {

@@ -1,8 +1,6 @@
 import '../export_home.dart';
-import 'package:flutter/material.dart';
 
 class DrawerAndFloatingButton {
-  @override
   Widget drawer(BuildContext context) {
     return Drawer(
         // Take 70% of the user screen
@@ -15,7 +13,6 @@ class DrawerAndFloatingButton {
         child: const MyDrawer());
   }
 
-  @override
   Widget floatingButton(BuildContext context) {
     return FloatingActionButton(
         focusElevation: 30,

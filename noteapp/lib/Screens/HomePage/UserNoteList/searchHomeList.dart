@@ -101,94 +101,107 @@ class _SearchListState extends State<SearchList> {
             ),
           ],
         ),
-        body: isSearching
-            ? ref.watch(userNewNoteFromDB.searchNoteItems).when(
-                data: (searchData) {
-                // Print to check if data is received
-                print('Number of notes: ${searchData.notes?.length}');
-                print('Search Note ${searchData.notes?.first.title}');
+        body: SizedBox(
+          height: MediaQuery.sizeOf(context).height * 100.0,
+          width: MediaQuery.sizeOf(context).width * 100.0,
+          child: isSearching
+              ? ref.watch(userNewNoteFromDB.searchNoteItems).when(
+                  data: (searchData) {
+                  // Print to check if data is received
+                  print('Number of notes: ${searchData.notes?.length}');
+                  print('Search Note ${searchData.notes?.first.title}');
+                  if (searchData.notes != null &&
+                      searchData.notes!.isNotEmpty) {
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: searchData.notes?.length,
+                            itemBuilder: (context, index) {
+                              final note = searchData.notes?[index];
+                              String userNoteId = note!.noteId ?? '';
+                              int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
 
-                if (searchData.notes != null && searchData.notes!.isNotEmpty) {
-                  return Container(
-                    // color: GlobalControllers.backGroundThemeColor,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: searchData.notes?.length,
-                      itemBuilder: (context, index) {
-                        final note = searchData.notes?[index];
-                        String userNoteId = note!.noteId ?? '';
-                        int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
+                              String formattedDate =
+                                  HomePageLogics.formatDate(note.date);
 
-                        String formattedDate =
-                            HomePageLogics.formatDate(note.date);
+                              return Padding(
+                                padding: EdgeInsets.all(15.sp),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    GlobalControllers.id = userNoteIdINT;
+                                    print('User note Id its $userNoteIdINT');
+                                    ReadUserNote.readNote();
 
-                        return Padding(
-                          padding: EdgeInsets.all(15.sp),
-                          child: GestureDetector(
-                            onTap: () {
-                              GlobalControllers.id = userNoteIdINT;
-                              print('User note Id its $userNoteIdINT');
-                              ReadUserNote.readNote();
-
-                              Navigator.push<void>(
-                                context,
-                                MaterialPageRoute<void>(
-                                  builder: (BuildContext context) =>
-                                      const UpdatePage(),
+                                    Navigator.push<void>(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                        builder: (BuildContext context) =>
+                                            const UpdatePage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Card(
+                                    child: ListTile(
+                                      title: Text(note.title ?? '',
+                                          overflow: TextOverflow.ellipsis,
+                                          style:
+                                              AppTextStyle.textStyle().copyWith(
+                                            color: themeColor,
+                                          )),
+                                      subtitle: Text(
+                                        note.note ?? '',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style:
+                                            AppTextStyle.textStyle().copyWith(
+                                          color: const Color.fromARGB(
+                                              255, 8, 8, 43),
+                                          fontSize: 17.sp,
+                                        ),
+                                      ),
+                                      trailing: Text(
+                                        formattedDate,
+                                        style:
+                                            AppTextStyle.textStyle().copyWith(
+                                          color: Colors.red,
+                                          fontSize: 15.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               );
                             },
-                            child: Card(
-                              child: ListTile(
-                                title: Text(note.title ?? '',
-                                    overflow: TextOverflow.ellipsis,
-                                    style: AppTextStyle.textStyle().copyWith(
-                                      color: themeColor,
-                                    )),
-                                subtitle: Text(
-                                  note.note ?? '',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppTextStyle.textStyle().copyWith(
-                                    color: const Color.fromARGB(255, 8, 8, 43),
-                                    fontSize: 17.sp,
-                                  ),
-                                ),
-                                trailing: Text(
-                                  formattedDate,
-                                  style: AppTextStyle.textStyle().copyWith(
-                                    color: Colors.red,
-                                    fontSize: 15.sp,
-                                  ),
-                                ),
-                              ),
-                            ),
                           ),
-                        );
-                      },
+                        ],
+                      ),
+                    );
+                  }
+                  return Container(
+                      // color: GlobalControllers.backGroundThemeColor,
+                      );
+                }, error: (error, stacktrace) {
+                  return const ErrorLoading();
+                }, loading: () {
+                  return Expanded(
+                    child: Center(
+                      child: SpinKitChasingDots(
+                        color: themeColor,
+                        size: 40.sp,
+                      ),
                     ),
                   );
-                }
-                return Container(
-                    // color: GlobalControllers.backGroundThemeColor,
-                    );
-              }, error: (error, stacktrace) {
-                return const ErrorLoading();
-              }, loading: () {
-                return Center(
-                  child: SpinKitChasingDots(
-                    color: themeColor,
-                    size: 40.sp,
-                  ),
-                );
-              })
-            : Container(
-                // color: GlobalControllers.backGroundThemeColor,
-                child: const Center(
-                    child: Text(
-                'searching',
-                // style: TextStyle(color: GlobalControllers.textThemeColor),
-              ))),
+                })
+              : Container(
+                  // color: GlobalControllers.backGroundThemeColor,
+                  child: const Center(
+                      child: Text(
+                  'searching',
+                  // style: TextStyle(color: GlobalControllers.textThemeColor),
+                ))),
+        ),
         floatingActionButton: drawerAndFloatingButton.floatingButton(context),
         drawer: drawerAndFloatingButton.drawer(context),
       );

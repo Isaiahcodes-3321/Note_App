@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:noteapp/Screens/Api_Service/export.dart';
 
 
+// ignore_for_file: avoid_print
 // ignore_for_file: use_build_context_synchronously
 class LogOutService {
   ApiServiceState apiServiceState = ApiServiceState();
