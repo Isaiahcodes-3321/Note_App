@@ -29,11 +29,19 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   Widget build(BuildContext context) {
+
+      GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.themeColorDarkMode
+        : BackgroundColor.lightMode;
+    GlobalControllers.textThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.lightMode
+        : BackgroundColor.darkMode;
     return Consumer(builder: (context, ref, child) {
       GlobalControllers.providerRef = ref;
       return SafeArea(
         child: Scaffold(
-          backgroundColor: BackgroundColor.lightMode,
+          backgroundColor: GlobalControllers.backGroundThemeColor,
+          // backgroundColor: BackgroundColor.lightMode,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -41,12 +49,12 @@ class _UpdatePageState extends State<UpdatePage> {
                 iconSize: 23.sp,
                 onPressed: () {
                   setState(() {
-                     GlobalControllers.providerRef
-                          .read(UserNewNoteFromDB.isSearchinG.notifier)
-                          .state =
-                      !GlobalControllers.providerRef
-                          .read(UserNewNoteFromDB.isSearchinG.notifier)
-                          .state;
+                    GlobalControllers.providerRef
+                            .read(UserNewNoteFromDB.isSearchinG.notifier)
+                            .state =
+                        !GlobalControllers.providerRef
+                            .read(UserNewNoteFromDB.isSearchinG.notifier)
+                            .state;
                   });
                   Navigator.push<void>(
                     context,

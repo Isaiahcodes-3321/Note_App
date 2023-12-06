@@ -36,8 +36,15 @@ class _SearchListState extends State<SearchList> {
     final isSearching =
         GlobalControllers.providerRef.watch(UserNewNoteFromDB.isSearchinG);
 
+    GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.themeColorDarkMode
+        : BackgroundColor.lightMode;
+    GlobalControllers.textThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.lightMode
+        : BackgroundColor.darkMode;
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
+        backgroundColor: GlobalControllers.backGroundThemeColor,
         appBar: AppBar(
           backgroundColor: themeColor,
           leading: Builder(
@@ -102,14 +109,12 @@ class _SearchListState extends State<SearchList> {
           ],
         ),
         body: SizedBox(
-          height: MediaQuery.sizeOf(context).height * 100.0,
-          width: MediaQuery.sizeOf(context).width * 100.0,
           child: isSearching
               ? ref.watch(userNewNoteFromDB.searchNoteItems).when(
                   data: (searchData) {
                   // Print to check if data is received
                   print('Number of notes: ${searchData.notes?.length}');
-                  print('Search Note ${searchData.notes?.first.title}');
+                  // print('Search Note ${searchData.notes?.first.title}');
                   if (searchData.notes != null &&
                       searchData.notes!.isNotEmpty) {
                     return SingleChildScrollView(
@@ -178,10 +183,16 @@ class _SearchListState extends State<SearchList> {
                         ],
                       ),
                     );
+                  } else {
+                    return Center(
+                      child: Text(
+                        'No notes found',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: GlobalControllers.textThemeColor),
+                      ),
+                    );
                   }
-                  return Container(
-                      // color: GlobalControllers.backGroundThemeColor,
-                      );
                 }, error: (error, stacktrace) {
                   return const ErrorLoading();
                 }, loading: () {
@@ -195,12 +206,12 @@ class _SearchListState extends State<SearchList> {
                   );
                 })
               : Container(
-                  // color: GlobalControllers.backGroundThemeColor,
-                  child: const Center(
+                  color: GlobalControllers.backGroundThemeColor,
+                  child: Center(
                       child: Text(
-                  'searching',
-                  // style: TextStyle(color: GlobalControllers.textThemeColor),
-                ))),
+                    'searching',
+                    style: TextStyle(color: GlobalControllers.textThemeColor),
+                  ))),
         ),
         floatingActionButton: drawerAndFloatingButton.floatingButton(context),
         drawer: drawerAndFloatingButton.drawer(context),

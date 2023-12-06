@@ -35,9 +35,17 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
+  
+    GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.themeColorDarkMode
+        : BackgroundColor.lightMode;
+    GlobalControllers.textThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.lightMode
+        : BackgroundColor.darkMode;
     return Consumer(builder: (context, ref, child) {
       return SafeArea(
         child: Scaffold(
+          backgroundColor: GlobalControllers.backGroundThemeColor,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(

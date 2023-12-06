@@ -1,3 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-var themeInit = StateProvider<bool>((ref) => false);
+
+class ThemeClass{
+ static final themeProvider = StateProvider<bool>((ref) => false);
+}

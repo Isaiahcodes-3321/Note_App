@@ -11,7 +11,7 @@ class ErrorLoading extends StatelessWidget {
       height: double.infinity,
       child: const Column(
         children: [
-           Expanded(
+          Expanded(
             flex: 2,
             child: CustomScrollView(
               slivers: [MyAppBar()],

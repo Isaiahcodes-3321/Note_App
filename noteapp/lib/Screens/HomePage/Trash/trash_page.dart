@@ -61,8 +61,8 @@ class TrashPageState extends State<TrashPage> {
             height: MediaQuery.sizeOf(context).height * 100.0,
             width: MediaQuery.sizeOf(context).width * 100.0,
 
-            child: ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
-               
+            child:
+                ref.watch(userNewNoteFromDB.trashItems).when(data: (trashData) {
               if (trashData.notes != null && trashData.notes!.isNotEmpty) {
                 return SingleChildScrollView(
                   child: Column(
@@ -74,13 +74,12 @@ class TrashPageState extends State<TrashPage> {
                           final note = trashData.notes?[index];
                           String userNoteId = note!.noteId ?? '';
                           int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
-                            
-                       
+
                           String formattedDate =
                               HomePageLogics.formatDate(note.date);
                           String noteTitle = note.title ?? '';
                           String noteBody = note.note ?? '';
-                            
+
                           return Padding(
                             padding: EdgeInsets.all(15.sp),
                             child: Card(
@@ -115,7 +114,8 @@ class TrashPageState extends State<TrashPage> {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: AppTextStyle.textStyle().copyWith(
-                                      color: const Color.fromARGB(255, 8, 8, 43),
+                                      color:
+                                          const Color.fromARGB(255, 8, 8, 43),
                                       fontSize: 17.sp,
                                     ),
                                   ),
@@ -140,9 +140,12 @@ class TrashPageState extends State<TrashPage> {
                   // color: GlobalControllers.backGroundThemeColor,
                   );
             }, error: (error, stacktrace) {
-              return const Expanded(
+              return Expanded(
                   child: Center(
-                child: Text("some error occurred "),
+                child: Text(
+                  "some error occurred ",
+                  style: TextStyle(color: GlobalControllers.textThemeColor),
+                ),
               ));
             }, loading: () {
               return Expanded(

@@ -30,16 +30,24 @@ class _MyDrawerState extends State<MyDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalControllers.themeController.setBool('repeat', false);
+
     final userName =
         GlobalControllers.userNameAndEmail.getAt(0) as UserNameAndEmailStorage;
 
-    // GlobalControllers.backGroundThemeColor =
-    //     GlobalControllers.theme! ? BackgroundColor.themeColorDarkMode : BackgroundColor.lightMode;
-    // GlobalControllers.textThemeColor =
-    //     GlobalControllers.theme! ? BackgroundColor.lightMode : BackgroundColor.darkMode;
+    final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
+
+    GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.themeColorDarkMode
+        : BackgroundColor.lightMode;
+    GlobalControllers.textThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.lightMode
+        : BackgroundColor.darkMode;
     return Consumer(builder: (context, ref, child) {
       return Container(
-        // color: GlobalControllers.backGroundThemeColor,
+        color: GlobalControllers.backGroundThemeColor,
         child: ListView(
           children: <Widget>[
             DrawerHeader(
@@ -50,11 +58,15 @@ class _MyDrawerState extends State<MyDrawer> {
                   children: <TextSpan>[
                     TextSpan(
                       text: 'Welcome ${userName.userName}',
+                       style: AppTextStyle.textStyle().copyWith(
+                            color: GlobalControllers.textThemeColor,
+                            fontSize: 20.sp)
                     ),
                     TextSpan(
-                          text: '\n${userName.email}',
+                        text: '\n${userName.email}',
                         style: AppTextStyle.textStyle().copyWith(
-                            color: BackgroundColor.darkMode, fontSize: 17.sp)),
+                            color: GlobalControllers.textThemeColor,
+                            fontSize: 17.sp)),
                   ],
                 ),
               ),
@@ -71,11 +83,11 @@ class _MyDrawerState extends State<MyDrawer> {
                 },
                 child: Text('Trash',
                     style: AppTextStyle.textStyle().copyWith(
-                        color: BackgroundColor.darkMode, fontSize: 18.sp)),
+                        color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
               ),
             ),
             Divider(
-              color: BackgroundColor.darkMode,
+              color: GlobalControllers.textThemeColor,
             ),
             ListTile(
               title: Row(
@@ -84,7 +96,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 children: [
                   Text('Theme',
                       style: AppTextStyle.textStyle().copyWith(
-                          color: BackgroundColor.darkMode, fontSize: 18.sp)),
+                          color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
                   CupertinoSwitch(
                     activeColor: Colors.white,
                     thumbColor: Colors.green,
@@ -92,34 +104,44 @@ class _MyDrawerState extends State<MyDrawer> {
                     value: GlobalControllers.theme ?? false,
                     onChanged: (value) async {
                       setState(() {
+                        //update theme on shared pref
                         GlobalControllers.theme = value;
+
+                        GlobalControllers.themeController
+                            .setBool('repeat', GlobalControllers.theme!);
+
+                        GlobalControllers.theme =
+                            GlobalControllers.themeController.getBool('repeat');
+
+                        // update theme on statemanagement
+                        ref.read(ThemeClass.themeProvider.notifier).state =
+                            GlobalControllers.theme!;
+
+                        print('man va is ${GlobalControllers.getTheme}');
                       });
-                      GlobalControllers.themeController
-                          .setBool('repeat', value);
-                      print('Value for theme is $GlobalControllers.theme');
                     },
                   ),
                 ],
               ),
             ),
             Divider(
-              color: BackgroundColor.darkMode,
+              color: GlobalControllers.textThemeColor,
             ),
             ListTile(
               title: Text('Developers',
                   style: AppTextStyle.textStyle().copyWith(
-                      color: BackgroundColor.darkMode, fontSize: 18.sp)),
+                      color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
             ),
             Divider(
-              color: BackgroundColor.darkMode,
+              color: GlobalControllers.textThemeColor,
             ),
             ListTile(
               title: Text('Rate Us',
                   style: AppTextStyle.textStyle().copyWith(
-                      color: BackgroundColor.darkMode, fontSize: 18.sp)),
+                      color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
             ),
             Divider(
-              color: BackgroundColor.darkMode,
+              color: GlobalControllers.textThemeColor,
             ),
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.25,
