@@ -21,22 +21,24 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
     HomePageLogics.checkTokenExpires();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     GlobalControllers.providerRef = ref;
-  
-    // GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
-    //     ? BackgroundColor.themeColorDarkMode
-    //     : BackgroundColor.lightMode;
-    // GlobalControllers.textThemeColor = GlobalControllers.getTheme
-    //     ? BackgroundColor.lightMode
-    //     : BackgroundColor.darkMode;
+    final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
+    GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.themeColorDarkMode
+        : BackgroundColor.lightMode;
+    GlobalControllers.textThemeColor = GlobalControllers.getTheme
+        ? BackgroundColor.lightMode
+        : BackgroundColor.darkMode;
 
     return Scaffold(
       body: ref.watch(userNewNoteFromDB.noteItems).when(data: (data) {
         return Container(
-          // color: GlobalControllers.backGroundThemeColor,
+          color: GlobalControllers.backGroundThemeColor,
           child: CustomScrollView(
             slivers: [
               const MyAppBar(),

@@ -19,9 +19,14 @@ class TrashPageState extends State<TrashPage> {
   bool onTap = true;
   @override
   Widget build(BuildContext context) {
+      final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
+  
     return Consumer(builder: (context, ref, child) {
       return SafeArea(
         child: Scaffold(
+          backgroundColor: GlobalControllers.backGroundThemeColor,
           appBar: AppBar(
             backgroundColor: themeColor,
             leading: IconButton(
@@ -137,7 +142,7 @@ class TrashPageState extends State<TrashPage> {
                 );
               }
               return Container(
-                  // color: GlobalControllers.backGroundThemeColor,
+                  color: GlobalControllers.backGroundThemeColor,
                   );
             }, error: (error, stacktrace) {
               return Expanded(

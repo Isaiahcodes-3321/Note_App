@@ -36,12 +36,10 @@ class _SearchListState extends State<SearchList> {
     final isSearching =
         GlobalControllers.providerRef.watch(UserNewNoteFromDB.isSearchinG);
 
-    GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
-        ? BackgroundColor.themeColorDarkMode
-        : BackgroundColor.lightMode;
-    GlobalControllers.textThemeColor = GlobalControllers.getTheme
-        ? BackgroundColor.lightMode
-        : BackgroundColor.darkMode;
+    final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
+    
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
         backgroundColor: GlobalControllers.backGroundThemeColor,

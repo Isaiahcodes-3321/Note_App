@@ -21,13 +21,6 @@ class _MyDrawerState extends State<MyDrawer> {
     GlobalControllers.tokenKey = await Hive.openBox('userNameBox');
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   GlobalControllers.themeController.setBool('repeat', false);
-  //   GlobalControllers.theme = GlobalControllers.themeController.getBool('repeat');
-  // }
-
   @override
   Widget build(BuildContext context) {
     GlobalControllers.themeController.setBool('repeat', false);

@@ -6,8 +6,11 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
     return Container(
-      // color: GlobalControllers.backGroundThemeColor,
+      color: GlobalControllers.backGroundThemeColor,
             width: double.infinity,
             height: double.infinity,
             child: Column(

@@ -5,13 +5,16 @@ class ErrorLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
     return Container(
-      // color: GlobalControllers.backGroundThemeColor,
+      color: GlobalControllers.backGroundThemeColor,
       width: double.infinity,
       height: double.infinity,
-      child: const Column(
+      child: Column(
         children: [
-          Expanded(
+          const Expanded(
             flex: 2,
             child: CustomScrollView(
               slivers: [MyAppBar()],
@@ -21,8 +24,7 @@ class ErrorLoading extends StatelessWidget {
               flex: 8,
               child: Center(
                 child: Text("some error occurred ",
-                    // style: TextStyle(color: GlobalControllers.textThemeColor)
-                    ),
+                    style: TextStyle(color: GlobalControllers.textThemeColor)),
               ))
         ],
       ),

@@ -29,13 +29,9 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   Widget build(BuildContext context) {
-
-      GlobalControllers.backGroundThemeColor = GlobalControllers.getTheme
-        ? BackgroundColor.themeColorDarkMode
-        : BackgroundColor.lightMode;
-    GlobalControllers.textThemeColor = GlobalControllers.getTheme
-        ? BackgroundColor.lightMode
-        : BackgroundColor.darkMode;
+    final changeTheme =
+        GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
+    GlobalControllers.getTheme = changeTheme;
     return Consumer(builder: (context, ref, child) {
       GlobalControllers.providerRef = ref;
       return SafeArea(
