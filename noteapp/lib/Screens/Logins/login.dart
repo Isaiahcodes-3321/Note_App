@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-// Lp  or Nn
+// Lp  
 class _LoginPageState extends State<LoginPage> {
   bool loginHidePassword = true;
 
