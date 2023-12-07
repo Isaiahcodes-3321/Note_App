@@ -50,11 +50,10 @@ class _MyDrawerState extends State<MyDrawer> {
                 TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Welcome ${userName.userName}',
-                       style: AppTextStyle.textStyle().copyWith(
+                        text: 'Welcome ${userName.userName}',
+                        style: AppTextStyle.textStyle().copyWith(
                             color: GlobalControllers.textThemeColor,
-                            fontSize: 20.sp)
-                    ),
+                            fontSize: 20.sp)),
                     TextSpan(
                         text: '\n${userName.email}',
                         style: AppTextStyle.textStyle().copyWith(
@@ -76,7 +75,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 },
                 child: Text('Trash',
                     style: AppTextStyle.textStyle().copyWith(
-                        color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
+                        color: GlobalControllers.textThemeColor,
+                        fontSize: 18.sp)),
               ),
             ),
             Divider(
@@ -89,7 +89,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 children: [
                   Text('Theme',
                       style: AppTextStyle.textStyle().copyWith(
-                          color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
+                          color: GlobalControllers.textThemeColor,
+                          fontSize: 18.sp)),
                   CupertinoSwitch(
                     activeColor: Colors.white,
                     thumbColor: Colors.green,
@@ -110,7 +111,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         ref.read(ThemeClass.themeProvider.notifier).state =
                             GlobalControllers.theme!;
 
-                        print('man va is ${GlobalControllers.getTheme}');
+                        // print('man va is ${GlobalControllers.getTheme}');
                       });
                     },
                   ),
@@ -123,7 +124,8 @@ class _MyDrawerState extends State<MyDrawer> {
             ListTile(
               title: Text('Developers',
                   style: AppTextStyle.textStyle().copyWith(
-                      color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
+                      color: GlobalControllers.textThemeColor,
+                      fontSize: 18.sp)),
             ),
             Divider(
               color: GlobalControllers.textThemeColor,
@@ -131,7 +133,8 @@ class _MyDrawerState extends State<MyDrawer> {
             ListTile(
               title: Text('Rate Us',
                   style: AppTextStyle.textStyle().copyWith(
-                      color: GlobalControllers.textThemeColor, fontSize: 18.sp)),
+                      color: GlobalControllers.textThemeColor,
+                      fontSize: 18.sp)),
             ),
             Divider(
               color: GlobalControllers.textThemeColor,
