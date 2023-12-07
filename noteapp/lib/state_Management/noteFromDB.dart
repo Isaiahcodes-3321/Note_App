@@ -23,6 +23,7 @@ class UserNewNoteFromDB {
 
 // searching for note
   static final isSearchinG = StateProvider<bool>((ref) => false);
+  static final readNoteTitle = StateProvider<String>((ref) => '');
 
   final searchNoteItems = FutureProvider<ModelS>((ref) async {
     final searchFetchedNotes = await SearchingForNote.searchNote();
@@ -32,15 +33,12 @@ class UserNewNoteFromDB {
   });
 
   // list of note in Trash
-final trashItems = FutureProvider<ModelReadTrash>((ref) {
-  final trashNotes = ViewTrash.trashNote();
-  // trashNotes.then((modelReadTrash) {
-  //   final titleOfFirstNote = modelReadTrash.notes?.first.title;
-  //   print('Title of the first note: $titleOfFirstNote');
-  // });
-  return trashNotes;
-});
-
-
+  final trashItems = FutureProvider<ModelReadTrash>((ref) {
+    final trashNotes = ViewTrash.trashNote();
+    // trashNotes.then((modelReadTrash) {
+    //   final titleOfFirstNote = modelReadTrash.notes?.first.title;
+    //   print('Title of the first note: $titleOfFirstNote');
+    // });
+    return trashNotes;
+  });
 }
-

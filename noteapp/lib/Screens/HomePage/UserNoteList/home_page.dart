@@ -67,8 +67,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                         child: GestureDetector(
                           onTap: () {
                             GlobalControllers.id = userNoteIdINT;
+
                             print('User note Id its $userNoteIdINT');
                             ReadUserNote.readNote();
+                             var getTittle = note.title;
+                            setState(() {
+                              GlobalControllers.providerRef
+                                  .read(
+                                      UserNewNoteFromDB.readNoteTitle.notifier)
+                                  .state = getTittle;
+                            });
 
                             Navigator.push<void>(
                               context,

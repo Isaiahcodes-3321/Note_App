@@ -17,6 +17,8 @@ class _UpdatePageState extends State<UpdatePage> {
     super.initState();
   }
 
+ 
+
   UserNewNoteFromDB userNewNoteFromDB = UserNewNoteFromDB();
   ImageFullScreen imageFullScreen = ImageFullScreen();
 
@@ -29,11 +31,14 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   Widget build(BuildContext context) {
+     final getTitle =
+        GlobalControllers.providerRef.watch( UserNewNoteFromDB.readNoteTitle);
     final changeTheme =
         GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
     GlobalControllers.getTheme = changeTheme;
     return Consumer(builder: (context, ref, child) {
       GlobalControllers.providerRef = ref;
+   
       return SafeArea(
         child: Scaffold(
           backgroundColor: GlobalControllers.backGroundThemeColor,
@@ -60,7 +65,8 @@ class _UpdatePageState extends State<UpdatePage> {
                   );
                 },
                 icon: const Icon(Icons.arrow_back_rounded)),
-            title: Text('New Notes',
+            title: Text(getTitle,
+                overflow: TextOverflow.ellipsis,
                 style: AppTextStyle.textStyle().copyWith(fontSize: 18.sp)),
             actions: [
               GestureDetector(
@@ -69,7 +75,7 @@ class _UpdatePageState extends State<UpdatePage> {
                   },
                   child: Padding(
                       padding: EdgeInsets.all(15.sp),
-                      child: Text("Save",
+                      child: Text("Update",
                           style: AppTextStyle.textStyle()
                               .copyWith(fontSize: 18.sp))))
             ],
@@ -87,8 +93,8 @@ class _UpdatePageState extends State<UpdatePage> {
               UpdateControllers.id = pushId!;
               print('note id when updating $pushId');
 
-              UpdateControllers.noteTittleContext.text = getTittle ?? '';
-              UpdateControllers.noteContext.text = getNote ?? '';
+              UpdateControllers.noteTittleContext.text = getTittle!;
+              UpdateControllers.noteContext.text = getNote!;
 
               return SizedBox(
                 height: double.infinity,
