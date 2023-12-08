@@ -3,6 +3,7 @@ import '../../../Model/Api_Service/emptyTrash.dart';
 import '../../../Model/Api_Service/restoreNote.dart';
 import '../../../Model/Api_Service/deleteANoteFromTrash.dart';
 import 'package:noteapp/Views/Add_Note/export_note_input.dart';
+// ignore_for_file: use_build_context_synchronously
 
 class TrashPage extends StatefulWidget {
   const TrashPage({super.key});
@@ -31,9 +32,9 @@ class TrashPageState extends State<TrashPage> {
         GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
     GlobalControllers.getTheme = changeTheme;
 
-    return Consumer(builder: (context, ref, child) {
-      return SafeArea(
-        child: Scaffold(
+    return SafeArea(
+      child: Consumer(builder: (context, ref, child) {
+        return Scaffold(
             backgroundColor: GlobalControllers.backGroundThemeColor,
             appBar: AppBar(
               backgroundColor: themeColor,
@@ -79,89 +80,103 @@ class TrashPageState extends State<TrashPage> {
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: trashData.notes?.length,
-                          itemBuilder: (context, index) {
-                            final note = trashData.notes?[index];
-                            String userNoteId = note!.noteId ?? '';
-                            int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
-
-                            String formattedDate =
-                                HomePageLogics.formatDate(note.date);
-                            String noteTitle = note.title ?? '';
-                            String noteBody = note.note ?? '';
-
-                            isTapped = index == tappedIndex;
-
-                            return Padding(
-                              padding: EdgeInsets.all(15.sp),
-                              child: Card(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    GlobalControllers.id = userNoteIdINT;
-                                    setState(() {
-                                      isTapped = !isTapped;
-                                      tappedIndex = index;
-                                      if (isTapped) {
-                                        iconsShownInList = !iconsShownInList;
-                                      }
-                                    });
-                                  },
-                                  child: SizedBox(
-                                    child: Row(
-                                      children: [
-                                        isTapped
-                                            ? Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 8.0, top: 2.h),
-                                                child: Icon(
-                                                  Icons.gpp_good_outlined,
-                                                  color: Colors.red,
-                                                  size: 20.sp,
-                                                ),
-                                              )
-                                            : const SizedBox(width: 20.0),
-                                        SizedBox(
-                                          // color: Colors.green,
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.80,
-                                          child: ListTile(
-                                            title: Text(noteTitle,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: AppTextStyle.textStyle()
-                                                    .copyWith(
-                                                  color: themeColor,
-                                                )),
-                                            subtitle: Text(
-                                              noteBody,
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: AppTextStyle.textStyle()
-                                                  .copyWith(
-                                                color: const Color.fromARGB(
-                                                    255, 8, 8, 43),
-                                                fontSize: 17.sp,
-                                              ),
-                                            ),
-                                            trailing: Text(
-                                              formattedDate,
-                                              style: AppTextStyle.textStyle()
-                                                  .copyWith(
-                                                color: Colors.red,
-                                                fontSize: 15.sp,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                        RefreshIndicator(
+                          onRefresh: () async {
+                            await Future.delayed(const Duration(seconds: 3));
+                            Navigator.push<void>(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const TrashPage(),
                               ),
                             );
                           },
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: trashData.notes?.length,
+                            itemBuilder: (context, index) {
+                              final note = trashData.notes?[index];
+                              String userNoteId = note!.noteId ?? '';
+                              int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
+
+                              String formattedDate =
+                                  HomePageLogics.formatDate(note.date);
+                              String noteTitle = note.title ?? '';
+                              String noteBody = note.note ?? '';
+
+                              isTapped = index == tappedIndex;
+
+                              return Padding(
+                                padding: EdgeInsets.all(15.sp),
+                                child: Card(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      GlobalControllers.id = userNoteIdINT;
+                                      setState(() {
+                                        isTapped = !isTapped;
+                                        tappedIndex = index;
+                                        if (isTapped) {
+                                          iconsShownInList = !iconsShownInList;
+                                        }
+                                      });
+                                    },
+                                    child: SizedBox(
+                                      child: Row(
+                                        children: [
+                                          isTapped
+                                              ? Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 8.0, top: 2.h),
+                                                  child: Icon(
+                                                    Icons.gpp_good_outlined,
+                                                    color: Colors.red,
+                                                    size: 20.sp,
+                                                  ),
+                                                )
+                                              : const SizedBox(width: 20.0),
+                                          SizedBox(
+                                            // color: Colors.green,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.80,
+                                            child: ListTile(
+                                              title: Text(noteTitle,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style:
+                                                      AppTextStyle.textStyle()
+                                                          .copyWith(
+                                                    color: themeColor,
+                                                  )),
+                                              subtitle: Text(
+                                                noteBody,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: AppTextStyle.textStyle()
+                                                    .copyWith(
+                                                  color: const Color.fromARGB(
+                                                      255, 8, 8, 43),
+                                                  fontSize: 17.sp,
+                                                ),
+                                              ),
+                                              trailing: Text(
+                                                formattedDate,
+                                                style: AppTextStyle.textStyle()
+                                                    .copyWith(
+                                                  color: Colors.red,
+                                                  fontSize: 15.sp,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -228,8 +243,8 @@ class TrashPageState extends State<TrashPage> {
                   )
                 : const SizedBox(
                     height: 1,
-                  )),
-      );
-    });
+                  ));
+      }),
+    );
   }
 }

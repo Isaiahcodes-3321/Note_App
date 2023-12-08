@@ -1,5 +1,6 @@
 import '../export_note_input.dart';
 import '../../HomePage/export_home.dart';
+// ignore_for_file: use_build_context_synchronously
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
@@ -35,8 +36,7 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-  
-        final changeTheme =
+    final changeTheme =
         GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
     GlobalControllers.getTheme = changeTheme;
     return Consumer(builder: (context, ref, child) {
@@ -87,8 +87,9 @@ class _AddNoteState extends State<AddNote> {
                                 ? Expanded(
                                     flex: 4,
                                     child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.30,
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                              0.30,
                                       child: Align(
                                           alignment: Alignment.center,
                                           child: InkWell(
@@ -146,9 +147,8 @@ class _AddNoteState extends State<AddNote> {
                                           logics.recordedAudio = '';
                                         }
                                       },
-                                      background:
-                                          GlobalDismissibleContainer.container(
-                                              context),
+                                      background: GlobalDismissibleContainer
+                                          .container(context),
                                       child: Center(
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -177,7 +177,8 @@ class _AddNoteState extends State<AddNote> {
                                                   style:
                                                       AppTextStyle.textStyle()
                                                           .copyWith(
-                                                              fontSize: 18.sp)),
+                                                              fontSize:
+                                                                  18.sp)),
                                             ),
                                           ),
                                         ),
@@ -190,8 +191,8 @@ class _AddNoteState extends State<AddNote> {
                       )
                     : const Text(""),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.sp, vertical: 20.sp),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 20.sp, vertical: 20.sp),
                   child: TextField(
                     style: AppTextStyle.textStyle().copyWith(
                         color: const Color.fromARGB(255, 28, 28, 28),
@@ -230,7 +231,8 @@ class _AddNoteState extends State<AddNote> {
                                 focusColor: Colors.white,
                                 hintText: "Notes",
                                 hintStyle: AppTextStyle.textStyle().copyWith(
-                                  color: const Color.fromARGB(255, 28, 28, 28),
+                                  color:
+                                      const Color.fromARGB(255, 28, 28, 28),
                                 ),
                                 focusedBorder: outlineInputBorder,
                                 enabledBorder: outlineInputBorder,
