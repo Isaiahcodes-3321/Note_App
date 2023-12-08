@@ -74,6 +74,7 @@ class SaveNoteService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         Navigator.pop(context);
         logics.image = null;
+        logics.recordedAudio = '';
         Navigator.push<void>(
           context,
           MaterialPageRoute<void>(

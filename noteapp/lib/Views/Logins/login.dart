@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                         controller: GlobalControllersLogins.userName,
                         keyboardType: TextInputType.text,
                         hintText: "User Name",
-                        prefixIcon: const Icon(Icons.mail_outline_rounded,
+                        prefixIcon: const Icon(Icons.person_3_outlined,
                             color: Colors.black),
                         onChanged: (value) {},
                       ),
