@@ -204,6 +204,7 @@ class _SearchListState extends State<SearchList> {
                         ],
                       ),
                     );
+                    
                   } else {
                     return Center(
                       child: Text(

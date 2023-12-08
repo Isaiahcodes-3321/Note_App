@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../Add_Note/export_note_input.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:noteapp/Controllers/HomeNotesPage/logics.dart';
 
 class DevPage extends StatefulWidget {

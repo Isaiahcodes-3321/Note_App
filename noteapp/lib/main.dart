@@ -8,8 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:noteapp/Views/Logins/login_SignUp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:noteapp/Views/Constant/global_controllers.dart';
+import 'package:noteapp/Model/Api_Service/refreshTokenService.dart';
 import 'package:noteapp/Views/HomePage/UserNoteList/home_page.dart';
-
 
 // error 503
 Future<void> main() async {
@@ -56,6 +56,7 @@ class NoteAppInit extends StatefulWidget {
 }
 
 class _NoteAppInitState extends State<NoteAppInit> {
+  RefreshTokenService refreshTokenService = RefreshTokenService();
   late var token = '';
 
   @override
@@ -71,6 +72,11 @@ class _NoteAppInitState extends State<NoteAppInit> {
 
     // Call the build method after fetching the token
     setState(() {});
+  }
+
+  // Call the refreshtoken when the app its been launch this funtion will be called if the token its expired
+  refreshToken() {
+    refreshTokenService.reFreshTokenFromMainFuntion(context);
   }
 
   @override
@@ -89,9 +95,7 @@ class _NoteAppInitState extends State<NoteAppInit> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => hasExpired
-                ? const SafeArea(child: LoginSignUpPage())
-                : const HomePage(),
+            builder: (_) => hasExpired ? refreshToken() : const HomePage(),
           ),
         );
       });
