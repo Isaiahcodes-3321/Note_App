@@ -116,6 +116,7 @@ class _SearchListState extends State<SearchList> {
                   if (searchData.notes != null &&
                       searchData.notes!.isNotEmpty) {
                     return SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
                       child: Column(
                         children: [
                           ListView.builder(

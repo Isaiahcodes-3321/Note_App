@@ -72,6 +72,7 @@ class TrashPageState extends State<TrashPage> {
                   data: (trashData) {
                 if (trashData.notes != null && trashData.notes!.isNotEmpty) {
                   return SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
                     child: Column(
                       children: [
                         ListView.builder(

@@ -1,8 +1,7 @@
 import 'package:intl/intl.dart';
 import '../../Model/Api_Service/export.dart';
 import '../../Views/HomePage/export_home.dart';
-import 'package:noteapp/Model/ThemeStore/theme.dart';
-import '../../Model/Api_Service/refreshTokenService.dart';
+import 'package:noteapp/Model/Api_Service/refreshTokenService.dart';
 
 
 ListUserNote readUserNote = ListUserNote();
@@ -30,9 +29,4 @@ class HomePageLogics {
     }
   }
 
-  //  static Future<void> fetchNotes() async {
-  //   final fetchedNotes = await readUserNote.getNote();
-  //   GlobalControllers.notes = fetchedNotes.notes;
-  //   // print("my notes ${fetchedNotes.notes?.first.title}");
-  // }
 }

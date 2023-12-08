@@ -64,7 +64,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/Audio_file/recorded_audio
-    # - images/a_dot_burr.jpeg
+    - lib/Views/Assects/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,5 @@
 import 'export_home.dart';
 import 'package:flutter/cupertino.dart';
-import '../../Model/ThemeStore/theme.dart';
 import 'package:noteapp/Model/Api_Service/export.dart';
 import 'package:noteapp/Views/HomePage/DevMode/devmode.dart';
 

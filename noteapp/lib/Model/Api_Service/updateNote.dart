@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../Views/HomePage/export_home.dart';
 import 'package:noteapp/Model/Api_Service/export.dart';
 
-
+// ignore_for_file: avoid_print
 // ignore_for_file: use_build_context_synchronously
 class Update {
   ApiServiceState apiServiceState = ApiServiceState();
