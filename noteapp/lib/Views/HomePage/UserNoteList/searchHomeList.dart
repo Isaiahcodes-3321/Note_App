@@ -138,6 +138,13 @@ class _SearchListState extends State<SearchList> {
                                     GlobalControllers.id = userNoteIdINT;
                                     print('User note Id its $userNoteIdINT');
                                     ReadUserNote.readNote();
+                                      var getTittle = note.title;
+                            setState(() {
+                              GlobalControllers.providerRef
+                                  .read(
+                                      UserNewNoteFromDB.readNoteTitle.notifier)
+                                  .state = getTittle;
+                            });
 
                                     Navigator.push<void>(
                                       context,
@@ -196,12 +203,10 @@ class _SearchListState extends State<SearchList> {
                 }, error: (error, stacktrace) {
                   return const ErrorLoading();
                 }, loading: () {
-                  return Expanded(
-                    child: Center(
-                      child: SpinKitChasingDots(
-                        color: themeColor,
-                        size: 40.sp,
-                      ),
+                  return Center(
+                    child: SpinKitChasingDots(
+                      color: themeColor,
+                      size: 40.sp,
                     ),
                   );
                 })

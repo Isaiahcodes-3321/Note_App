@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../Add_Note/export_note_input.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:noteapp/Controllers/HomeNotesPage/logics.dart';
 
 class DevPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class DevPage extends StatefulWidget {
 }
 
 class _DevPageState extends State<DevPage> {
-    @override
+  @override
   void initState() {
     super.initState();
     HomePageLogics.checkTokenExpires();
@@ -295,15 +296,27 @@ class _DevPageState extends State<DevPage> {
                                               GlobalControllers.textThemeColor,
                                           fontSize: 17.sp,
                                           fontWeight: FontWeight.bold)),
-                                  FittedBox(
-                                    child: Text(
-                                        'https://github.com/emmanuel1-byte',
-                                        style: AppTextStyle.textStyle()
-                                            .copyWith(
-                                                color: GlobalControllers
-                                                    .textThemeColor,
-                                                fontSize: 17.sp,
-                                                fontWeight: FontWeight.normal)),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      // final Uri urlGitHub = Uri.parse(
+                                      //     'https://github.com/emmanuel1-byte');
+
+                                      // if (!await launchUrl(urlGitHub)) {
+                                      //   throw Exception(
+                                      //       'Could not launch $urlGitHub');
+                                      // }
+                                    },
+                                    child: FittedBox(
+                                      child: Text(
+                                          'https://github.com/emmanuel1-byte',
+                                          style: AppTextStyle.textStyle()
+                                              .copyWith(
+                                                  color: GlobalControllers
+                                                      .textThemeColor,
+                                                  fontSize: 17.sp,
+                                                  fontWeight:
+                                                      FontWeight.normal)),
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 2.h,

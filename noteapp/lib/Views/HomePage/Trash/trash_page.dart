@@ -109,7 +109,6 @@ class TrashPageState extends State<TrashPage> {
                                     });
                                   },
                                   child: SizedBox(
-                                    height: 70.0,
                                     child: Row(
                                       children: [
                                         isTapped
@@ -123,7 +122,11 @@ class TrashPageState extends State<TrashPage> {
                                                 ),
                                               )
                                             : const SizedBox(width: 20.0),
-                                        Expanded(
+                                        SizedBox(
+                                          // color: Colors.green,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.80,
                                           child: ListTile(
                                             title: Text(noteTitle,
                                                 overflow: TextOverflow.ellipsis,
@@ -173,20 +176,17 @@ class TrashPageState extends State<TrashPage> {
                       color: GlobalControllers.textThemeColor,
                     )));
               }, error: (error, stacktrace) {
-                return Expanded(
-                    child: Center(
+                return Center(
                   child: Text(
                     "some error occurred ",
                     style: TextStyle(color: GlobalControllers.textThemeColor),
                   ),
-                ));
+                );
               }, loading: () {
-                return Expanded(
-                  child: Center(
-                    child: SpinKitChasingDots(
-                      color: themeColor,
-                      size: 40.sp,
-                    ),
+                return Center(
+                  child: SpinKitChasingDots(
+                    color: themeColor,
+                    size: 40.sp,
                   ),
                 );
               }),
@@ -205,12 +205,11 @@ class TrashPageState extends State<TrashPage> {
                               onTap: () {
                                 restoreNoteFromTrash.restoreNote(context);
                               },
-                              child: Expanded(
-                                  child: Icon(
+                              child: Icon(
                                 Icons.replay_outlined,
                                 color: Colors.white,
                                 size: 25.sp,
-                              ))),
+                              )),
                           Container(
                             width: 1,
                             height: 100,
@@ -220,12 +219,11 @@ class TrashPageState extends State<TrashPage> {
                               onTap: () {
                                 deleteANoteFromTrash.deleteANote(context);
                               },
-                              child: Expanded(
-                                  child: Icon(
+                              child: Icon(
                                 Icons.delete_forever,
                                 color: Colors.white,
                                 size: 25.sp,
-                              )))
+                              ))
                         ]),
                   )
                 : const SizedBox(
