@@ -9,6 +9,7 @@ class Update {
   ApiServiceState apiServiceState = ApiServiceState();
 
   Future<void> updating(BuildContext context) async {
+        HomePageLogics.checkTokenExpires();
     showDialog(
       context: context,
       builder: (context) {

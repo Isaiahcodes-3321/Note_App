@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../state_Management/ModelNote/readNote.dart';
 
+
 ApiServiceState apiServiceState = ApiServiceState();
 
 class ReadUserNote {
    static Future<ModelR> readNote() async {
+        HomePageLogics.checkTokenExpires();
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
     final noteId = GlobalControllers.id; 
     final response = await http.get(

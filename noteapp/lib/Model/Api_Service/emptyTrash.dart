@@ -12,6 +12,7 @@ ApiServiceState apiServiceState = ApiServiceState();
 
 class EmptyTrash {
   static Future<void> emptyNote(BuildContext context) async {
+        HomePageLogics.checkTokenExpires();
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
 
     final response = await http.delete(

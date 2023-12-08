@@ -9,6 +9,7 @@ import 'package:noteapp/Model/Api_Service/export.dart';
 class RestoreNoteFromTrash {
   ApiServiceState apiServiceState = ApiServiceState();
   Future<void> restoreNote(BuildContext context) async {
+        HomePageLogics.checkTokenExpires();
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
     final noteId = GlobalControllers.id;
 

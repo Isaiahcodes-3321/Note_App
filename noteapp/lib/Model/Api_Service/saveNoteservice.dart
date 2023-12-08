@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Model/Api_Service/export.dart';
 
-
 // ignore_for_file: avoid_print
 // import 'dart:io';
 // import 'dart:convert';
@@ -15,6 +14,7 @@ class SaveNoteService {
   Future<void> saveUserNote(
     BuildContext context,
   ) async {
+        HomePageLogics.checkTokenExpires();
     showDialog(
       context: context,
       builder: (context) {

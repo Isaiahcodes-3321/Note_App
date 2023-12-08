@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../state_Management/ModelNote/sNote.dart';
 
+
 ApiServiceState apiServiceState = ApiServiceState();
 
 class SearchingForNote{
   static Future<ModelS> searchNote() async {
+        HomePageLogics.checkTokenExpires();
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
    final String searchQuery = GlobalControllers.searching.text; 
 

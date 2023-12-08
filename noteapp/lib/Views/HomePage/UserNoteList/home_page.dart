@@ -1,10 +1,12 @@
 import 'loadingNote.dart';
 import 'errorLoading.dart';
 import '../export_home.dart';
-import '../../../Model/Api_Service/delete.dart';
-import '../../Add_Note/Note.dart/upDateNote.dart';
-import '../../../Model/Api_Service/readNote.dart';
 import '../DrawerAndFloatingButton.dart/drawer.dart';
+import 'package:noteapp/Model/Api_Service/readNote.dart';
+import 'package:noteapp/Views/Add_Note/Note.dart/upDateNote.dart';
+
+
+
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Model/Api_Service/export.dart';
 
-
-
 // ignore_for_file: avoid_print
 
 class Delete {
   ApiServiceState apiServiceState = ApiServiceState();
   Future<void> deleteNote(BuildContext context) async {
+    HomePageLogics.checkTokenExpires();
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
     final noteId = GlobalControllers.id;
 

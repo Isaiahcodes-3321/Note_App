@@ -1,3 +1,4 @@
+export 'package:noteapp/Controllers/HomeNotesPage/logics.dart';
 export 'package:noteapp/Model/ThemeStore/theme.dart';
 export 'package:noteapp/Model/Api_Service/export.dart';
 export '../../Views/HomePage/UserNoteList/home_page.dart';
@@ -11,4 +12,5 @@ export '../../Views/Components/Dialogs/logOutAnimation.dart';
 export '../../Views/Logins/login_SignUp.dart';
 export '../state_Management/note_added.dart';
 export '../../Controllers/NotesPage/controller.dart';
+
 

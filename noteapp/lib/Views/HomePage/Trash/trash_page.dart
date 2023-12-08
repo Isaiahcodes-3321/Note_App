@@ -19,6 +19,11 @@ class TrashPageState extends State<TrashPage> {
   int? tappedIndex;
   bool isTapped = true;
   bool iconsShownInList = false;
+  @override
+  void initState() {
+    super.initState();
+    HomePageLogics.checkTokenExpires();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +72,6 @@ class TrashPageState extends State<TrashPage> {
             body: SizedBox(
               height: MediaQuery.sizeOf(context).height * 100.0,
               width: MediaQuery.sizeOf(context).width * 100.0,
-
               child: ref.watch(userNewNoteFromDB.trashItems).when(
                   data: (trashData) {
                 if (trashData.notes != null && trashData.notes!.isNotEmpty) {
@@ -231,17 +235,3 @@ class TrashPageState extends State<TrashPage> {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

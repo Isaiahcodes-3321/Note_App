@@ -22,6 +22,7 @@ class _SearchListState extends State<SearchList> {
   @override
   void initState() {
     super.initState();
+    HomePageLogics.checkTokenExpires();
     GlobalControllers.searching = TextEditingController();
   }
 
@@ -39,7 +40,7 @@ class _SearchListState extends State<SearchList> {
     final changeTheme =
         GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
     GlobalControllers.getTheme = changeTheme;
-    
+
     return Consumer(builder: (context, ref, child) {
       return Scaffold(
         backgroundColor: GlobalControllers.backGroundThemeColor,

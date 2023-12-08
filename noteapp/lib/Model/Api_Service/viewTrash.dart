@@ -8,6 +8,7 @@ ApiServiceState apiServiceState = ApiServiceState();
 class ViewTrash {
   bool checkRegistration = true;
   static Future<ModelReadTrash> trashNote() async {
+        HomePageLogics.checkTokenExpires();
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
 
     final response = await http.get(

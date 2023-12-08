@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../Add_Note/export_note_input.dart';
+import 'package:noteapp/Controllers/HomeNotesPage/logics.dart';
 
-class DevPage extends StatelessWidget {
+class DevPage extends StatefulWidget {
   const DevPage({super.key});
+
+  @override
+  State<DevPage> createState() => _DevPageState();
+}
+
+class _DevPageState extends State<DevPage> {
+    @override
+  void initState() {
+    super.initState();
+    HomePageLogics.checkTokenExpires();
+  }
 
   @override
   Widget build(BuildContext context) {
