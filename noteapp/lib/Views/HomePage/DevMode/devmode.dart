@@ -327,7 +327,7 @@ class _DevPageState extends State<DevPage> {
                                               GlobalControllers.textThemeColor,
                                           fontSize: 17.sp,
                                           fontWeight: FontWeight.bold)),
-                                  Text('twitter username ',
+                                  Text('@emmanueIhilary_',
                                       style: AppTextStyle.textStyle().copyWith(
                                           color:
                                               GlobalControllers.textThemeColor,
