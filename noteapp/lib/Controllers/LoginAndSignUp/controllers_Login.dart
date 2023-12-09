@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../Views/Logins/export_login_register.dart';
-
+import 'package:noteapp/Views/TokenLogout/tryLogingOutUser.dart';
 
 class LoginAndRegistrationControllers {
   LoginService loginService = LoginService();
-RegisteredService  registeredService  = RegisteredService();
-
+  RegisteredService registeredService = RegisteredService();
 
   void inputsRequiredSnackbar(BuildContext context) {
     ReusedSnackBar.showCustomSnackBar(
@@ -13,7 +12,6 @@ RegisteredService  registeredService  = RegisteredService();
       "All inputs are required",
       themeColor,
       const Duration(seconds: 3),
-      
     );
   }
 
@@ -47,7 +45,15 @@ RegisteredService  registeredService  = RegisteredService();
       "Please check your internet connection",
       themeColor,
       const Duration(seconds: 3),
-      
     );
+
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const TryLogUserOut(),
+        ),
+      );
+    });
   }
 }
