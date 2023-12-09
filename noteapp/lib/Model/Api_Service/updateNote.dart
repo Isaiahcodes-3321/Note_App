@@ -48,7 +48,7 @@ class Update {
           context,
           "Note Updated Successfully ",
           themeColor,
-          const Duration(seconds: 3),
+          const Duration(seconds: 2),
         );
       } else {
         Navigator.pop(context);

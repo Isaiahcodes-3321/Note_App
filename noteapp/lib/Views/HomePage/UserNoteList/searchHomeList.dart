@@ -109,6 +109,8 @@ class _SearchListState extends State<SearchList> {
           ],
         ),
         body: SizedBox(
+          height: MediaQuery.sizeOf(context).height * 100.0,
+          width: MediaQuery.sizeOf(context).width * 100.0,
           child: isSearching
               ? ref.watch(userNewNoteFromDB.searchNoteItems).when(
                   data: (searchData) {
@@ -134,6 +136,7 @@ class _SearchListState extends State<SearchList> {
                             },
                             child: ListView.builder(
                               shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: searchData.notes?.length,
                               itemBuilder: (context, index) {
                                 final note = searchData.notes?[index];
@@ -204,7 +207,6 @@ class _SearchListState extends State<SearchList> {
                         ],
                       ),
                     );
-                    
                   } else {
                     return Center(
                       child: Text(

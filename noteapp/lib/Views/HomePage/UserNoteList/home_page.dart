@@ -22,6 +22,16 @@ class _HomePageState extends ConsumerState<HomePage> {
     HomePageLogics.checkTokenExpires();
   }
 
+  onRefresh() async {
+    await Future.delayed(const Duration(seconds: 3));
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const HomePage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     GlobalControllers.providerRef = ref;
@@ -38,13 +48,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     return SafeArea(
       child: RefreshIndicator(
         onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 3));
-          Navigator.push<void>(
-            context,
-            MaterialPageRoute<void>(
-              builder: (BuildContext context) => const HomePage(),
-            ),
-          );
+          onRefresh();
         },
         child: Scaffold(
           body: ref.watch(userNewNoteFromDB.noteItems).when(data: (data) {
@@ -53,7 +57,6 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: CustomScrollView(
                 slivers: [
                   const MyAppBar(),
-              
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
@@ -72,6 +75,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
                               GlobalControllers.id = userNoteIdINT;
                               delete.deleteNote(context);
+                              onRefresh();
                             }
                           },
                           background:

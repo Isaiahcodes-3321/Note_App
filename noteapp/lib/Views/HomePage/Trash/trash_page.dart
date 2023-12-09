@@ -93,19 +93,20 @@ class TrashPageState extends State<TrashPage> {
                           },
                           child: ListView.builder(
                             shrinkWrap: true,
+                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: trashData.notes?.length,
                             itemBuilder: (context, index) {
                               final note = trashData.notes?[index];
                               String userNoteId = note!.noteId ?? '';
                               int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
-
+                  
                               String formattedDate =
                                   HomePageLogics.formatDate(note.date);
                               String noteTitle = note.title ?? '';
                               String noteBody = note.note ?? '';
-
+                  
                               isTapped = index == tappedIndex;
-
+                  
                               return Padding(
                                 padding: EdgeInsets.all(15.sp),
                                 child: Card(
@@ -178,6 +179,7 @@ class TrashPageState extends State<TrashPage> {
                             },
                           ),
                         ),
+                  
                       ],
                     ),
                   );
@@ -248,3 +250,40 @@ class TrashPageState extends State<TrashPage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                  
+                        // Text('data'),
+                        // SizedBox(height: 20,),
+                        // Text('data'),
+                        // SizedBox(height: 20,),
