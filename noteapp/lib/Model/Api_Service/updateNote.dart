@@ -9,7 +9,7 @@ class Update {
   ApiServiceState apiServiceState = ApiServiceState();
 
   Future<void> updating(BuildContext context) async {
-        HomePageLogics.checkTokenExpires();
+    HomePageLogics.checkTokenExpires();
     showDialog(
       context: context,
       builder: (context) {
@@ -36,18 +36,19 @@ class Update {
       if (response.statusCode == 200 || response.statusCode == 201) {
         Navigator.pop(context);
 
-        Navigator.push<void>(
-          context,
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => const HomePage(),
-          ),
-        );
+
+        // Navigator.push<void>(
+        //   context,
+        //   MaterialPageRoute<void>(
+        //     builder: (BuildContext context) => const HomePage(),
+        //   ),
+        // );
 
         ReusedSnackBar.showCustomSnackBar(
           context,
           "Note Updated Successfully ",
           themeColor,
-          const Duration(seconds: 4),
+          const Duration(seconds: 3),
         );
       } else {
         Navigator.pop(context);

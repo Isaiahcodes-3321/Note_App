@@ -100,10 +100,16 @@ class LogOutService {
           ),
         );
       } else {
-        const TryLogUserOut();
+        Navigator.push<void>(
+          context,
+          MaterialPageRoute<void>(builder: (context) => const TryLogUserOut()),
+        );
       }
     } catch (e) {
-      const TryLogUserOut();
+      Navigator.push<void>(
+        context,
+        MaterialPageRoute<void>(builder: (context) => const TryLogUserOut()),
+      );
     }
   }
 }

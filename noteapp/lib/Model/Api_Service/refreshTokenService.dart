@@ -21,6 +21,9 @@ class RefreshTokenService {
     try {
       final response = await http.post(
         Uri.parse(apiServiceState.refreshToken),
+         headers: {
+          'authorization': tokenStorage.myToken,
+        },
         body: getRefreshToken,
       );
 

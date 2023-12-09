@@ -106,8 +106,7 @@ class _UpdatePageState extends State<UpdatePage> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 UpdateControllers.image != null
                                     ? Expanded(
@@ -137,19 +136,19 @@ class _UpdatePageState extends State<UpdatePage> {
                                                     Hero(
                                                       tag: 'imageTagUpdate',
                                                       child: UpdateControllers
-                                                              .image
-                                                              .isNotEmpty
+                                                              .image.isNotEmpty
                                                           ? Image.network(
                                                               UpdateControllers
                                                                   .image,
                                                               width: 100,
                                                               height: 100,
-                                                              loadingBuilder: (BuildContext
-                                                                      context,
-                                                                  Widget
-                                                                      child,
-                                                                  ImageChunkEvent?
-                                                                      loadingProgress) {
+                                                              loadingBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      Widget
+                                                                          child,
+                                                                      ImageChunkEvent?
+                                                                          loadingProgress) {
                                                                 if (loadingProgress ==
                                                                     null) {
                                                                   return child;
@@ -159,8 +158,8 @@ class _UpdatePageState extends State<UpdatePage> {
                                                                         SpinKitChasingDots(
                                                                       color:
                                                                           themeColor,
-                                                                      size: 25
-                                                                          .sp,
+                                                                      size:
+                                                                          25.sp,
                                                                     ),
                                                                   );
                                                                 }
@@ -188,9 +187,8 @@ class _UpdatePageState extends State<UpdatePage> {
                                               logics.recordedAudio = '';
                                             }
                                           },
-                                          background:
-                                              GlobalDismissibleContainer
-                                                  .container(context),
+                                          background: GlobalDismissibleContainer
+                                              .container(context),
                                           child: Center(
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -221,8 +219,7 @@ class _UpdatePageState extends State<UpdatePage> {
                                                       style: AppTextStyle
                                                               .textStyle()
                                                           .copyWith(
-                                                              fontSize:
-                                                                  18.sp)),
+                                                              fontSize: 18.sp)),
                                                 ),
                                               ),
                                             ),
@@ -267,8 +264,8 @@ class _UpdatePageState extends State<UpdatePage> {
                               GestureDetector(
                                 onTap: () {
                                   Clipboard.setData(ClipboardData(
-                                      text: GlobalControllers
-                                          .noteContext.text));
+                                      text:
+                                          GlobalControllers.noteContext.text));
                                 },
                                 child: TextFormField(
                                   controller: UpdateControllers.noteContext,
@@ -278,8 +275,8 @@ class _UpdatePageState extends State<UpdatePage> {
                                     hintText: "Notes",
                                     hintStyle:
                                         AppTextStyle.textStyle().copyWith(
-                                      color: const Color.fromARGB(
-                                          255, 28, 28, 28),
+                                      color:
+                                          const Color.fromARGB(255, 28, 28, 28),
                                     ),
                                     focusedBorder: outlineInputBorder,
                                     enabledBorder: outlineInputBorder,
