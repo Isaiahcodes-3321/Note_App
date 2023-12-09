@@ -9,7 +9,9 @@ import 'package:noteapp/Views/Logins/login_SignUp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:noteapp/Model/Api_Service/logOutService.dart';
 import 'package:noteapp/Views/Constant/global_controllers.dart';
+import 'package:noteapp/Views/TokenLogout/tryLogingOutUser.dart';
 import 'package:noteapp/Views/HomePage/UserNoteList/home_page.dart';
+
 
 // error 503
 Future<void> main() async {
@@ -73,10 +75,6 @@ class _NoteAppInitState extends State<NoteAppInit> {
     setState(() {});
   }
 
-  // when the app its been launch this funtion will be called if the token its expired
-  logUserOut() {
-    logOutService.userLogOutIfTokenExpires(context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +92,7 @@ class _NoteAppInitState extends State<NoteAppInit> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => hasExpired ? logUserOut() : const HomePage(),
+            builder: (_) => hasExpired ? const TryLogUserOut() : const HomePage(),
           ),
         );
       });

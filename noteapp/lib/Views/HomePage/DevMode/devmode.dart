@@ -60,8 +60,6 @@ class _DevPageState extends State<DevPage> {
                     child: Padding(
                       padding: EdgeInsets.all(25.sp),
                       child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Center(
                             child: Container(

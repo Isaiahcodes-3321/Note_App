@@ -53,6 +53,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: CustomScrollView(
                 slivers: [
                   const MyAppBar(),
+              
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
@@ -61,8 +62,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         int userNoteIdINT = int.tryParse(userNoteId) ?? 0;
                         String formattedDate =
                             HomePageLogics.formatDate(note.date);
-                        
-               
+
                         return Dismissible(
                           key: const Key('your_unique_key'),
                           onDismissed: (direction) {
@@ -81,7 +81,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             child: GestureDetector(
                               onTap: () {
                                 GlobalControllers.id = userNoteIdINT;
-    
+
                                 print('User note Id its $userNoteIdINT');
                                 ReadUserNote.readNote();
                                 var getTittle = note.title;
@@ -91,7 +91,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                           .readNoteTitle.notifier)
                                       .state = getTittle;
                                 });
-    
+
                                 Navigator.push<void>(
                                   context,
                                   MaterialPageRoute<void>(
@@ -111,8 +111,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: AppTextStyle.textStyle().copyWith(
-                                          color:
-                                              const Color.fromARGB(255, 8, 8, 43),
+                                          color: const Color.fromARGB(
+                                              255, 8, 8, 43),
                                           fontSize: 17.sp)),
                                   trailing: Text(formattedDate,
                                       style: AppTextStyle.textStyle().copyWith(

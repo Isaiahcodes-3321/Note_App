@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:noteapp/Model/Api_Service/export.dart';
+import 'package:noteapp/Views/TokenLogout/tryLogingOutUser.dart';
 
 // ignore_for_file: avoid_print
 // ignore_for_file: use_build_context_synchronously
@@ -36,6 +37,8 @@ class LogOutService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("User logsOut successfully.");
         await GlobalControllers.tokenKey.clear();
+        logics.image = null;
+        logics.recordedAudio = '';
 
         Navigator.push<void>(
           context,
@@ -67,10 +70,8 @@ class LogOutService {
     }
   }
 
-
 // when app its open and token have expires logUser out
   Future<void> userLogOutIfTokenExpires(BuildContext context) async {
- 
     GlobalControllers.tokenKey = await Hive.openBox('tokenBox');
     final tokenStorage = GlobalControllers.tokenKey.getAt(0) as TokenStorage;
 
@@ -89,6 +90,8 @@ class LogOutService {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         await GlobalControllers.tokenKey.clear();
+        logics.image = null;
+        logics.recordedAudio = '';
 
         Navigator.push<void>(
           context,
@@ -97,10 +100,10 @@ class LogOutService {
           ),
         );
       } else {
-        userLogOutIfTokenExpires(context);
+        const TryLogUserOut();
       }
     } catch (e) {
-      userLogOutIfTokenExpires(context);
+      const TryLogUserOut();
     }
   }
 }
