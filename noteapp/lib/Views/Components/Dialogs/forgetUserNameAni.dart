@@ -24,7 +24,7 @@ class _ShowUserNameState extends State<ForgetUserName> {
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
     final userName =
-        GlobalControllers.userNameAndEmail.getAt(0) as UserNameAndEmailStorage;
+        GlobalControllers.userNameAndEmail.get('userNameBox');
 
     return WillPopScope(
         // Prevent dialog from closing if the user clicks outside the dialog
@@ -67,7 +67,7 @@ class _ShowUserNameState extends State<ForgetUserName> {
                         textFonts.copyWith(fontSize: 18.sp, color: themeColor),
                   ),
                   Text(
-                    userName.userName,
+                    userName?.userName ?? '',
                     style:
                         textFonts.copyWith(fontSize: 18.sp, color: themeColor),
                   ),

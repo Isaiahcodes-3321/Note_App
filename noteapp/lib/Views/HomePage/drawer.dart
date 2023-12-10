@@ -19,15 +19,14 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 
   openHive() async {
-    GlobalControllers.tokenKey = await Hive.openBox('userNameBox');
+    GlobalControllers.userNameAndEmail = await Hive.openBox('userNameBox');
   }
 
   @override
   Widget build(BuildContext context) {
     GlobalControllers.themeController.setBool('repeat', false);
 
-    final userName =
-        GlobalControllers.userNameAndEmail.getAt(0) as UserNameAndEmailStorage;
+    final userName = GlobalControllers.userNameAndEmail.get('userNameBox');
 
     final changeTheme =
         GlobalControllers.providerRef.watch(ThemeClass.themeProvider);
@@ -51,12 +50,12 @@ class _MyDrawerState extends State<MyDrawer> {
                 TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                        text: 'Welcome ${userName.userName}',
+                        text: 'Welcome ${userName?.userName ?? ''}',
                         style: AppTextStyle.textStyle().copyWith(
                             color: GlobalControllers.textThemeColor,
                             fontSize: 20.sp)),
                     TextSpan(
-                        text: '\n${userName.email}',
+                        text: '\n${userName?.email ?? ''}',
                         style: AppTextStyle.textStyle().copyWith(
                             color: GlobalControllers.textThemeColor,
                             fontSize: 17.sp)),
